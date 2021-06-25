@@ -3,21 +3,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Sample code to represent Trie data-structure using a simple {@link TrieNode} class.
+ */
 public class TrieDataStructure {
-
-    public static void main(String[] args) {
-        TrieNode root = new TrieNode();
-        addWord("Prince", root); addWord("Prince", root); addWord("Priya", root); addWord("Pri", root);
-        addWord("Pinki", root);  addWord("Chauda", root);
-        addWord("Riya", root); addWord("Rahul", root); addWord("Malik", root);
-        addWord("Print", root); addWord("Printf", root);
-
-        System.out.println(root);
-        System.out.println(findWord("Prince", root)); // should print true
-        List<String> allWordsMatchingPrefix = findAllWordsForPrefix("Pri", root);
-
-        System.out.println(allWordsMatchingPrefix); // should print [Pri, Priya, Prince, Print, Printf]
-    }
 
     static List<String> findAllWordsForPrefix(String prefix, TrieNode root) {
         List<String> words = new ArrayList<>();
@@ -28,25 +17,22 @@ public class TrieDataStructure {
             current = nextNode;
         }
         if(!current.children.isEmpty()) {
-            findAllWordsForPrefixRecursively(prefix, current, words);
+            findAllWordsStartingFromTheNode(prefix, current, words);
         } else {
             if(current.isWord) words.add(prefix);
         }
         return words;
     }
 
-    static void findAllWordsForPrefixRecursively(String prefix, TrieNode node, List<String> words) {
+    private static void findAllWordsStartingFromTheNode(String prefix, TrieNode node, List<String> words) {
         if(node.isWord) words.add(prefix);
         if(node.children.isEmpty()) {
             return;
         }
         for(Character c: node.children.keySet()) {
-            findAllWordsForPrefixRecursively(prefix + c, node.children.get(c), words);
+            findAllWordsStartingFromTheNode(prefix + c, node.children.get(c), words);
         }
     }
-
-
-
 
     static boolean findWord(String word, TrieNode root) {
         TrieNode current = root;
@@ -66,8 +52,40 @@ public class TrieDataStructure {
         current.isWord = true;
     }
 
+    static boolean deleteWord(String word, TrieNode current, int index) {
+        if (index == word.length()) {
+            if (!current.isWord) {
+                return false;
+            }
+            current.isWord = false;
+            return current.children.isEmpty();
+        }
+        char ch = word.charAt(index);
+        TrieNode node = current.children.get(ch);
+        if (node == null) return false;
+        boolean shouldDeleteCurrentNode = deleteWord(word, node, index + 1) && !node.isWord;
+
+        if (shouldDeleteCurrentNode) {
+            current.children.remove(ch);
+            return current.children.isEmpty();
+        }
+        return false;
+    }
+
     static class TrieNode {
         Map<Character, TrieNode> children = new HashMap<>();
         boolean isWord = false;
+    }
+
+    public static void main(String[] args) {
+        TrieNode root = new TrieNode();
+        addWord("Prince", root); addWord("Prince", root); addWord("Priya", root); addWord("Pri", root);
+        addWord("Pinki", root);  addWord("Chauda", root);
+        addWord("Riya", root); addWord("Rahul", root); addWord("Malik", root);
+        addWord("Print", root); addWord("Printf", root);
+        System.out.println(findWord("Prince", root)); // should print true
+        System.out.println(findAllWordsForPrefix("Pri", root)); // should print [Pri, Priya, Prince, Print, Printf]
+        deleteWord("Prince", root, 0);
+        System.out.println(findAllWordsForPrefix("Pri", root)); // should print [Pri, Priya, Print, Printf]
     }
 }
