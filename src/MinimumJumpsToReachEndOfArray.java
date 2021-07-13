@@ -2,6 +2,8 @@ public class MinimumJumpsToReachEndOfArray {
 
     public static void main(String[] args) {
         int[] arr = new int[] {2, 2, 0, 8, 0, 0, 0, 1, 2, 2, 1, 0, 1}; // Output should be -1 due to zero at 11th position starting from 0th position
+        // int[] arr = new int[] {2, 2, 0, 8, 0, 0, 0, 1, 2, 2, 1, 1, 1}; // Output should be 4 due to zero at 2nd position starting from 0th position
+        // int[] arr = new int[] {3, 2, 0, 8, 0, 0, 0, 1, 2, 2, 1, 1, 1}; // Output should be 3 starting from 0th position
         System.out.println("Minimum jumps O(n): " + minJumps(arr));
         System.out.println("Minimum jumps (recursive): " + minimumJumpsRecursive(arr, 0, arr.length-1));
     }

@@ -10,12 +10,20 @@ public class PhantomReferenceTest {
         Person p = new Person(10);
         PersonReference pf = new PersonReference(p, queue);
         if(pf.get() == null) System.out.println("Null");
+        if(pf.isEnqueued()) System.out.println("Enqueued before GC");
         p = null;
         System.gc();
         Thread.sleep(2000);
-        if(pf.isEnqueued()) System.out.println("Enqueued");
-        Reference<? extends Person> poll = queue.poll();
-        poll.clear();
+        if(pf.isEnqueued()) {
+            if(pf.get() == null) System.out.println("Null");
+            System.out.println("Enqueued after GC");
+            Reference<? extends Person> poll = queue.poll();
+            System.out.println(poll.get());
+            poll.clear();
+        }
+        if(!pf.isEnqueued()) {
+            System.out.println("No longer enqueued");
+        }
     }
 }
 class Person {

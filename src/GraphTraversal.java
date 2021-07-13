@@ -16,7 +16,7 @@ public class GraphTraversal {
 
         System.out.println("Depth first traversal");
         List<Integer> dfsTraversal = new ArrayList<>(15);
-        gt.performDepthFirstTraversal(root, dfsTraversal);
+        gt.performDepthFirstTraversalSimplified(root, dfsTraversal);
         System.out.println(dfsTraversal); // [1, 2, 5, 14, 6, 7, 3, 8, 15, 9, 10, 4, 11, 12, 13]
     }
 
@@ -35,27 +35,27 @@ public class GraphTraversal {
             }
         }
     }
-
-    private void performDepthFirstTraversal(GraphVertex<Integer> root, List<Integer> dfsTraversal) {
+    // Using algo of Pre-Order traversal
+    private void performDepthFirstTraversalSimplified(GraphVertex<Integer> root, List<Integer> dfsTraversal) {
         Stack<GraphVertex<Integer>> stack = new Stack<>();
-        dfsTraversal.add(root.key);
-
         GraphVertex<Integer> current = root;
+
         while(!stack.isEmpty() || current != null) {
-            if(current == null) {
-                current = stack.pop();
+            if(current != null) {
                 dfsTraversal.add(current.key);
-            }
-            if(current.children != null) {
-                for(int i = current.children.size() - 1; i >= 0; i--) {
-                    if(i == 0) {
-                        current = current.children.get(0);
-                        dfsTraversal.add(current.key);
-                    } else
-                        stack.push(current.children.get(i));
+                GraphVertex<Integer> leftMostChild = null;
+                if(current.children != null) {
+                    for(int i = current.children.size() - 1; i >= 0; i--) {
+                        if(i == 0 ) {
+                            leftMostChild = current.children.get(i);
+                        } else {
+                            stack.push(current.children.get(i));
+                        }
+                    }
                 }
+                current = leftMostChild;
             } else {
-                current = null;
+                current = stack.pop();
             }
         }
     }

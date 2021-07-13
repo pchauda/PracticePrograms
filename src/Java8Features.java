@@ -37,7 +37,7 @@ public class Java8Features {
 
         // Compute methods in Map
         HashMap<String, String> map = new HashMap<>();
-        map.compute("Riya", (k, v) -> v);
+        map.compute("Riya", (k, v) -> v == null ? k.toUpperCase() : v.concat(k.toLowerCase()));
         map.computeIfAbsent("Prince", (k) -> k.toUpperCase());
         System.out.println(map);
     }

@@ -12,17 +12,19 @@ public class CounterUsingAtomic {
     AtomicInteger counter3 = new AtomicInteger(0);
 
     public void incrementCounter() {
-        counter2++;
         counter++;
-        //counter3.getAndIncrement();
+        counter2++;
+        counter3.getAndIncrement();
     }
 
     public int getCounter() {
         return counter;
     }
-
     public int getCounter2() {
         return counter2;
+    }
+    private int getCounter3() {
+        return counter3.get();
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -43,10 +45,6 @@ public class CounterUsingAtomic {
         System.out.println("Time taken: " + (endTime - startTime) + " ms");
     }
 
-    private int getCounter3() {
-        return counter3.get();
-    }
-
     static class MyRunnable implements Runnable {
         CounterUsingAtomic obj;
 
@@ -56,7 +54,7 @@ public class CounterUsingAtomic {
 
         @Override
         public void run() {
-            for(int i=1; i <= 100000000; i++) {
+            for(int i=1; i <= 100000; i++) {
                 obj.incrementCounter();
             }
         }

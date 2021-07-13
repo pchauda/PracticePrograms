@@ -9,25 +9,25 @@ public class BinarySearch {
     }
 
     static int binarySearchRecursive(int[] arr, int start, int end, int x) {
-        if(start > end) return -1;
+        if (start > end) return -1;
 
         int mid = (start + end) / 2;
-        if(arr[mid] == x) return mid;
-        if(x > arr[mid])
+        if (arr[mid] == x) return mid;
+        if (x > arr[mid])
             return binarySearchRecursive(arr, mid + 1, end, x);
         else
-            return binarySearchRecursive(arr, start, mid -1, x);
+            return binarySearchRecursive(arr, start, mid - 1, x);
     }
 
     static int binarySearchIterative(int[] arr, int x) {
         int start = 0;
         int end = arr.length - 1;
 
-        while(start <= end) {
+        while (start <= end) {
             int mid = (start + end) / 2;
-            if(arr[mid] == x) return mid;
+            if (arr[mid] == x) return mid;
 
-            if(x > arr[mid])
+            if (x > arr[mid])
                 start = mid + 1;
             else
                 end = mid - 1;

@@ -40,6 +40,7 @@ public class MaxPathIn2DArray {
             }
             // System.out.println();
         }
+        System.out.println("Max sum within optimized: " + maxSumAtEachPosition[arr.length - 1][arr[0].length - 1]);
 
         LinkedList<Integer> path = new LinkedList<>();
         int row = maxSumAtEachPosition.length - 1;
