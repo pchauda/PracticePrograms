@@ -15,7 +15,7 @@ public class BinarySearch {
 
         int mid = (start + end) / 2;
         if (arr[mid] == x) return mid;
-        if (x > arr[mid])
+        if (arr[mid] < x )
             return binarySearchRecursive(arr, mid + 1, end, x);
         else
             return binarySearchRecursive(arr, start, mid - 1, x);

@@ -16,6 +16,7 @@ public class FactorialPrimeFibonacci {
         Map<String, String> map = new HashMap<>();
     }
 
+    // Time Complexity O(power(2, n))
     static long factorialRecursive(int n) {
         if(n < 0) throw new IllegalArgumentException("Please provide a positive integer");
         if(n == 0 ) return 1;

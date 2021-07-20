@@ -34,17 +34,17 @@ public class CounterUsingAtomic {
         Thread t1 = new Thread(new MyRunnable(obj));
         Thread t2 = new Thread(new MyRunnable(obj));
 
-        long startTime = System.currentTimeMillis();
+        long startTime = System.nanoTime();
         t1.start();
         t2.start();
 
         t1.join();
         t2.join();
-        long endTime = System.currentTimeMillis();
+        long endTime = System.nanoTime();
         System.out.println(obj.getCounter());
         System.out.println(obj.getCounter2());
         System.out.println(obj.getCounter3());
-        System.out.println("Time taken: " + (endTime - startTime) + " ms");
+        System.out.println("Time taken: " + (endTime - startTime)/1000.0 + " micros");
     }
 
     static class MyRunnable implements Runnable {

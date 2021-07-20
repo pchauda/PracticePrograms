@@ -19,28 +19,17 @@ public class SockMerchantProblem {
         // count of socks for each sock number
         Map<Integer, Long> sockIdentityToCountMap = Arrays.stream(socks).boxed().collect(Collectors.groupingBy(i -> i, Collectors.counting()));
         // Count the sockIdentity where count is even number
-        System.out.println(sockIdentityToCountMap.values().stream().reduce(0L, (sum, next) -> sum + next / 2).intValue());
-
-        sockMerchant(socks);
+        System.out.println("Total Pairs using streams:" + sockIdentityToCountMap.values().stream().reduce(0L, (sum, next) -> sum + next / 2).intValue());
+        System.out.println("Total Pairs: " + sockMerchant(socks));
     }
 
     // Complete the sockMerchant function below.
     static int sockMerchant(int[] ar) {
-
         Map<Integer, Integer> socksCounts = new HashMap<>();
-        Map<Integer, Integer> socksCounts2 = new HashMap<>();
         for(int i : ar) {
-            if(!socksCounts.containsKey(i)) {
-                socksCounts.put(i, 1);
-            }
-            else {
-                socksCounts.put(i, socksCounts.get(i) + 1);
-            }
+            socksCounts.compute(i, (k, v) -> v == null? 1: v+1 );
         }
-        int total = 0;
-        for(Integer value : socksCounts.values()) {
-            total += value / 2;
-        }
-        return total;
+
+        return socksCounts.values().stream().map(t -> t/2).reduce(0, Integer::sum);
     }
 }

@@ -19,8 +19,6 @@ public class HashMapTest {
         t2.join();
         System.out.println(obj.map.keySet().size());
     }
-
-
     static class MyRunnable implements Runnable {
         HashMap<Integer, Integer> map = new HashMap<>();
 

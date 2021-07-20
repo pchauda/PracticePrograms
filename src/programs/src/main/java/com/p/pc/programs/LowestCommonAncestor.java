@@ -1,5 +1,11 @@
 package com.p.pc.programs;
 
+/**
+ * Tree:                    1
+ *               2                  3
+ *         4            5    6             7
+ *     12
+ */
 public class LowestCommonAncestor {
 
     public static void main(String[] args) {
@@ -10,9 +16,9 @@ public class LowestCommonAncestor {
         root.left.right = new TreeNode(5);
         root.right.left = new TreeNode(6);
         root.right.right = new TreeNode(7);
-        root.right.left.left = new TreeNode(12);
+        root.left.left.left = new TreeNode(12);
 
-        System.out.println("Lowest common ancestor between 3 and 12: " + lowestCommonAncestor(root, new TreeNode(3), new TreeNode(15)).val);
+        System.out.println("Lowest common ancestor between 3 and 12: " + lowestCommonAncestor(root, new TreeNode(3), new TreeNode(12)).val);
     }
 
     public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {

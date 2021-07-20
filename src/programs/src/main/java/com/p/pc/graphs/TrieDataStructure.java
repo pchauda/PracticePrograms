@@ -57,7 +57,7 @@ public class TrieDataStructure {
     }
 
     /**
-     * Deleting a word will also require to delete
+     * Deleting a word will also require to delete empty TrieNodes
      * @param word
      * @param node
      * @param index

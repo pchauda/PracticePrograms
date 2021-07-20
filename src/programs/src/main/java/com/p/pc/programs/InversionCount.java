@@ -14,8 +14,8 @@ public class InversionCount {
 
     public static void main(String[] args) {
         int[] array = new int[]{4,6,3,7,1,2,9};
-        System.out.println(inversionCount(array)); // Output = 6
-        System.out.println(inversionCountOptimized(array)); // Output = 6
+        System.out.println(inversionCount(array)); // Output = 10
+        System.out.println(inversionCountOptimized(array)); // Output = 10
     }
 
     static int inversionCount(int[] array) {

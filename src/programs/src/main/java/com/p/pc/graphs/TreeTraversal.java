@@ -27,15 +27,15 @@ public class TreeTraversal<K> {
     public static void main(String[] args) {
         TreeTraversal<Integer> tree = new TreeTraversal<>();
 
-        TreeNode<Integer> root = new TreeNode<>(1, null);
-        root.left = new TreeNode<>(2, root);
-        root.right = new TreeNode<>(3, root);
-        root.left.left = new TreeNode<>(4, root.left);
-        root.left.right = new TreeNode<>(5, root.left);
+        TreeNode<Integer> root = new TreeNode<>(5, null);
+        root.left = new TreeNode<>(3, root);
+        root.right = new TreeNode<>(8, root);
+        root.left.left = new TreeNode<>(2, root.left);
+        root.left.right = new TreeNode<>(4, root.left);
         root.right.left = new TreeNode<>(6, root.right);
-        root.right.right = new TreeNode<>(7, root.right);
-        root.left.left.right = new TreeNode<>(8, root.left.left);
-        root.right.left.right = new TreeNode<>(9, root.left.right);
+        root.right.right = new TreeNode<>(9, root.right);
+        //root.left.left.right = new TreeNode<>(8, root.left.left);
+        //root.right.left.right = new TreeNode<>(9, root.left.right);
 
         System.out.println("Printing InOrder Traversal:");
         tree.printInOrderTraversal(root);
@@ -93,7 +93,6 @@ public class TreeTraversal<K> {
     // Iterative using stack
     void printInOrderTraversalIterative(TreeNode<K> root) {
         Stack<TreeNode<K>> stack = new Stack<>();
-
         TreeNode<K> current = root;
         while(!stack.empty() || current != null) {
             if(current != null) {
@@ -123,11 +122,12 @@ public class TreeTraversal<K> {
         }
     }
     // Left -> Right -> Root
+    // Using LinkedList as Stack
     void printPostOrderTraversalIterative(TreeNode<K> root) {
-        Stack<TreeNode<K>> stack = new Stack<>();
-        Stack<TreeNode<K>> outputStack = new Stack<>();
+        LinkedList<TreeNode<K>> stack = new LinkedList<>();
+        LinkedList<TreeNode<K>> outputStack = new LinkedList<>();
         TreeNode<K> current = root;
-        while(!stack.empty() || current != null) {
+        while(!stack.isEmpty() || current != null) {
             if(current != null) {
                 outputStack.push(current);
                 if(current.left != null) {
@@ -138,7 +138,7 @@ public class TreeTraversal<K> {
                 current = stack.pop();
             }
         }
-        while(!outputStack.empty()) {
+        while(!outputStack.isEmpty()) {
             System.out.print(outputStack.pop().value + " ");
         }
 
@@ -159,8 +159,28 @@ public class TreeTraversal<K> {
             }
         }
     }
+    // Reverse level order using queue and stack for output similar to Post Order Traversal
+    void printReverseLevelOrderTraversal(TreeNode<K> root) {
+        Queue<TreeNode<K>> queue = new ArrayDeque<>();
+        queue.add(root);
+        Stack<TreeNode<K>> output = new Stack<>();
+        while(!queue.isEmpty()) {
+            TreeNode<K> treeNode = queue.poll();
+            output.push(treeNode);
+            // Add right child first to the queue if you still need normal order for a given level
+            if(treeNode.right != null) {
+                queue.add(treeNode.right);
+            }
+            if(treeNode.left != null) {
+                queue.add(treeNode.left);
+            }
+        }
+        while(!output.empty()) {
+            System.out.print(output.pop().value + " ");
+        }
+    }
 
-    // BFS with depth info, use this algo to print the tree in reverse level order
+    // BFS with depth info, this algo can be used to print the tree in reverse level order
     void breadthFirstSearchWithDepthInfo(TreeNode<K> root) {
         Queue<TreeNode<K>> queue = new ArrayDeque<>();
         Map<Integer, List<TreeNode<K>>> map = new HashMap<>();
@@ -190,27 +210,8 @@ public class TreeTraversal<K> {
             System.out.println("Level: " + i + ", Nodes: " + treeNodes.stream().map(t -> t.value).collect(Collectors.toList()));
         }
     }
-    // Reverse level order using queue and stack for output similar to Post Order Traversal
-    void printReverseLevelOrderTraversal(TreeNode<K> root) {
-        Queue<TreeNode<K>> queue = new ArrayDeque<>();
-        queue.add(root);
-        Stack<TreeNode<K>> output = new Stack<>();
-        while(!queue.isEmpty()) {
-            TreeNode<K> treeNode = queue.poll();
-            output.push(treeNode);
-            if(treeNode.right != null) {
-                queue.add(treeNode.right);
-            }
-            if(treeNode.left != null) {
-                queue.add(treeNode.left);
-            }
-        }
-        while(!output.empty()) {
-            System.out.print(output.pop().value + " ");
-        }
-    }
 
-    // Reverse Level Order via Pre Order Algo with depth info using recursion
+    // Level Order via Pre Order Algo with depth info using recursion
     void levelOrderTraversalViaPreOrderAlgo(TreeNode<K> root) {
         Map<Integer, List<TreeNode<K>>> map = new HashMap<>();
         preOrderTraversalWithLevelInfo(root, 0, map);

@@ -34,7 +34,7 @@ public class MergeSort {
         }
         // copy elements to right array
         for(int i=0; i < r; i++) {
-            R[i] = array[i + (mid + 1)];
+            R[i] = array[(mid + 1) + i];
         }
         int i=0,j=0,k=start;
         while(i < l && j < r) {
