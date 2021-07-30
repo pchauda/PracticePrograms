@@ -47,14 +47,15 @@ public class MergeTimeInterval {
         result.add(v.get(0));
 
         for(int i = 1 ; i < v.size(); i++) {
-            int x1 = v.get(i).first;
-            int y1 = v.get(i).second;
+            Pair current = v.get(i);
+            int x1 = current.first;
+            int y1 = current.second;
 
             int y2 = result.get(result.size() - 1).second;
             if(y2 >= x1) {
                 result.get(result.size() - 1).second = Math.max(y1, y2);
             } else {
-                result.add(v.get(i));
+                result.add(current);
             }
         }
 

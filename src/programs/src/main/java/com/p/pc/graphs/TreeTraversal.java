@@ -54,6 +54,8 @@ public class TreeTraversal<K> {
 
         System.out.println("\nPrinting LevelOrder Traversal:");
         tree.printLevelOrderTraversal(root);
+        System.out.println("\nPrinting LevelOrder Traversal using 2 queues:");
+        tree.levelOrderTraversalUsingTwoQueue(root);
 
         System.out.println("\nPrinting Reverse LevelOrder Traversal:");
         tree.printReverseLevelOrderTraversal(root);
@@ -142,6 +144,26 @@ public class TreeTraversal<K> {
             System.out.print(outputStack.pop().value + " ");
         }
 
+    }
+    // level Order Traversal using two queues
+    void levelOrderTraversalUsingTwoQueue(TreeNode root) {
+        if(root == null) return;
+        Queue<TreeNode> q1 = new ArrayDeque<>();
+        Queue<TreeNode> q2 = new ArrayDeque<>();
+
+        q1.add(root);
+        while(!q1.isEmpty()) {
+            TreeNode node = q1.poll();
+            System.out.print(node.value + ",");
+            if(node.left != null) q2.add(node.left);
+            if(node.right != null) q2.add(node.right);
+            if(q1.isEmpty()) {
+                System.out.println();
+                Queue<TreeNode> tmp = q1;
+                q1 = q2;
+                q2 = tmp;
+            }
+        }
     }
 
     // BFS using queue
