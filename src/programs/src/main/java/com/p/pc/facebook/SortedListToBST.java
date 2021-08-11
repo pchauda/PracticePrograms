@@ -1,4 +1,4 @@
-package com.p.pc.programs;
+package com.p.pc.facebook;
 
 /**
  * Create a balance binary search tree from a sorted list.
