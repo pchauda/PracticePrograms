@@ -11,18 +11,14 @@ public class PalindromePermutation {
 
     private static boolean checkIfPalindromeOfPermutation(String str) {
         if(str.length() <= 1) return true;
-
+        int countOdd = 0;
         Map<Character, Integer> charFreq = new HashMap<>();
         for(char c: str.toCharArray()) {
             charFreq.put(c, charFreq.getOrDefault(c, 0) + 1);
+            if(charFreq.get(c) % 2 == 0) {
+                countOdd--;
+            } else countOdd++;
         }
-        // Except one char every character should appear even number of times
-        int count = 0;
-        for(int value : charFreq.values()) {
-            if(value % 2 != 0) {
-                count++;
-            }
-        }
-        return count > 1? false:true;
+        return countOdd <= 1 ? true : false;
     }
 }

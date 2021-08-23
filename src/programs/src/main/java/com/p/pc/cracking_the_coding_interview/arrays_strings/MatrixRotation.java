@@ -1,4 +1,4 @@
-package com.p.pc.facebook.arrays;
+package com.p.pc.cracking_the_coding_interview.arrays_strings;
 
 import com.sun.security.jgss.GSSUtil;
 
@@ -81,8 +81,8 @@ public class MatrixRotation {
     }
     // After rotation row becomes column and column becomes row
     private static int[][] rotateMatrixClockWise(int[][] mat) {
-        int x = mat.length;
-        int y = mat[0].length;
+        int x = mat.length; // rows
+        int y = mat[0].length; // columns
         int[][] retVal = new int[y][x];
         for(int i=0; i<x; i++) {
             for(int j=0; j<y; j++) {
@@ -93,8 +93,8 @@ public class MatrixRotation {
     }
     // After rotation row becomes column and column becomes row
     private static int[][] rotateMatrixAntiClockWise(int[][] mat) {
-        int x = mat.length;
-        int y = mat[0].length;
+        int x = mat.length; // rows
+        int y = mat[0].length; // columns
         int[][] retVal = new int[y][x];
         for(int i=0; i<x; i++) {
             for(int j=0; j<y; j++) {

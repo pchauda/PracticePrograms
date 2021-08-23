@@ -1,7 +1,5 @@
 package com.p.pc.facebook;
 
-import java.util.LinkedList;
-
 public class FindNeedleInHaystack {
     public static void main(String[] args) {
         String hayStack = "My name is Prince and my full name is Prince Chauda. I, Prince Chauda is a good engineer.";
