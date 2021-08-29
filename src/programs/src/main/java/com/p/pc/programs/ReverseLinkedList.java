@@ -20,16 +20,16 @@ public class ReverseLinkedList {
      * head -> 1 -> 2 -> 3 -> 4 -> null to
      * null <- 1 <- 2 <- 3 <- 4 <- head
      *
-     * @param head input list
+     * @param node input list
      * @return reversed list
      */
-    private static Node<Integer> reversedList(Node<Integer> head) {
-        Node<Integer> next = null, prev = null, curr = head;
-        while(curr != null) {
-            next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
+    private static Node<Integer> reversedList(Node<Integer> node) {
+        Node<Integer> tmp = null, prev = null;
+        while(node != null) {
+            tmp = node.next;
+            node.next = prev;
+            prev = node;
+            node = tmp;
         }
         return prev;
     }

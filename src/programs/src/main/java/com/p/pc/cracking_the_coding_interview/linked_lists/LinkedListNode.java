@@ -15,7 +15,7 @@ public class LinkedListNode {
     }
 
     public static void printList(LinkedListNode head) {
-        StringJoiner joiner = new StringJoiner("," ,"[", "]");
+        StringJoiner joiner = new StringJoiner(" -> " ,"[", "]");
         while(head != null) {
             joiner.add(Integer.toString(head.val));
             head = head.next;

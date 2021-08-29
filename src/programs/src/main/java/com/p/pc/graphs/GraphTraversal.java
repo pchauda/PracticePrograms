@@ -32,11 +32,12 @@ public class GraphTraversal {
         System.out.println("Level order traversal with level info - Recursive");
         gt.performLevelOrderTraversalWithLevelInfoRecursive(root);
     }
+
     // Follow Pre-Order traversal algo with level info to collect all nodes in map
     void performLevelOrderTraversalWithLevelInfoRecursive(GraphVertex<Integer> root) {
         Map<Integer, List<GraphVertex<Integer>>> levelMap = new HashMap<>();
         dFSWithInfoRecursive(root, 0, levelMap);
-        for(int i=0; i < levelMap.keySet().size(); i++) {
+        for (int i = 0; i < levelMap.keySet().size(); i++) {
             List<Integer> nodeKeys = levelMap.get(i).stream().map(t -> t.key).collect(Collectors.toList());
             System.out.println("Level: " + i + ", Nodes: " + nodeKeys);
         }
@@ -45,8 +46,8 @@ public class GraphTraversal {
     private void dFSWithInfoRecursive(GraphVertex<Integer> node, int level, Map<Integer, List<GraphVertex<Integer>>> levelMap) {
         if (node != null) {
             addToMap(node, level, levelMap);
-            if(node.children != null) {
-                for(GraphVertex<Integer> child: node.children) {
+            if (node.children != null) {
+                for (GraphVertex<Integer> child : node.children) {
                     dFSWithInfoRecursive(child, level + 1, levelMap);
                 }
             }
@@ -65,18 +66,18 @@ public class GraphTraversal {
         Map<Integer, List<GraphVertex<Integer>>> levelMap = new HashMap<>();
         int level = 0;
         queue.add(root);
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             int levelSize = queue.size();
-            while(levelSize-- > 0) {
+            while (levelSize-- > 0) {
                 GraphVertex<Integer> node = queue.poll();
                 addToMap(node, level, levelMap);
-                if(node.children != null) {
+                if (node.children != null) {
                     node.children.stream().forEach(t -> queue.add(t));
                 }
             }
             level++;
         }
-        for(int i=0; i < levelMap.keySet().size(); i++) {
+        for (int i = 0; i < levelMap.keySet().size(); i++) {
             List<Integer> nodeKeys = levelMap.get(i).stream().map(t -> t.key).collect(Collectors.toList());
             System.out.println("Level: " + i + ", Nodes: " + nodeKeys);
         }
@@ -86,11 +87,11 @@ public class GraphTraversal {
         Queue<GraphVertex<Integer>> queue = new ArrayDeque<>();
         queue.add(root);
 
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             GraphVertex<Integer> node = queue.poll();
             bfsTraversal.add(node.key);
-            if(node.children != null) {
-                for(GraphVertex<Integer> child : node.children) {
+            if (node.children != null) {
+                for (GraphVertex<Integer> child : node.children) {
                     queue.add(child);
                 }
             }
@@ -102,13 +103,13 @@ public class GraphTraversal {
         Stack<GraphVertex<Integer>> stack = new Stack<>();
         GraphVertex<Integer> current = root;
 
-        while(!stack.isEmpty() || current != null) {
-            if(current != null) {
+        while (!stack.isEmpty() || current != null) {
+            if (current != null) {
                 dfsTraversal.add(current.key);
                 GraphVertex<Integer> leftMostChild = null;
-                if(current.children != null) {
-                    for(int i = current.children.size() - 1; i >= 0; i--) {
-                        if(i == 0 ) {
+                if (current.children != null) {
+                    for (int i = current.children.size() - 1; i >= 0; i--) {
+                        if (i == 0) {
                             leftMostChild = current.children.get(i);
                         } else {
                             stack.push(current.children.get(i));
@@ -124,10 +125,10 @@ public class GraphTraversal {
 
     // Using Pre-order traversal's recursive approach
     private void performDepthFirstTraversalRecursive(GraphVertex<Integer> root, List<Integer> dfsTraversalRecursive) {
-        if(root != null) {
+        if (root != null) {
             dfsTraversalRecursive.add(root.key);
-            if(root.children != null) {
-                for(GraphVertex<Integer> child: root.children) {
+            if (root.children != null) {
+                for (GraphVertex<Integer> child : root.children) {
                     performDepthFirstTraversalRecursive(child, dfsTraversalRecursive);
                 }
             }
@@ -137,11 +138,11 @@ public class GraphTraversal {
     GraphVertex<Integer> createGraph() {
         int i = 2;
         GraphVertex<Integer> root = new GraphVertex<>(1);
-        while(i <= 4) {
+        while (i <= 4) {
             root.addChild(new GraphVertex<>(i++));
         }
 
-        for(GraphVertex<Integer> child : root.children) {
+        for (GraphVertex<Integer> child : root.children) {
             child.addChild(new GraphVertex<>(i++));
             child.addChild(new GraphVertex<>(i++));
             child.addChild(new GraphVertex<>(i++));
@@ -164,7 +165,7 @@ public class GraphTraversal {
         }
 
         void addChild(GraphVertex<K> child) {
-            if(children == null) {
+            if (children == null) {
                 children = new LinkedList<>();
             }
             children.add(child);
