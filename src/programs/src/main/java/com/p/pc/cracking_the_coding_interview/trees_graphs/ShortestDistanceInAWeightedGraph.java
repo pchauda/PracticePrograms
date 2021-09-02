@@ -19,6 +19,7 @@ import java.util.*;
  *  Mark the current vertex as visited and add the adjacent vertices to the min heap along with their distances.
  *  Repeat the above till min heap is empty.
  */
+@SuppressWarnings("unchecked")
 public class ShortestDistanceInAWeightedGraph {
     public static void main(String[] args) {
         ShortestDistanceInAWeightedGraph obj = new ShortestDistanceInAWeightedGraph();
