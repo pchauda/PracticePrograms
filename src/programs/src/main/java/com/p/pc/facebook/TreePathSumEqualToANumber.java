@@ -33,8 +33,10 @@ public class TreePathSumEqualToANumber {
         findPathsStartingFromRootToLeaf(root, 10, new ArrayList<>(), paths);
         System.out.println("All paths starting from root till leaf having sum = 10 are: " + paths); // Output: [[4, 5, 1, -1, 1]]
         paths = new ArrayList<>();
-        findAnyPathEqualToK(root, 8, new ArrayList<>(), paths);
-        System.out.println("Any paths having sum = 8 are: " + paths); // Output: [[5, 1], [5, 1, -1, 1], [3, 3]]
+        findAnyPathEqualToK(root, 6, new ArrayList<>(), paths);
+        System.out.println("Any paths having sum = 6 are: " + paths); // Output: [[5, 1], [5, 1, -1, 1], [3, 3]]
+        int allPaths = countAllPathsEqualToK(root, 6, 0, new HashMap<>());
+        System.out.println("Total paths equal to 6 are: " + allPaths);
         countAllSubTreesHavingSumEqualToK(root, 8);
         System.out.println("Count of all subtrees having sum = 8 is: " + count); // Output: 2
         paths = new ArrayList<>();
@@ -101,6 +103,40 @@ public class TreePathSumEqualToANumber {
 
         path.remove(path.size() - 1);
     }
+    // Better approach to count any path equal to sum. Time complexity = O(n) as all nodes are being visited only once
+    // Maintain a running sum and its count in a hash map.
+    static int countAllPathsEqualToK(TreeNode root, int K, int runningSum, HashMap<Integer, Integer> pathSumCountMap) {
+        if(root == null) return 0;
+        /* Count paths with sum ending at the current node. */
+        runningSum += root.value;
+        int totalPaths = 0;
+        /* If runningSum equals targetSum, then one additional path found, add this in total paths.*/
+        if(runningSum == K)
+            totalPaths++;
+        // RunningSum exceeds the targetSum by (runningSum - targetSum), find count of such subArrays having sum equal
+        // to this deltaSum. By excluding these many subArrays, we will get the targetSum and hence add this count to the total paths.
+        int deltaSum = runningSum - K;
+        totalPaths += pathSumCountMap.getOrDefault(deltaSum, 0); //
+
+        // add the runningSum to the map and increase the value by 1 if runningSum already exists
+        incrementPathSumCount(pathSumCountMap, runningSum, 1);
+        // count recursively for left and right subtrees
+        totalPaths += countAllPathsEqualToK(root.left, K, runningSum, pathSumCountMap);
+        totalPaths += countAllPathsEqualToK(root.right, K, runningSum, pathSumCountMap);
+        // remove the runningSum from the map and decrease the value by 1 or remove the entry completely if count = 0
+        incrementPathSumCount(pathSumCountMap, runningSum, -1);
+        return totalPaths;
+    }
+
+    private static void incrementPathSumCount(HashMap<Integer, Integer> hashTable, int pathSum, int delta) {
+        int newCount = hashTable.getOrDefault(pathSum, 0) + delta;
+        if (newCount == 0) {
+            hashTable.remove(pathSum);
+        } else {
+            hashTable.put(pathSum, newCount);
+        }
+    }
+
     // perform post order traversal for this problem
     static int countAllSubTreesHavingSumEqualToK(TreeNode root, int K) {
         if(root == null) return 0;
