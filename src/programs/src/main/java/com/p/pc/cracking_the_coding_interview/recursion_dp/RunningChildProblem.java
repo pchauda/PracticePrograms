@@ -19,7 +19,7 @@ import java.util.Arrays;
  */
 public class RunningChildProblem {
     public static void main(String[] args) {
-        int stairs = 3;
+        int stairs = 30;
         BigInteger waysToClimb = waysToClimbOptimized(stairs);
         System.out.println(waysToClimb);
     }
@@ -31,14 +31,17 @@ public class RunningChildProblem {
     }
     // Solving the problem using Dynamic Programming. Very optimized solution, time complexity = O(n)
     private static BigInteger waysToClimbOptimizedWithMemo(int n, BigInteger[] memo) {
-        if(n < 0) return BigInteger.valueOf(0); // Return 0
-        if(n == 0) return BigInteger.valueOf(1); // Return 1
-        if(memo[n] != BigInteger.valueOf(-1)) return memo[n]; // Return previously computed value if available
+        if(n < 0)
+            return BigInteger.valueOf(0); // Return 0
+        if(n == 0)
+            return BigInteger.valueOf(1); // Return 1, if there are no steps then also 1 step is required
+        if(memo[n] != BigInteger.valueOf(-1))
+            return memo[n]; // Return previously computed value if available
         // Compute the value and store it in the array before returning it
         memo[n] = waysToClimbOptimizedWithMemo(n-1, memo).add(waysToClimbOptimizedWithMemo(n-2, memo)).add(waysToClimbOptimizedWithMemo(n-3, memo));
         return memo[n];
     }
-    // Un-optimized recursive algorithm, time complexity = O(2^n)
+    // Un-optimized recursive algorithm, time complexity = O(3^n)
     private static BigInteger waysToClimb(int n) {
         if(n < 0) return BigInteger.valueOf(0);
         if(n == 0) return BigInteger.valueOf(1);
