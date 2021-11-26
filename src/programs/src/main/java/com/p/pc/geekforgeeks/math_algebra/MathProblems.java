@@ -1,4 +1,4 @@
-package com.p.pc.geekforgeeks.math;
+package com.p.pc.geekforgeeks.math_algebra;
 
 /**
  * Problem 1: For a given N, find missing number in an array containing elements from range 1: N-1
