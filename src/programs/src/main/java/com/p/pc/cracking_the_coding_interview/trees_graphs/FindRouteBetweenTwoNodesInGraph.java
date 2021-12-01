@@ -68,7 +68,7 @@ public class FindRouteBetweenTwoNodesInGraph {
     private static void dfsRecursive(Graph g, Integer u, Integer v, Set<Integer> visited, List<Integer> path, List<List<Integer>> paths) {
         // If reached the destination then collect the path and return
         if(u.equals(v)) {
-            paths.add(List.copyOf(path));
+            paths.add(new ArrayList<>(path));
             return;
         }
         // add the current node as visited to avoid circular paths
