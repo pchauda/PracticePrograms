@@ -1,16 +1,24 @@
 package com.p.pc.sorting;
 
 import java.util.Arrays;
-import java.util.StringJoiner;
 
+/**
+ * Algorithm:
+ *  Merge Sort is one of the most popular sorting algorithms that is based on the principle of Divide and Conquer Algorithm.
+ *  Here, a problem is divided into multiple sub-problems. Each sub-problem is solved individually. Finally, sub-problems
+ *  are combined to form the final solution.
+ *
+ * Time complexity: O(n log n)
+ *
+ * Merge Sort is a Stable Sort.
+ */
 public class MergeSort {
 
     public static void main(String[] args) {
         int[] array = new int[]{4, 1, 3, 5, 9, 8, 7};
-        System.out.println(printArray(array));
+        System.out.println("Original array: " + Arrays.toString(array));
         mergeSort(array, 0, array.length-1);
-        System.out.println("Sorted Array:");
-        System.out.println(printArray(array));
+        System.out.println("Sorted Array: " + Arrays.toString(array));
     }
 
     static void mergeSort(int[] array, int start, int end) {
@@ -39,29 +47,18 @@ public class MergeSort {
         int i=0,j=0,k=start;
         while(i < l && j < r) {
             if(L[i] <= R[j]) { // Equals condition here is important for retaining the stable-sort nature of merge sort
-                array[k] = L[i];
+                array[k++] = L[i];
                 i++;
             } else {
-                array[k] = R[j];
+                array[k++] = R[j];
                 j++;
             }
-            k++;
         }
         while(i < l) {
-            array[k] = L[i];
-            i++;
-            k++;
+            array[k++] = L[i++];
         }
         while(j < r) {
-            array[k] = R[j];
-            j++;
-            k++;
+            array[k++] = R[j++];
         }
-    }
-
-    static String printArray(int[] array) {
-        StringJoiner joiner = new StringJoiner(", ", "[", "]");
-        Arrays.stream(array).boxed().forEach(t -> joiner.add(t.toString()));
-        return joiner.toString();
     }
 }

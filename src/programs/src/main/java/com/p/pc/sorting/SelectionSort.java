@@ -6,15 +6,20 @@ import java.util.StringJoiner;
 /**
  * Find the minimum element in the unsorted array, place it to the first position, repeat the same steps for remaining
  * unsorted array.
+ *
+ * Time complexity is O(n^2) and it is worse than the insertion sort.
+ * Selection sort requires at most n swaps, however, bubble sort may require n * n-1 swaps. So if swaps are costlier
+ * then Selection sort can be used compared to Bubble sort.
+ *
+ * Selection Sort is Unstable sort i.e. order of equal elements is not retained.
  */
 public class SelectionSort {
 
     public static void main(String[] args) {
         int[] arr = new int[]{6, 3, 1, 5, 9, 8};
-        printArray(arr);
+        System.out.println("Original array: " + Arrays.toString(arr));
         selectionSort(arr);
-        System.out.println("Sorted Array:");
-        printArray(arr);
+        System.out.println("Sorted Array: " + Arrays.toString(arr));
     }
 
     private static void selectionSort(int[] arr) {
@@ -25,7 +30,8 @@ public class SelectionSort {
                 if(arr[j] < arr[minIdx])
                     minIdx = j;
             }
-            swap(arr, i, minIdx);
+            if(minIdx != i)
+                swap(arr, i, minIdx);
         }
     }
 
@@ -33,11 +39,5 @@ public class SelectionSort {
         int temp = arr[i];
         arr[i] = arr[minIdx];
         arr[minIdx] = temp;
-    }
-
-    static void printArray(int[] arr) {
-        StringJoiner j = new StringJoiner(",", "[","]");
-        Arrays.stream(arr).boxed().forEach(t -> j.add(Integer.toString(t)));
-        System.out.println(j.toString());
     }
 }

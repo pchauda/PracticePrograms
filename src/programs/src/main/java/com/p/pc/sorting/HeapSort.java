@@ -1,24 +1,28 @@
 package com.p.pc.sorting;
 
 import java.util.Arrays;
-import java.util.StringJoiner;
 
 /**
  * Heap is a complete binary tree.
  * For a given element i, the left child will be at (2*i + 1) and right child will be
- * at (2*i + 2) position. Similarly for a given node i, the parent node will be at (i-1)/2 position.
+ * at (2*i + 2) position. Similarly, for a given node i, the parent node will be at (i/2 - 1) position.
  *
  * Using above, an array of inputs can be considered as a complete binary tree and max/min heap can be constructed out of it.
  * For every parent node, heapify method should be invoked to construct a max/min heap.
  *
  * For an array with length n, all nodes starting from index (n/2 - 1) will be parent node and hence need to be heapified.
+ *
+ * Heap Sort is Unstable sort i.e. order of equal elements is not retained.
+ *
+ * Heap sort is slower than both merge sort (Twice slower) and quick sort (4 times slower). However, since Merge sort
+ * take O(n) space and hence sometimes Heap sort is preferred over merge sort if space is a concern.
  */
 public class HeapSort {
     public static void main(String[] args) {
         int[] input = new int[]{4, 10, 12, 60, 7, 71, 5};
-        System.out.println("Input Array: " + printArray(input));
+        System.out.println("Input Array: " + Arrays.toString(input));
         heapSortAscending(input);
-        System.out.println("Sorted Array using com.p.pc.sorting.HeapSort: " + printArray(input));
+        System.out.println("Sorted Array using com.p.pc.sorting.HeapSort: " + Arrays.toString(input));
     }
 
     static void heapSortAscending(int[] array) {
@@ -32,7 +36,7 @@ public class HeapSort {
         for(int i=length - 1; i > 0; i--) {
             // swap the top element with the last element
             swap(array, 0, i);
-            // remove the last element from array and invoke heapify on root
+            // heapify root with effectively reduced array size
             heapify(array, i, 0);
         }
     }
@@ -70,14 +74,5 @@ public class HeapSort {
         arr[i] = arr[j];
         arr[j] = temp;
     }
-
-    static String printArray(int[] array) {
-        StringJoiner joiner = new StringJoiner(", ", "[", "]");
-        Arrays.stream(array).boxed().forEach(t -> joiner.add(t.toString()));
-        return joiner.toString();
-    }
-
-
-
 }
 
