@@ -14,7 +14,7 @@ public class Java8Features {
         List<String> list = new ArrayList<>();
         list.add(""); list.add("Prince"); list.add("");
 
-        obj.removeEmptyStrings(list);
+        list.removeIf(String::isEmpty);
         System.out.println(list.size());
 
         // forEach method takes a Consumer. Any method that takes a argument and returns void can be replace here.
@@ -44,10 +44,6 @@ public class Java8Features {
     }
 
     public static void myStaticMethod() {}
-
-    void removeEmptyStrings(List<String> list) {
-        list.removeIf(String::isEmpty);
-    }
 
     List<String> removeEmptyStringsUsingStream(List<String> list) {
         return list.stream().filter(String::isEmpty).collect(Collectors.toList());

@@ -1,5 +1,6 @@
 package com.p.pc.programs;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.StringJoiner;
 
@@ -7,10 +8,10 @@ public class MinimumJumpsToReachEndOfArray {
 
     public static void main(String[] args) {
         // int[] arr = new int[] {2, 2, 0, 8, 0, 0, 0, 1, 2, 2, 1, 0, 1}; // Output should be -1 due to zero at 11th position starting from 0th position
-        int[] arr = new int[] {2, 4, 0, 8, 9, 1, 2, 7, 1, 0, 8, 0, 0}; // Output should be 3
+        int[] arr = new int[] {2, 4, 0, 8, 9, 1, 2, 7, 1, 0, 8, 0, 0, 0, 0, 1}; // Output should be 3
         // int[] arr = new int[] {3, 2, 0, 8, 0, 0, 0, 1, 2, 2, 1, 1, 1}; // Output should be 3 starting from 0th position
         System.out.println("Minimum jumps O(n): " + minJumps(arr));
-        System.out.println("Minimum jumps (dynamic programming): " + minJumpsDP(arr, arr.length - 1));
+        System.out.println("Minimum jumps (dynamic programming): " + minJumpsDP(arr, arr.length));
         System.out.println("Minimum jumps (with indexes): " + minJumpsWithIndexes(arr));
     }
 
@@ -23,10 +24,10 @@ public class MinimumJumpsToReachEndOfArray {
 
         int[] minJumps = new int[arr.length];
         int[] jumpIndex = new int[arr.length];
-        initializeArray(minJumps, Integer.MAX_VALUE);
-        initializeArray(jumpIndex, -1);
-        minJumps[0] = 0; // initialize the minJUms and jumIndex array for 0 position
-        // For each index in the array, try to find out the minimum jump from each position starting from 0 index
+        Arrays.fill(minJumps, Integer.MAX_VALUE);
+        Arrays.fill(jumpIndex, -1);
+        minJumps[0] = 0; // initialize the minJumps and jumIndex array for 0 position
+        // For each index in the array, try to find out the minimum jump for each position starting from 0 index
         // if index i is reachable from the given j index
         for(int i = 1; i < arr.length; i++) {
             for(int j = 0; j < i; j++ ) {
@@ -55,27 +56,25 @@ public class MinimumJumpsToReachEndOfArray {
         return minJumps[arr.length - 1];
     }
 
-    static void initializeArray(int[] arr, int value) {
-        for(int i=0; i < arr.length; i++) {
-            arr[i] = value;
-        }
-    }
-
     static int minJumpsDP(int arr[], int n) {
         if(n == 1) return 0;
         if(arr[0] == 0) return Integer.MAX_VALUE;
         int[] minJumps = new int[n];
-        for(int i = 0; i < minJumps.length - 1; i++) {
-            minJumps[i] = Integer.MAX_VALUE;
-        }
+        Arrays.fill(minJumps, Integer.MAX_VALUE);
+
         minJumps[0] = 0;
-        for(int i = 0; i < n; i++){
-            for(int j = i+1; j < Math.min(i+ arr[i]+1, n); j++) {
-                minJumps[j] = Math.min(minJumps[j], 1 + minJumps[i]);
+        // For each i index, calculate the minimum number of jumps required to reach any reachable j index
+        for(int i = 0; i < n; i++) {
+            int maxReach = Math.min(i + arr[i] + 1, n);
+            for(int j = i+1; j < maxReach; j++) {
+                int jumpTillJ = 1 + minJumps[i];
+                if(jumpTillJ < minJumps[j])
+                    minJumps[j] = jumpTillJ;
             }
         }
-        return minJumps[n-2];
+        return minJumps[n-1];
     }
+
     // This is O(n) solution but it is not possible to know the jump indexes
     static int minJumps(int arr[]) {
         if (arr.length <= 1) return 0;

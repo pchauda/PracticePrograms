@@ -31,10 +31,7 @@ public class MaxSumSubArray {
             prevSum = newSum;
         }
         System.out.println(format("Max sum of the contiguous sub array: %d with sub array indexes: {%d, %d} " , max, startIndex, endIndex));
-        for(int i : Arrays.copyOfRange(arr, startIndex, endIndex + 1)) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
+        System.out.println(Arrays.toString(Arrays.copyOfRange(arr, startIndex, endIndex + 1)));
         System.out.println("Max sum: " + maxSum(arr));
     }
 

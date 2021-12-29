@@ -1,5 +1,8 @@
 package com.p.pc.programs;
 
+/**
+ * Write a program to detect a cycle or loop in a given linked list.
+ */
 public class DetectCycleInList {
 
     public static void main(String[] args) {

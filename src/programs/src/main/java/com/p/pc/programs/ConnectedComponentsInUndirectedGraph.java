@@ -35,7 +35,7 @@ public class ConnectedComponentsInUndirectedGraph {
             adjacencyList = new ArrayList<>();
             // initialize the adjacencyList for each vertex
             for(int i =0; i < n; i++) {
-                adjacencyList.add(i, new ArrayList<>());
+                adjacencyList.add(new ArrayList<>());
             }
         }
         // Add edge from vertex src to dest

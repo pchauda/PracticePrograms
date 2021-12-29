@@ -1,23 +1,25 @@
 package com.p.pc.facebook;
 
 /**
+ * Find key in a sorted but rotated array. Degree of rotation is not known.
+ *
+ * Approach: Complexity: O(log n)
+ *
  * Even with the rotation, the array can always be split into two sorted arrays.
  * Using this property, we can find the element.
- * From the mid element do the following:
+ * From the mid-element do the following:
  * 1.Find in the left array if left array is sorted and key lies between start and mid
  * 2.Find in the right array if right array is sorted and key lied between mid and end
- *
  * If above two cases are false, that means both sides are not sorted so that means either
  * 1. end is lower than the mid OR
  * 2. start is higher
- *
  * So, if end is lower than key will be from mid to end
  * if start is higher than key will be from start to mid.
  */
 public class FindKeyInSortedRotatedArray {
     public static void main(String[] args) {
-        int[] arr = new int[] {21, 22, 23, 24, 12, 13, 14, 15};
-        binarySearch(arr, 13);
+        int[] arr = new int[] {21, 22, 9, 10, 12, 13, 14, 15};
+        binarySearch(arr, 9);
         binarySearch(arr, 21);
     }
 

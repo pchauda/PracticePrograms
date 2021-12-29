@@ -26,7 +26,7 @@ public class MinSwapRequiredToSortArray {
         for(int i=0; i<arr.length; i++) {
             map.put(arr[i], i);
         }
-        // check each element of arr to see if it is in its correct position or not by comparing it with the sorter array
+        // check each element of arr to see if it is in its correct position or not by comparing it with the sorted array
         // if not, then swap the element with sorted element for that position
         for(int i=0; i<arr.length; i++) {
             int original = arr[i];

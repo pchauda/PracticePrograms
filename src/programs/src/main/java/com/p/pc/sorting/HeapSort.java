@@ -42,9 +42,9 @@ public class HeapSort {
     }
 
     static void heapify(int[] array, int length, int index) {
+        int maxIndex = index; // assuming current index has tbe max value
         int leftChild = 2 * index + 1;
         int rightChild = 2 * index + 2;
-        int maxIndex = index; // assuming current index has tbe max value
 
         if(leftChild < length && array[leftChild] > array[maxIndex]) {
             maxIndex = leftChild;

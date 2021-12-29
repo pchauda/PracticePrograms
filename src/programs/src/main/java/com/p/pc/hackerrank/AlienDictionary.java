@@ -36,9 +36,10 @@ import java.util.Map;
  */
 public class AlienDictionary {
     public static void main(String[] args) {
-        String[] words = new String[]{"world", "word", "row"};
         String order = "worldabcefghijkmnpqstuvxyz";
-        System.out.println(isAlienSorted(words, order));
+        System.out.println(isAlienSorted(new String[]{"world", "word", "row"}, order));
+        System.out.println(isAlienSorted(new String[]{"applepie", "apple"}, order));
+        System.out.println(isAlienSorted(new String[]{"prince", "priya", "row"}, order));
     }
 
     /**

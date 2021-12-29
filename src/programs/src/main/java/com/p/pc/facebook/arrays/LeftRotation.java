@@ -1,20 +1,22 @@
 package com.p.pc.facebook.arrays;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
+/**
+ * Given an array and total number of left rotations, print the final array after completing all rotations.
+ */
 public class LeftRotation {
 
     public static void main(String[] args) {
         int[] arr = new int[] {1,2,3,4};
         int rotation = 3;
-        System.out.println("Original array: " + Arrays.stream(arr).boxed().map(t -> Integer.toString(t)).collect(Collectors.toList()));
+        System.out.println("Original array: " + Arrays.toString(arr));
         performRotationInPlace(arr, rotation);
-        System.out.println("Rotated array (in place) : " + Arrays.stream(arr).boxed().map(t -> Integer.toString(t)).collect(Collectors.toList()));
+        System.out.println("Rotated array (in place) : " + Arrays.toString(arr));
         performRotationInPlace(arr, 1); // restore original array
-        System.out.println("Original array: " + Arrays.stream(arr).boxed().map(t -> Integer.toString(t)).collect(Collectors.toList()));
+        System.out.println("Original array: " + Arrays.toString(arr));
         arr = performRotation(arr, rotation);
-        System.out.println("Rotated array: " + Arrays.stream(arr).boxed().map(t -> Integer.toString(t)).collect(Collectors.toList()));
+        System.out.println("Rotated array: " + Arrays.toString(arr));
     }
 
     private static int[] performRotation(int[] arr, int rotation) {

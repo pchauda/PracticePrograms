@@ -3,7 +3,7 @@ package com.p.pc.facebook;
 import java.util.LinkedList;
 
 /**
- * Find the length of longest strictly increasing subsequence in a given array
+ * <p>Find the length of longest strictly increasing subsequence in a given array. </p>
  *
  * Approach:
  *  This problem can be solved using dynamic programming as it contains overlapping sub-problems and optimal sub-structure properties.

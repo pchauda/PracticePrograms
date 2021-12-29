@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Given the input Tree like below:
+ * Given the input Tree like below (not a binary search tree):
  *                         1
  *                2                 3
  *          4           5     6           7
@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
  *
  * Breadth First Search is equivalent to Level Order Traversal.
  * Depth First Search is equivalent to PreOrder Traversal.
+ *
+ * Given a binary search tree, the inorder traversal results in a sorted array.
  *
  * @param <K>
  */
@@ -43,7 +45,7 @@ public class TreeTraversal<K> {
         tree.printInOrderTraversalIterative(root);
 
         System.out.println("\nPrinting PreOrder Traversal:");
-        tree.preOrderTraversalWithLevelInfo(root);
+        tree.printPreOrderTraversal(root);
         System.out.println("\nPrinting PreOrder Traversal Iterative:");
         tree.printPreOrderTraversalIterative(root);
 
@@ -76,12 +78,12 @@ public class TreeTraversal<K> {
         printInOrderTraversal(root.right);
     }
 
-    void preOrderTraversalWithLevelInfo(TreeNode<K> root) {
+    void printPreOrderTraversal(TreeNode<K> root) {
         if(root == null) return;
 
         System.out.print(root.value + " ");
-        preOrderTraversalWithLevelInfo(root.left);
-        preOrderTraversalWithLevelInfo(root.right);
+        printPreOrderTraversal(root.left);
+        printPreOrderTraversal(root.right);
     }
 
     void printPostOrderTraversal(TreeNode<K> root) {
@@ -236,17 +238,17 @@ public class TreeTraversal<K> {
     // Level Order via Pre Order Algo with depth info using recursion
     void levelOrderTraversalViaPreOrderAlgo(TreeNode<K> root) {
         Map<Integer, List<TreeNode<K>>> map = new HashMap<>();
-        preOrderTraversalWithLevelInfo(root, 0, map);
+        printPreOrderTraversal(root, 0, map);
         for(int i = map.keySet().size() - 1; i >= 0; i--) {
             List<TreeNode<K>> treeNodes = map.get(i);
             System.out.println("Level: " + i + ", Nodes: " + treeNodes.stream().map(t -> t.value).collect(Collectors.toList()));
         }
     }
-    void preOrderTraversalWithLevelInfo(TreeNode<K> root, Integer level, Map<Integer, List<TreeNode<K>>> map) {
+    void printPreOrderTraversal(TreeNode<K> root, Integer level, Map<Integer, List<TreeNode<K>>> map) {
         if(root == null) return;
         addToMap(map, level, root);
-        preOrderTraversalWithLevelInfo(root.left, level + 1, map);
-        preOrderTraversalWithLevelInfo(root.right, level + 1, map);
+        printPreOrderTraversal(root.left, level + 1, map);
+        printPreOrderTraversal(root.right, level + 1, map);
     }
     private void addToMap(Map<Integer, List<TreeNode<K>>> map, Integer level, TreeNode<K> treeNode) {
         map.putIfAbsent(level, new ArrayList<>());

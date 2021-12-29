@@ -46,14 +46,11 @@ public class MergeSort {
         }
         int i=0,j=0,k=start;
         while(i < l && j < r) {
-            if(L[i] <= R[j]) { // Equals condition here is important for retaining the stable-sort nature of merge sort
-                array[k++] = L[i];
-                i++;
-            } else {
-                array[k++] = R[j];
-                j++;
-            }
+            // Equals condition here is important for retaining the stable-sort nature of merge sort
+            int value = ( L[i] <= R[j] ? L[i++] : R[j++] );
+            array[k++] = value;
         }
+
         while(i < l) {
             array[k++] = L[i++];
         }

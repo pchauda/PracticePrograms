@@ -4,16 +4,17 @@ import java.util.Arrays;
 import java.util.Stack;
 
 /**
- * You are given an array arr of N integers. For each index i, you are required to determine the number of contiguous subarrays that fulfills the following conditions:
- * The value at index i must be the maximum element in the contiguous subarrays, and
- * These contiguous subarrays must either start from or end on index i.
+ * You are given an array arr of N integers. For each index i, you are required to determine the number of contiguous
+ * sub-arrays that fulfills the following conditions:
+ * The value at index i must be the maximum element in the contiguous sub-arrays, and these contiguous sub-arrays must
+ * either start from or end on index i.
  * Signature
- * int[] countSubarrays(int[] arr)
+ * int[] countSubArrays(int[] arr)
  * Input
- * Array arr is a non-empty list of unique integers that range between 1 to 1,000,000,000
+ * Array arr is a non-empty list of unique integers that range between 1 and 1,000,000,000
  * Size N is between 1 and 1,000,000
  * Output
- * An array where each index i contains an integer denoting the maximum number of contiguous subarrays of arr[i]
+ * An array where each index i contains an integer denoting the maximum number of contiguous sub-arrays of arr[i]
  * Example:
  * arr = [3, 4, 1, 6, 2]
  * output = [1, 3, 1, 5, 1]
@@ -39,18 +40,18 @@ public class ContiguousSubArrayCount {
     static int[] findCountOfContiguousSubArray(int[] arr) {
         int length = arr.length;
         int[] result = new int[length];
-        Arrays.fill(result, 1);
-        for (int idx = 0; idx < length; idx++) {
+        Arrays.fill(result, 1); // initialize with 1 as each element will correspond to an array of size 1
+        for (int i = 0; i < length; i++) {
             // Check for left values
-            int ptr = idx - 1;
-            while (ptr >= 0 && ptr < length && arr[idx] > arr[ptr]) {
-                result[idx]++;
+            int ptr = i - 1;
+            while (ptr >= 0 && arr[i] > arr[ptr]) {
+                result[i]++;
                 ptr--;
             }
             // Check for right values
-            ptr = idx + 1;
-            while (ptr >= 0 && ptr < length && arr[idx] > arr[ptr]) {
-                result[idx]++;
+            ptr = i + 1;
+            while (ptr < length && arr[i] > arr[ptr]) {
+                result[i]++;
                 ptr++;
             }
         }
@@ -59,10 +60,11 @@ public class ContiguousSubArrayCount {
 
     /**
      * Maintain a stack such that it always contains the index for the last maximum encountered. If the next element is
-     * greater than the arr[stack.peek()] then pop the top of the stack till we find a equal or greater element.
+     * greater than the arr[stack.peek()] then pop the top of the stack till we find an equal or greater element.
      * If stack is empty then it means that the current element is the maximum of all and hence there are
      * (current index + 1) possible arrays meeting the criteria.
-     * If stack is not empty, then (current index - stack top) will be possible arrays for the index position
+     * If stack is not empty, then (current index - stack top) will be possible arrays for the index position.
+     * Repeat this solution from left to right and then from right to left.
      * <p>
      * O(n) solution
      *
@@ -78,19 +80,21 @@ public class ContiguousSubArrayCount {
         for (int i = 1; i < arr.length; i++) {
             while (!stack.isEmpty() && arr[stack.peek()] < arr[i])
                 stack.pop(); // pop the stack elements till arr[stack top] is greater than or equal to the current element
-            // after the above step either stack is empty or stack top is the max element and hence contiguous sub-arrays having max element at i are only possible till the stack top
-            if (stack.isEmpty()) result[i] = i + 1;
-            else result[i] = i - stack.peek();
+            // after the above step either stack is empty or stack top is the max element and hence contiguous sub-arrays
+            // having max element at i are only possible till the stack top
+            if (stack.isEmpty()) result[i] = i + 1; // add 1 for self
+            else result[i] = i - stack.peek(); // no need to add 1 here as for base case when ith element is smaller than stack top, delta will still result into 1
             stack.push(i);
         }
         stack.clear();
         // For every index, check from the right for possible contiguous arrays
         stack.push(arr.length - 1);
         for (int i = arr.length - 2; i >= 0; i--) {
-            while (!stack.isEmpty() && arr[stack.peek()] < arr[i]) stack.pop();
+            while (!stack.isEmpty() && arr[stack.peek()] < arr[i])
+                stack.pop();
             // after the above step either stack is empty or stack top is the max element and hence contiguous sub-arrays having max element at i are only possible till the stack top
             if (stack.isEmpty()) result[i] += (arr.length - i - 1);
-            else result[i] += (stack.peek() - i - 1);
+            else result[i] += (stack.peek() - i - 1); // subtract 1 as it was already counted earlier and for base case no need to count it again
             stack.push(i);
         }
         return result;

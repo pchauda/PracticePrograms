@@ -26,6 +26,10 @@ public class SingleTon {
 
         }
 
+        public FileReader getFr() {
+            return fr;
+        }
+
         public static MySingleTon getInstance() {
             return INSTANCE;
         }
@@ -33,7 +37,7 @@ public class SingleTon {
 
     class MySingleTonClass {
 
-        volatile MySingleTonClass instance; // Volatile guarantees the happens before relationship starting Java 6.
+        private MySingleTonClass instance; // Volatile guarantees the happens before relationship starting Java 6.
 
         MySingleTonClass getInstance() {
             if(instance == null) {

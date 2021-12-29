@@ -6,17 +6,18 @@ package com.p.pc.facebook;
  *
  * Approach:
  *  Idea here to follow the algorithm of connected components search in a graph. The only variation is to find out the
- *  adjacent nodes and then perform DFS recursively. Every node will have max of 8 adjacent nodes that can we reached out by -1, 0, 1 for rows and -1, 0, 1 for columns.
+ *  adjacent nodes and then perform DFS recursively. Every node will have max of 8 adjacent nodes that can we reached
+ *  out by -1, 0, 1 for rows and -1, 0, 1 for columns.
  */
 public class FindIslandsInAGiven2DArray {
     public static void main(String[] args) {
         int[][] arr = new int[][] {
                 {1, 0, 1, 0, 0},
-                {1, 1, 0, 1, 0},
+                {1, 0, 0, 1, 0},
                 {0, 0, 1, 0, 0},
                 {1, 0, 0, 0, 1}
         };
-        System.out.println("Total islands: " + findIslands(arr));
+        System.out.println("Total islands: " + findIslands(arr)); // Output: 4
     }
 
     private static int findIslands(int[][] arr) {

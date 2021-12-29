@@ -23,9 +23,9 @@ public class AllPossibleSubSetsForIntArray {
         for(int i=0; i < totalCases; i++) {
             Set<Integer> subset = new HashSet<>();
             for(int j=0; j < arr.length; j++) {
-                int temp = 1 << j;
-                temp = i & temp;
-                if(temp > 0) {
+                // Left shift 1 by j. 1 << 0 == 1, 1 << 1 == 2 (10), 1 << 2 == 4 (100)
+                // Effectively, create binary representation of array index and perform AND operation with i to select the elements in the subset
+                if((i & (1 << j)) > 0) {
                     subset.add(arr[j]);
                 }
             }
@@ -38,7 +38,7 @@ public class AllPossibleSubSetsForIntArray {
     public static void subsetsUsingBacktrack(int[] nums, int current, LinkedList<Integer> track, List<List<Integer>> result) {
         //All elements have been traversed
         if (current == nums.length) {
-            result.add(new LinkedList<>(track));
+            result.add(new LinkedList<>(track)); // clone and add to the result
             return;
         }
         //Select the current element and then recursively work on the next element

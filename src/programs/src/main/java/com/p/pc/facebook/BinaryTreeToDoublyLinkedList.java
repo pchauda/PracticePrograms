@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Convert a given binary tree to a linked list and return the head (left most element i.e. first element in in-order traversal).
+ */
 public class BinaryTreeToDoublyLinkedList {
     public static BinaryTreeNode convertToDoublyLinkedList(BinaryTreeNode root) {
         LinkedList<BinaryTreeNode> stack = new LinkedList<>();
@@ -17,9 +20,9 @@ public class BinaryTreeToDoublyLinkedList {
                 current = current.left;
             } else {
                 BinaryTreeNode node = stack.pop();
-                if(prev == null) {
-                    prev = head = node;
-                    prev.left = null;
+                if(head == null) {
+                    head = prev = node;
+                    head.left = null;
                 } else {
                     prev.right = node;
                     node.left = prev;
@@ -30,7 +33,8 @@ public class BinaryTreeToDoublyLinkedList {
         }
         return head;
     }
-    static List<Integer> get_list(BinaryTreeNode node) {
+
+    private static List<Integer> get_list(BinaryTreeNode node) {
         List<Integer> r = new ArrayList<>();
         while(node != null) {
             r.add(node.value);

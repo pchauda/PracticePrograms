@@ -67,7 +67,8 @@ public class TrieDataStructure {
         if(word.length() == index) {
             if(!node.isWord)
                 return false;
-            node.isWord = false;
+            node.isWord = false; // delete the word
+            // return true if no children so that the node can be deleted via the parent
             return node.children.isEmpty();
         }
 
@@ -75,12 +76,15 @@ public class TrieDataStructure {
         TrieNode child = node.children.get(c);
         if(child == null) return false;
 
-        boolean isEmptyChild = deleteWord( word, child, index + 1);
-        if(isEmptyChild) {
-            node.children.remove(c);
+        boolean shouldDeleteChildNode = deleteWord( word, child, index + 1);
+        // delete child node if required i.e. if the child node has no children
+        if(shouldDeleteChildNode) {
+            node.children.remove(c); // delete the child node
+            // If current node is word then return false so that this node is not deleted via the parent node
             if(node.isWord)
                 return false;
             else
+                // otherwise, if current node has no children left then return true so that current node can be deleted
                 return node.children.isEmpty();
         }
         return false;
@@ -105,7 +109,7 @@ public class TrieDataStructure {
         addWord("Pinki", root);  addWord("Chauda", root);
         addWord("Riya", root); addWord("Rahul", root); addWord("Malik", root);
         addWord("Print", root); addWord("Printf", root);
-        System.out.println(findAllWordsForPrefix("", root)); // should print [Pri, Priya, Prince, Print, Printf]
+        System.out.println(findAllWordsForPrefix("P", root)); // should print [Pri, Priya, Prince, Print, Printf, Pinki]
         System.out.println(findWord("Prince", root)); // should print true
         System.out.println(findAllWordsForPrefix("Pri", root)); // should print [Pri, Priya, Prince, Print, Printf]
         deleteWord("Prince", root, 0);

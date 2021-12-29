@@ -26,8 +26,7 @@ public class MaxPathIn2DArray {
     }
 
     static int findMaxPathOptimized(int[][] arr) {
-        // Kadane's algo
-        int[][] maxSumAtEachPosition = new int[arr.length][arr[0].length]; //assuming balanced matrix
+        int[][] maxSumAtEachPosition = new int[arr.length][arr[0].length];
 
         for(int i=0; i < arr.length; i++) {
             for(int j=0; j < arr[i].length; j++) {
@@ -68,9 +67,9 @@ public class MaxPathIn2DArray {
         if(x == 0 && y == 0)
             return arr[0][0];
         else if(x == 0)
-            return arr[x][y] + findMaxPath(arr, x, y -1);
+            return arr[x][y] + findMaxPath(arr, 0, y -1);
         else if(y == 0)
-            return arr[x][y] + findMaxPath(arr, x-1, y);
+            return arr[x][y] + findMaxPath(arr, x-1, 0);
         return arr[x][y] + Math.max(findMaxPath(arr, x-1, y), findMaxPath(arr, x, y-1));
     }
 }

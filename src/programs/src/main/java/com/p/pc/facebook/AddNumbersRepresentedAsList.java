@@ -29,7 +29,7 @@ public class AddNumbersRepresentedAsList {
         Node sum = addListAsNumbers(num1, num2);
         printList(sum); // [1,2,2,2,9]
 
-        // Another problem (simpler one), if lists are in reverse order for a number then perform the sum and return the list in the reverse order
+        // Another problem (simpler one), if lists are in reverse order for a number, then perform the sum and return the list in the reverse order
         Node num3 = new Node(3);
         num3.next = new Node(4);
         num3.next.next = new Node(5);
@@ -43,7 +43,7 @@ public class AddNumbersRepresentedAsList {
         printList(num4); // [6,8,6,4] => Num = 4686
 
         Node sum2 = addListAsNumbersInReverse(num3, num4);
-        printList(sum2); // [1,2,2,2,9] => Total = 12229
+        printList(sum2); // [9,2,2,2,1] => Total = 12229
     }
 
     private static Node addListAsNumbersInReverse(Node num1, Node num2) {
@@ -57,7 +57,6 @@ public class AddNumbersRepresentedAsList {
             Node tmp = new Node(sum % 10);
             if(head == null) {
                 head = next = tmp;
-                head.next = next;
             } else {
                 next.next = tmp;
                 next = tmp;

@@ -6,7 +6,8 @@ import java.util.List;
 
 /**
  * We are given an array A of positive integers, and two positive integers L and R (L <= R).
- * Return the number of (contiguous, non-empty) subarrays such that the value of the maximum array element in that subarray is at least L and at most R.
+ * Return the number of (contiguous, non-empty) sub-arrays such that the value of the maximum array element in that
+ * sub-array is at least L and at most R.
  *
  * Example :
  * Input:
@@ -14,7 +15,7 @@ import java.util.List;
  * L = 2
  * R = 3
  * Output: 3
- * Explanation: There are three subarrays that meet the requirements: [2], [2, 1], [3].
+ * Explanation: There are three sub-arrays that meet the requirements: [2], [2, 1], [3].
  *
  * Approach for max value within the array:
  * Start with two pointers start and end with both at -1.
@@ -44,8 +45,9 @@ public class SubArrayWithBoundedMaxMin {
         System.out.println(subArrays);
     }
     /**
-     * Since, the max value of the subarray should be within the range, any array value > high value will reset the end and start pointers.
-     * For any array value < low, keep the start and end pointer unchanged as the value can be included in the sub array as long as max is within range
+     * Since, the max value of the sub-array should be within the range, any array value > high value will reset the end
+     * and start pointers. For any array value < low, keep the start and end pointer unchanged as the value can be included
+     * in the sub array as long as max is within range.
      */
     static int countOfSubArrayWithBoundedMax(int[] arr, int low, int high) {
         int start = -1, end = -1;

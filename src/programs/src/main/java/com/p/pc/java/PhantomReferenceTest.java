@@ -10,11 +10,13 @@ public class PhantomReferenceTest {
         ReferenceQueue<Person> queue = new ReferenceQueue<>();
 
         Person p = new Person(10);
-        PersonReference pf = new PersonReference(p, queue);
+        PersonReference pf = new PersonReference(p, null);
         if(pf.get() == null) System.out.println("Null");
-        if(pf.isEnqueued()) System.out.println("Enqueued before GC");
+        if(pf.isEnqueued()) {
+            System.out.println("Enqueued before GC");
+        } else System.out.println("Not enqueued before GC");
         p = null;
-        System.gc();
+        System.gc(); // force GC
         Thread.sleep(2000);
         if(pf.isEnqueued()) {
             if(pf.get() == null) System.out.println("Null");

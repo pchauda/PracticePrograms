@@ -18,7 +18,7 @@ public class SubArraySumEqualToK {
         int arr[] = { 2, 3, 1, -3, -1, 4, 2 };
         int sum = 4;
         int n = arr.length;
-        System.out.println(findSubArraySum(arr, n, sum));
+        System.out.println(findSubArraySum(arr, n, sum)); // Output: 3
     }
 
     // Function to find number of sub-arrays with target exactly equal to k.
@@ -39,7 +39,7 @@ public class SubArraySumEqualToK {
             // to get to the target hence increase the result count by these many sub-arrays' count.
             res += prevSum.getOrDefault(runningSum - target, 0);
 
-            // Add runningSum value to the hashMap, increase the count by 1 if runnin sum is already present in hashmap
+            // Add runningSum value to the hashMap, increase the count by 1 if running sum is already present in hashmap
             prevSum.compute(runningSum, (k, v) -> v == null ? 1 : v + 1);
         }
         return res;

@@ -54,7 +54,8 @@ public class InversionCount {
                 arr[k++] = left[i++];
             else {
                 arr[k++] = right[j++];
-                // If left element at index i is larger than that all elements starting i will be larger and hence can be counted towards swaps
+                // If left element at index i is larger than the right element
+                // then all elements starting i will be larger than the right and hence can be counted towards swaps
                 swaps += left.length - i;
             }
         }

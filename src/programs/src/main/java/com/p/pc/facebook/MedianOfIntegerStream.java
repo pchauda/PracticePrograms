@@ -6,15 +6,15 @@ import java.util.Queue;
 import java.util.stream.IntStream;
 
 /**
- * Compute the running median of a integer stream.
- *
- * Explain median: In case of odd number median is the middle element, else mean of middle two elements
- *
- * Approach:
- * Maintain two heaps such that smaller number compared to median are in max heap and greater number are in min heap.
- * Then if size of the both the heaps is same then return sum (top of max heap + top of min heap)/2 else return the top
- * element of the heap having greater size.
- *
+ * <p>Compute the running median of a given integer stream. Median: In case of odd number median is the middle element,
+ * else mean of middle two elements</p>
+
+ * <p>Approach:</p>
+ *  Idea here is to maintain all lower elements (compared to median) on one side and all higher elements on the other side such
+ *  that difference between the lower and higher size is always <= 1.
+ *  Then the maximum from the lower elements (using Max heap) and minimum from the higher elements (Min heap) can be compared
+ *  for the median. If both halves are equal in size then median = (max from lower + min from higher) / 2, else if
+ *  lowers' size is more than higher than return lowers' max as median else highers' min.
  */
 public class MedianOfIntegerStream {
     // Max Heap to maintain all smaller elements
@@ -23,7 +23,7 @@ public class MedianOfIntegerStream {
     static Queue<Integer> greater = new PriorityQueue<>();
 
     public static void main(String[] args) {
-        IntStream range = IntStream.range(1, 9);
+        IntStream range = IntStream.range(1, 101);
         range.forEach(i -> {
             addNumber(i);
             System.out.println("Number : " + i + ", Median:" + getMedian());

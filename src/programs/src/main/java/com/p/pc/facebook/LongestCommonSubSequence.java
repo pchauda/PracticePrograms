@@ -67,13 +67,13 @@ public class LongestCommonSubSequence {
         }
 
         // Below step is just to print the common sub-sequence
-        int index = lcs[m][n];
-        char[] lcsArr = new char[index];
+        int lcsVal = lcs[m][n];
+        char[] lcsArr = new char[lcsVal];
 
         int i=m; int j=n;
         while(i > 0 && j > 0) {
             if(X[i-1] == Y[j-1]) {
-                lcsArr[--index] = X[--i];
+                lcsArr[--lcsVal] = X[--i];
                 j--;
             } else if(lcs[i-1][j] > lcs[i][j-1]) {
                 i--;

@@ -1,7 +1,7 @@
 package com.p.pc.programs;
 
 /**
- * Find lowest common ancestor in a given tree having duplicate values of the node.
+ * Find the lowest common ancestor in a given tree having duplicate values of the node.
  * Approach:
  *  Follow post order traversal to perform bottom up search.
  *

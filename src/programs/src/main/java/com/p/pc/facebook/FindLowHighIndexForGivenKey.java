@@ -9,7 +9,7 @@ import java.util.List;
 public class FindLowHighIndexForGivenKey {
 
     public static void main(String[] args) {
-        List<Integer> array = Arrays.asList(0, 1, 3, 3, 4, 5, 6);
+        List<Integer> array = Arrays.asList(0, 1, 2, 3, 4, 5, 6);
         int key = 3;
         int low = findLowIndex(array, key);
         int high = findHighIndex(array, key);
