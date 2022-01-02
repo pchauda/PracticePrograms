@@ -1,9 +1,9 @@
 package com.p.pc.geekforgeeks.math_algebra;
 
 /**
- * Given two line segments, find out if they intersect or not.
+ * <p>Given two line segments, find out if they intersect or not.</p>
  *
- * Approach:
+ * Approach: <br/>
  *  Two segments (p1,q1) and (p2,q2) intersect if and only if one of the following two conditions is verified
  *
  * 1. General Case:

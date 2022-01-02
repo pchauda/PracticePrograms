@@ -1,7 +1,7 @@
 package com.p.pc.geekforgeeks.math_algebra;
 
 /**
- * Given a circle and a point, find out if the point lies inside the circle or outside.
+ * <p>Given a circle and a point, find out if the point lies inside the circle or outside.</p>
  *
  * Approach:
  *  Calculate distance of the given point from the center of the circle and compare it with radius. If distance less

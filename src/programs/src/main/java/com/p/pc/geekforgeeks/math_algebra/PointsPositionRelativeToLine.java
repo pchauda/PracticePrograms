@@ -1,11 +1,11 @@
 package com.p.pc.geekforgeeks.math_algebra;
 
 /**
- * Given a line equation ax + by = c and two points (x1, y1) and (x2, y2), determine if both points lie on the
- * same side or opposite side of the line.
+ * <p>Given a line equation ax + by = c and two points (x1, y1) and (x2, y2), determine if both points lie on the
+ * same side or opposite side of the line.</p>
  *
- * Approach:
- *  calculate the (ax + by + c) for both points if the sign is the same then both lie on the same side else not.
+ * Approach: <br/>
+ *  calculate the (ax + by - c) for both points if the sign is the same then both lie on the same side else not.
  */
 public class PointsPositionRelativeToLine {
 

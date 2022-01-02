@@ -1,9 +1,9 @@
 package com.p.pc.geekforgeeks.math_algebra;
 
 /**
- * Given a line and a circle, find out if the line touches the circle, intersects or outside the circle.
+ * <p>Given a line and a circle, find out if the line touches the circle, intersects or outside the circle.</p>
  *
- * Approach:
+ * Approach: <br/>
  *  Calculate the perpendicular distance (p) of the line from the center of the circle. If p > radius then outside,
  *  p = radius then touches, else intersects.
  */

@@ -1,9 +1,9 @@
 package com.p.pc.geekforgeeks.math_algebra;
 
 /**
- * Given 3 ordered points, find its orientation i.e. clockwise, counterclockwise, collinear.
+ * <p>Given 3 ordered points, find its orientation i.e. clockwise, counterclockwise, collinear.</p>
  *
- * Approach:
+ * Approach: <br/>
  *  Find slope of first two points and then compare it last two points. If slope is increasing then orientation is
  *  counterclockwise, if decreasing then clockwise else collinear.
  *

@@ -6,9 +6,9 @@ import java.util.Set;
 import java.util.stream.IntStream;
 
 /**
- * Given an array of elements having (N-K) elements from 1 to N, find the missing K numbers.
+ * <p>Given an array of elements having (N-K) elements from 1 to N, find the missing K numbers.</p>
  *
- * Approach:
+ * Approach:<br/>
  *  Maintain a Set to keep track of numbers present in the array. And then collect all number from 1 to N that are missing
  *  from the Set.
  *

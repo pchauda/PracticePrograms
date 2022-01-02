@@ -1,9 +1,9 @@
 package com.p.pc.geekforgeeks.math_algebra;
 
 /**
- * Given a point and polygon, find out if the point lies inside or outside.
+ * <p>Given a point and polygon, find out if the point lies inside or outside.</p>
  *
- * Approach:
+ * Approach: <br/>
  *  If a point is inside the polygon, then an infinite line drawn from the point in the right direction should cross odd
  *  number of edges else the point is outside.
  *  For points on the polygon itself, check for point in line segment condition.

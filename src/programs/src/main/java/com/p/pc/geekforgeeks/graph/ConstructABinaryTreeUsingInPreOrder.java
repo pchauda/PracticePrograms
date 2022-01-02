@@ -1,10 +1,10 @@
 package com.p.pc.geekforgeeks.graph;
 
 /**
- * Pre Order: Root is always the first element
+ * <p>Pre Order: Root is always the first element. <br/>
  * In Order: All elements before the root element will be on its left side, all elements after root will be on its right side
- *
- * Algo:
+ *</p>
+ * Algo:<br/>
  * 1. Pick the first element from PreOrder and mark it as root, pick next element in every recursive call
  * 2. Find the index of root element in InOrder
  * 3. build a tree for all elements before this index and assign it as left subtree of root

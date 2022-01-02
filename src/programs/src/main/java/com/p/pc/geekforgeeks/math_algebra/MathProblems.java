@@ -1,8 +1,8 @@
 package com.p.pc.geekforgeeks.math_algebra;
 
 /**
- * Problem 1: For a given N, find missing number in an array containing elements from range 1: N-1
- * Problem 2: Find trailing zeros in the factorial of a given number
+ * <p>Problem 1: For a given N, find missing number in an array containing elements from range 1: N-1</p>
+ * <p>Problem 2: Find trailing zeros in the factorial of a given number.</p>
  */
 public class MathProblems {
     public static void main(String[] args) {

@@ -1,9 +1,9 @@
 package com.p.pc.geekforgeeks.math_algebra;
 
 /**
- * Given a point and a line segment represented by two points, find out if the point lies on the line segment.
+ * <p>Given a point and a line segment represented by two points, find out if the point lies on the line segment.</p>
  *
- * Approach:
+ * Approach: <br/>
  *  First check if all three points are collinear, if no then point is not on the line. If yes, then check with the
  *  point is within the line segment.
  */
