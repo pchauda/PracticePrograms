@@ -1,7 +1,7 @@
 package com.p.pc.facebook;
 
 /**
- * Find the row with maximum number of 1's in a given matrix containing 0's and 1's and all rows are sorted.
+ * <p>Find the row with maximum number of 1's in a given matrix containing 0's and 1's and all rows are sorted.</p>
  */
 public class RowWithMaxOneInMatrix {
 
@@ -38,7 +38,7 @@ public class RowWithMaxOneInMatrix {
     private static int findIndex(int[] arr, int start, int end) {
         if(start > end) return -1;
         int mid = (end + start) / 2;
-        if (mid == 0) {
+        if (mid == 0) { // extra base condition to handle index 0 to avoid going to -1 index
             if(arr[mid] == 1) return mid; else return -1;
         }
         if(arr[mid] == 1 && arr[mid - 1] == 0)

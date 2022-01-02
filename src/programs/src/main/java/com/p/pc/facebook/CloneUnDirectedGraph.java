@@ -19,7 +19,7 @@ public class CloneUnDirectedGraph {
         if(root == null || clone == null) return false;
         if(root.value != clone.value) return false;
         if(root.neighbours.size() != clone.neighbours.size()) return false;
-
+        visited.add(root);
         for(Node r1 : root.neighbours) {
             boolean foundMatch = false;
             for(Node c1 : clone.neighbours) {

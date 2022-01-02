@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Given an integer array, move all elements that are 0 to the left while maintaining the order of other elements in
- * the array. The array has to be modified in-place.
+ * <p>Given an integer array, move all elements that are 0 to the left while maintaining the order of other elements in
+ * the array. The array has to be modified in-place.</p>
  *
- * Approach: Use reader and writer index. Move the reader index from (start to end for RightMove) or (end to start for LeftMove)
- * Idea here is to stop the writer index when reader encounters a zero else writer reader's value at writer index and move writer.
+ * <p>Approach:</p>
+ * Use reader and writer index. Move the reader index from (start to end for RightMove) or (end to start for LeftMove)
+ * Idea here is to stop the writer index when reader encounters a zero else write reader's value at writer index and move writer.
  *
  * If arr[reader] != 0 then arr[writer--] = arr[reader] followed by reader--, for Left Move
  * If arr[reader] != 0 then arr[writer++] = arr[reader] followed by reader++, for Right Move
@@ -30,7 +31,9 @@ public class MoveZeroesToLeftRight {
         int w = arr.length - 1;
         for(int r = arr.length - 1; r >= 0; r--) {
             if(arr[r] !=0) {
-                arr[w--] = arr[r];
+                if(r != w)
+                    arr[w] = arr[r];
+                w--;
             }
         }
         while(w >= 0) {
@@ -46,7 +49,9 @@ public class MoveZeroesToLeftRight {
         int w = 0, l = arr.length;
         for(int r=0; r < l; r++) {
             if(arr[r] !=0) {
-                arr[w++] = arr[r];
+                if(r != w)
+                    arr[w] = arr[r];
+                w++;
             }
         }
         while(w < l) {
@@ -55,6 +60,7 @@ public class MoveZeroesToLeftRight {
         long end = System.nanoTime();
         System.out.println("Time taken in moving right: " + (end - start)  + " ns");
     }
+
     // Using insertion sort O(n2) solution, not optimal
     private static void moveZeroesToLeft(int[] arr) {
         long start = System.nanoTime();
@@ -63,7 +69,8 @@ public class MoveZeroesToLeftRight {
             if(arr[i] == 0) {
                 int j = i-1;
                 while(j >= 0 && arr[j] != 0) {
-                    arr[j+1] = arr[j--];
+                    arr[j+1] = arr[j];
+                    j--;
                 }
                 arr[j+1] = 0;
             }

@@ -1,10 +1,10 @@
 package com.p.pc.geekforgeeks.math_algebra;
 
 /**
- * Given a directional line segment (P -> Q) and a point (R), find out the direction of the point with respect to the
+ * <p>Given a directional line segment (P -> Q) and a point (R), find out the direction of the point with respect to the
  * line segment i.e. if the point lies on the LEFT or RIGHT or COLLINEAR.
- * This technique is used in maps to identify the left vs right turns.
- * Approach:
+ * This technique is used in maps to identify the left vs right turns.</p>
+ * Approach: <br/>
  *  Calculate the cross product of the point with line segment with respect to origin. If the cross product is positive
  *  then point lies on the RIGHT, if negative then on LEFT else COLLINEAR
  */

@@ -3,9 +3,9 @@ package com.p.pc.facebook;
 import java.util.StringJoiner;
 
 /**
- * Perform a pairwise swap of a given linked list. For example convert 1 -> 2 -> 3 -> 4 -> 5 to 2 -> 1 -> 4 -> 3 -> 5
- *
- * Approach:
+ * <p>Perform a pairwise swap of a given linked list.<br/> For example convert 1 -> 2 -> 3 -> 4 -> 5 to 2 -> 1 -> 4 -> 3 -> 5
+ *</p>
+ * Approach:<br/>
  *  Simple approach will be to swap the values of current and next element.
  */
 public class PairWiseSwapElementsInList {
@@ -29,7 +29,7 @@ public class PairWiseSwapElementsInList {
         if(head == null) return null;
         if(head.value == toRemove) return head.next;
 
-        Node prev = head, newHead = head, next = head.next;
+        Node prev = head, next = head.next;
         while(next != null) {
             if(next.value == toRemove) {
                 prev.next = next.next;
@@ -38,7 +38,7 @@ public class PairWiseSwapElementsInList {
             prev = next;
             next = next.next;
         }
-        return newHead;
+        return head;
     }
 
     private static Node swapListRecursive(Node head) {

@@ -1,10 +1,10 @@
 package com.p.pc.facebook;
 
 /**
- * Find all unique paths in a grid (M x N) from start (top left) to end (bottom right). Movement can only happen to
- * right or down from a given block.
+ * <p>Find all unique paths in a grid (M x N) from start (top left) to end (bottom right). Movement can only happen to
+ * right or down from a given block.</p>
  *
- * Approach:
+ * Approach: <br/>
  *  Using DP, the complexity can be reduced to O(m * n). For base cases, if there is only 1 row or 1 column then only
  *  1 path will exist from start to end irrespective to number of columns or rows respectively. And for a given (i, j)
  *  the total paths can be calculated as
@@ -49,15 +49,15 @@ public class UniquePathsInGrid {
      * Complexity: O(m * n)
      */
     private static int uniquePaths(int m, int n) {
-        int[][] paths = new int[m][n];
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (i == 0 || j == 0) {
+        int[][] paths = new int[m+1][n+1];
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (i == 1 || j == 1) {
                     paths[i][j] = 1;
                 } else
                     paths[i][j] = paths[i - 1][j] + paths[i][j - 1];
             }
         }
-        return paths[m - 1][n - 1];
+        return paths[m][n];
     }
 }

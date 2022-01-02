@@ -2,7 +2,7 @@ package com.p.pc.facebook;
 
 public class FindNeedleInHaystack {
     public static void main(String[] args) {
-        String hayStack = "My name is Prince and my full name is Prince Chauda. I, Prince Chauda is a good engineer.";
+        String hayStack = "My name is Prince and my full name is Prince Chauda. I am trying to practice coding questions.";
         String needle = "Prince Chauda";
 
         System.out.println(String.format("First index of needle in haystack (iterative) = %d", findNeedleInHayStackIterative(hayStack, needle)));

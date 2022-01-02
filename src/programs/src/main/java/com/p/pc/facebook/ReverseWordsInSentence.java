@@ -1,6 +1,9 @@
 package com.p.pc.facebook;
 
 /**
+ * <p>Reverse words in a given sentence i.e. "Prince is an engineer" to "engineer an is Prince".</p>
+ *
+ * Approach: <br/>
  * First reverse the given char array completely. It will result in reversed words as well.
  * Now, reverse individual words in place.
  */
@@ -20,9 +23,9 @@ public class ReverseWordsInSentence {
         for(int i=0; i < chars.length; i++) {
             if(chars[i] == ' ') {
                 reverseString(chars, start, end - 1);
-                start = end = i + 1;
+                start = end = i + 1; // reset both start and end
             } else {
-                end++;
+                end++; // increment end
             }
         }
     }

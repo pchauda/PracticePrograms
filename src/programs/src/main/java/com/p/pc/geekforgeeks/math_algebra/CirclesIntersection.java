@@ -1,10 +1,10 @@
 package com.p.pc.geekforgeeks.math_algebra;
 
 /**
- * Given two circles, find out if circles intersect each other or not.
- * Similarly also find out if smaller circle is completely inside the larger circle or not.
+ * <p>Given two circles, find out if circles intersect each other or not.
+ * Similarly also find out if smaller circle is completely inside the larger circle or not.</p>
  *
- * Approach:
+ * Approach:<br/>
  *  Calculate the distance between the center of both circle, and then compare this distance with radius of both circles
  *  using below cases:
  *  1. distance of centers = r1 + r2 => Circles touch each other

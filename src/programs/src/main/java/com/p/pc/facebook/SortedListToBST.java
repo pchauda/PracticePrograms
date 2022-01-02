@@ -1,15 +1,16 @@
 package com.p.pc.facebook;
 
 /**
- * Create a balance binary search tree from a sorted list.
+ * <b>Create a balanced binary search tree from a sorted list.</b>
  *
- * Approach:
+ * Approach:<br/>
  * Since the list is sorted, middle element of the list can be picked up as root and all elements before it will be part of
  * left subtree and after it will be part of the right sub tree.
  *
  * The number of nodes in the linked list are counted and set equal to n. First, the middle node is set as the root (always).
- * Then, the left subtree is constructed recursively, using the left n/2 nodes, and connected with the root at the end. The right subtree is similarly constructed and connected to the root.
- * While constructing the BST, we keep moving the list head pointer to the next node so that we have the appropriate pointer in each recursive call.
+ * Then, the left subtree is constructed recursively, using the left n/2 nodes, and connected with the root at the end.
+ * The right subtree is similarly constructed and connected to the root. While constructing the BST, we keep moving the
+ * list head pointer to the next node so that we have the appropriate pointer in each recursive call.
  */
 public class SortedListToBST {
     static ListNode headNode;
@@ -50,7 +51,7 @@ public class SortedListToBST {
     private static TreeNode createBSTRecursive(ListNode head, int start, int end) {
         if(start > end) return null;
         if(head == null) return null;
-        int mid = (end + start + 1) / 2;
+        int mid = (end + start) / 2;
         if(start == end) return new TreeNode(findListNode(head, start).value);
         ListNode node = findListNode(head, mid);
         TreeNode root = new TreeNode(node.value);

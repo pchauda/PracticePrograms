@@ -3,11 +3,11 @@ package com.p.pc.facebook;
 import java.util.ArrayList;
 
 /**
- * You are given an array (list) of interval pairs as input where each interval has a start and end timestamp.
+ * <p>You are given an array (list) of interval pairs as input where each interval has a start and end timestamp.
  * The input array is sorted by starting timestamps. You are required to merge overlapping intervals and return a new output array.
  * Consider the input array below. Intervals (1, 5), (3, 7), (4, 6), (6, 8) are overlapping so they should be merged
  * to one big interval (1, 8). Similarly, intervals (10, 12) and (12, 15) are also overlapping and should be merged to (10, 15)
- *
+ * </p>
  * Idea here is to merge the next pair to the previous pair if they are overlapping (startNext <= prevEnd) else collect
  * the prev pair in the output result and update assignment of the prev pair
  */
@@ -61,21 +61,22 @@ public class MergeTimeInterval {
 
         return result;
     }
-}
-class Pair{
-    public int first;
-    public int second;
 
-    public Pair(int x, int y){
-        this.first = x;
-        this.second = y;
-    }
+    static class Pair{
+        public int first;
+        public int second;
 
-    @Override
-    public String toString() {
-        return "Pair{" +
-                "first=" + first +
-                ", second=" + second +
-                '}';
+        public Pair(int x, int y){
+            this.first = x;
+            this.second = y;
+        }
+
+        @Override
+        public String toString() {
+            return "Pair{" +
+                    "first=" + first +
+                    ", second=" + second +
+                    '}';
+        }
     }
 }

@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * You are given a dictionary of words and a large input string. You have to find out whether the input string can be
- * completely segmented into the words of a given dictionary.
+ * <p>You are given a dictionary of words and a large input string. You have to find out whether the input string can be
+ * completely segmented into the words of a given dictionary.</p>
  */
 public class StringSegmentation {
     public static void main(String[] args) {
@@ -13,8 +13,7 @@ public class StringSegmentation {
         dictionary.add("apple"); dictionary.add("pear"); dictionary.add("pier"); dictionary.add("applep");
         dictionary.add("ie");
 
-        String word = "applepiepear";
-        System.out.println("Word can be segmented: " + canSegmented(word, dictionary)); // Output: true
+        System.out.println("Word can be segmented: " + canSegmented("applepiepear", dictionary)); // Output: true
     }
 
     static boolean canSegmented(String s, Set<String> dictionary) {

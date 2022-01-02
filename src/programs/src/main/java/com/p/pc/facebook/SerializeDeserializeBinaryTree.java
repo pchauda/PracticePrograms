@@ -3,19 +3,23 @@ package com.p.pc.facebook;
 import java.io.*;
 
 /**
+ * <p>Write a program to serialize and deserialize a given Binary Tree. Tree after deserialization should be identical to
+ * the given tree. </p>
+ * Approach: <br/>
  * Use the Pre-order traversal approach to serialize and deserialize tree and use filler element for missing or null values.
- * If we don't want to use the filler elements then store both pre and in order in the
+ * If we don't want to use the filler elements then store both pre and in order representation in the serialized format
+ * and use both of these to deserialize.
  */
 public class SerializeDeserializeBinaryTree {
 
     public static void main(String[] args) throws IOException {
-        Node root = new Node(1);
+        Node root = new Node(3);
         root.left = new Node(2);
-        root.right = new Node(3);
-        root.left.left = new Node(4);
+        root.right = new Node(4);
+        root.left.left = new Node(1);
         root.right.right = new Node(5);
 
-        printInorder(root); // Output: 4 2 1 3 5
+        printInorder(root); // Output: 1 2 3 4 5
 
         ByteArrayOutputStream bo = new ByteArrayOutputStream();
         try(ObjectOutputStream outputStream = new ObjectOutputStream(bo)){
@@ -32,18 +36,18 @@ public class SerializeDeserializeBinaryTree {
     private static void serializeTree(Node root, ObjectOutputStream outputStream) throws IOException {
         if(root == null) {
             // Filler element
-            outputStream.writeInt(Integer.MIN_VALUE);
+            outputStream.writeChar('x');
             return;
         }
-        outputStream.writeInt(root.value);
+        outputStream.writeChar(root.value);
         serializeTree(root.left, outputStream);
         serializeTree(root.right, outputStream);
     }
 
     private static Node deserializeTree(ObjectInputStream inputStream) throws IOException {
-        int value = inputStream.readInt();
+        char value = inputStream.readChar();
         // Replace filler elements with null to restore the tree
-        if(value == Integer.MIN_VALUE) return null;
+        if(value == 'x') return null;
 
         Node root = new Node(value);
         root.left = deserializeTree(inputStream);

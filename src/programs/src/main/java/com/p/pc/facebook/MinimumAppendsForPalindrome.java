@@ -1,9 +1,9 @@
 package com.p.pc.facebook;
 
 /**
- * Find out the minimum number of appends required for a given string to make the given string as a palindrome.
+ * <p>Find out the minimum number of appends required for a given string to make the given string as a palindrome.</p>
  *
- * Approach:
+ * <p>Approach:</p>
  *  Check if the string is a palindrome or not. If no, then remove the first char and check again and so on.
  *  The total number of chars removed will be equal to total appends.
  */
