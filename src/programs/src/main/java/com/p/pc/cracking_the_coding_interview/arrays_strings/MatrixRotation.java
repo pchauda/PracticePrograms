@@ -1,14 +1,12 @@
 package com.p.pc.cracking_the_coding_interview.arrays_strings;
 
-import com.sun.security.jgss.GSSUtil;
-
 /**
- * Rotate a matrix clockwise or anti-clockwise by 90 degree.
+ * <p>Rotate a matrix clockwise or anti-clockwise by 90 degree.
  * Any N x M matrix can be rotated in either direction very easily using a new array of size M x N as rows will be transformed into columns and vice-versa.
  *
- * In place rotation can only be done for N x N (square matrix).
+ * In place rotation can only be done for N x N (square matrix).</p>
  *
- * Approach for in-place rotation of N x N matrix:
+ * Approach for in-place rotation of N x N matrix: <br/>
  *  Any matrix of N cardinality will have floor (N/2) perfect squares to be rotated. For example, 3 x 3 matrix will have 1 square to be rotated
  *  and 4 x 4 matrix will have 2 squares to be rotated. Lets have a counter i = 0 to N/2 -1 for these squares
  *
@@ -30,8 +28,6 @@ public class MatrixRotation {
                 {5, 1, 2, 3, 4}
         };
         System.out.println("Original square matrix:");
-        String s = "sasasdsad";
-        s.contains("as");
         printMatrix(square55);
         // 5 x 7 matrix
         int[][] rect57 = new int[][] {
@@ -86,7 +82,7 @@ public class MatrixRotation {
         int[][] retVal = new int[y][x];
         for(int i=0; i<x; i++) {
             for(int j=0; j<y; j++) {
-                retVal[j][x - 1 - i] = mat[i][j];
+                retVal[j][x - 1 - i] = mat[i][j]; // first row becomes last column and so on
             }
         }
         return retVal;
@@ -98,7 +94,7 @@ public class MatrixRotation {
         int[][] retVal = new int[y][x];
         for(int i=0; i<x; i++) {
             for(int j=0; j<y; j++) {
-                retVal[y - 1 - j][i] = mat[i][j];
+                retVal[y - 1 - j][i] = mat[i][j]; // last row becomes first column and so on
             }
         }
         return retVal;

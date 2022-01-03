@@ -8,9 +8,9 @@ public class ZeroMatrix {
     public static void main(String[] args) {
         int[][] mat = new int[][] {
                 {1, 2, 3, 4, 0},
-                {2, 1, 1, 2, 1},
+                {2, 1, 0, 2, 1},
                 {1, 2, 5, 1, 2},
-                {3, 5, 0, 2, 3}
+                {3, 5, 1, 2, 3}
         };
         System.out.println("Original matrix:");
         printMatrix(mat);

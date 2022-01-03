@@ -1,9 +1,9 @@
 package com.p.pc.cracking_the_coding_interview.arrays_strings;
 
 /**
- * Given a string with spaces in between URLify the string ignoring all spaces at the end.
+ * <p>Given a string with spaces in between, URLify the string (replace whitespace with %20) ignoring all spaces at the end.</p>
  *
- * Approach:
+ * Approach: <br/>
  *  1. Identify the true length (upto the last valid character)
  *  2. Calculate total spaces in the string
  *  3. Calculate the new length = true length + 2 * space_count --> ' ' will be replaced with '%20' that means for every space we need 2 more empty positions
@@ -30,7 +30,8 @@ public class URLify {
         // mark the end of the string in case original string is longer than the required
         if(str.length > newLength) str[newLength] = '\0';
         // fill the array from the end
-        for(int i=trueLength-1, index=newLength-1; i >= 0; i--) {
+        int index= newLength - 1;
+        for(int i = trueLength-1; i >= 0; i--) {
             if(str[i] == ' ') {
                 str[index--] = '0';
                 str[index--] = '2';

@@ -13,11 +13,13 @@ import static com.p.pc.cracking_the_coding_interview.linked_lists.LinkedListNode
 public class RemoveDupsFromList {
     public static void main(String[] args) {
         LinkedListNode head = createSimpleListWithDupes();
+        System.out.println("Original list with dupes:");
         LinkedListNode.printList(head);
-        removeDupsWithNoBuffer(head);
+        removeDupsUsingTempBuffer(head);
+        System.out.println("List after removing dupes:");
         LinkedListNode.printList(head); // Output: [1,2,3,4,7]
     }
-    // Use a temporary HashSet to store the value of the existing nodes, complexity O(n)
+    // Use a temporary HashSet to store the value of the existing nodes, time complexity O(n), space complexity = O(n)
     private static void removeDupsUsingTempBuffer(LinkedListNode head) {
         Set<Integer> nodeValues = new HashSet<>();
         LinkedListNode prev = null;

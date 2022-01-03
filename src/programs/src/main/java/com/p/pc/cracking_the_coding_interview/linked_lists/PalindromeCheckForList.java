@@ -5,8 +5,8 @@ import java.util.Stack;
 import static com.p.pc.cracking_the_coding_interview.linked_lists.LinkedListNode.printList;
 
 /**
- * Given a linked list, find out if its nodes are palindrome.
- * Approach:
+ * <p>Given a linked list, find out if its nodes are palindrome in node value.</p>
+ * Approach: <br/>
  *  Since the length of the list is not given and back traversal is not permitted, the best way to find out the palindrome
  *  would be to push half of the elements to a stack and then compare the next elements with the stack top.
  */

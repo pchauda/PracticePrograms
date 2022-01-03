@@ -58,7 +58,6 @@ public class StringPermutation {
         return true;
     }
 
-
     /**
      * For each character in the string, remove the character and collect it as prefix and invoke
      * permutation method recursively using the remaining string and prev prefix + character removed
@@ -74,7 +73,7 @@ public class StringPermutation {
     }
 
     /**
-     * Check if two strings are rotation of each other. For example: ant and tan are rotation of each other.
+     * <p>Check if two strings are rotation of each other. For example: ant and tan are rotation of each other.</p>
      *
      * Approach: If the string is appended with its own then it will contain all its rotations in it. We will use this
      * property to find if strings are rotation of each other or not.
@@ -85,7 +84,7 @@ public class StringPermutation {
      * @return
      */
     static boolean checkRotation(String str1, String str2) {
-        String tmp = str1 + str1;
-        return tmp.contains(str2);
+        if(str1.length() != str2.length()) return false;
+        return (str1 + str1).contains(str2);
     }
 }

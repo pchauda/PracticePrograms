@@ -1,12 +1,12 @@
 package com.p.pc.cracking_the_coding_interview.arrays_strings;
 
 /**
- * Implement a method to perform basic string compression using the counts
- * of repeated characters. For example, the string aabcccccaaa would become a2blc5a3. If the
- * "compressed" string would not become smaller than the original string, your method should return
- * the original string. You can assume the string has only uppercase and lowercase letters (a - z).
+ * <p>Implement a method to perform basic string compression using the counts of repeated characters.
+ * For example, the string aabcccccaaa would become a2blc5a3. If the "compressed" string would not become smaller than
+ * the original string, your method should return the original string. You can assume the string has only uppercase
+ * and lowercase letters from [A-Za-z].</p>
  *
- * Approach:
+ * Approach: <br/>
  *  For each character, keep increasing the counter until the next char is different. If either next char is different or it's the
  *  end of the string then record the char with count to a builder string and continue to the next char after resetting the counter.
  */

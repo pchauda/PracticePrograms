@@ -1,10 +1,10 @@
 package com.p.pc.cracking_the_coding_interview.linked_lists;
 
 /**
- * Given two lists, find the intersection node (after which lists merge) of the two lists. Intersecting node must have
- *  * both address and value as same in both the lists.
+ * <p>Given two lists, find the intersection node (after which lists merge) of the two lists. Intersecting node must have
+ * both address and value as same in both the lists. </p>
  *
- * Approach:
+ * Approach: <br/>
  * 1. HashMap based approach: Takes O(n) extra space
  * 2. Two pointer approach: Find the length of both lists, calculate delta = (l1 - l2), move the larger list's pointer
  * by delta nodes. After that if the two lists node match anywhere then that's the intersecting node.

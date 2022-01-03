@@ -18,7 +18,7 @@ public class ReturnKthToTheLast {
     }
     // Assuming k = 1 means the last element, we will have two pointers, one at head and other K nodes away from head
     // when the second pointer will reach the end of the list then first pointer will be at Kth position from last
-    // in case, k = 0 means the last element then move the second pointer by (k=1) nodes.
+    // in case, k = 0 means the last element then move the second pointer by (k-1) nodes.
     private static LinkedListNode findKthElement(LinkedListNode head, int k) {
         LinkedListNode p1 = head;
         LinkedListNode p2 = head;

@@ -1,18 +1,18 @@
 package com.p.pc.cracking_the_coding_interview.linked_lists;
 
 /**
- * Given a list, find the first node creating the circular list.
+ * <p>Given a list, find the first node creating the circular list.
  * For example: If the list is 1 -> 2 -> 3 -> 4 -> 5 -> 3
  * Then output should be 3.
  *
  * If the list is not circular then return null.
- *
- * Approach:
+ *</p>
+ * Approach: <br/>
  *  Using slow and fast pointer technique, we can identify if the list is circular or not. For circular list, the node
- *  where both slow and fast pointers will meet, will be k nodes away from the start of the circle and head or
- *  both CollisionSpot and list head are k nodes from the start of the loop. So if we move
- *  any one pointer to head and start moving both slow and fast pointer by 1 node at a time then whenever these two
- *  pointers will meet again will be the starting node of the circular list
+ *  where both slow and fast pointers will meet, will be k nodes away from the start of the circle.
+ *  Or in other term, both collision spot and list head are k nodes away from the start of the loop. So if we move
+ *  any one pointer to head and start moving other pointer by 1 node at a time then whenever these two
+ *  pointers will meet again that will be the starting node of the circular list.
  */
 public class StartingNodeOfACircularList {
     public static void main(String[] args) {

@@ -20,7 +20,7 @@ public class LinkedListNode {
             joiner.add(Integer.toString(head.val));
             head = head.next;
         }
-        System.out.println(joiner.toString());
+        System.out.println(joiner);
     }
 
     public static LinkedListNode createSimpleListWithDupes() {

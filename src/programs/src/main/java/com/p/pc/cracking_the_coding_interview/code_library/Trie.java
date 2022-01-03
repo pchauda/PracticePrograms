@@ -22,8 +22,8 @@ public class Trie {
     public boolean contains(String prefix, boolean exact) {
         TrieNode tmp = root;
         if(prefix == null || prefix.isEmpty()) return false;
-        for(int i=0; i < prefix.length(); i++) {
-            tmp = tmp.getChild(prefix.charAt(i));
+        for(char c : prefix.toCharArray()) {
+            tmp = tmp.getChild(c);
             if(tmp == null) return false;
         }
         return !exact || tmp.terminates();

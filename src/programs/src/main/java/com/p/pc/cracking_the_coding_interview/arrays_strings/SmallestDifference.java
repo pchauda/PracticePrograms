@@ -1,13 +1,18 @@
 package com.p.pc.cracking_the_coding_interview.arrays_strings;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 /**
- * Given two arrays of integers, compute the pair of values (one value in each
+ * <p>Given two arrays of integers, compute the pair of values (one value in each
  * array) with the smallest (non-negative) difference. Return the difference.
  * EXAMPLE
  * Input: {1, 3, 15, 11, 2}, {23, 127, 235, 19, 8}
  * Output: 3. That is, the pair (11, 8)
+ * </p>
+ * Approach: <br/>
+ *  Sort the arrays and then compare the first elements, compute and store the diff. Then move to the next element in the
+ *  array having the smaller first element and so on.
  */
 public class SmallestDifference {
     public static void main(String[] args) {
@@ -23,7 +28,7 @@ public class SmallestDifference {
         Arrays.sort(a1);
         Arrays.sort(a2);
         // Use this if you do not want to sort the original array.
-        // IntStream.of(a1).boxed().sorted(Comparator.reverseOrder()).mapToInt(i -> i).toArray()
+        // java.util.stream.IntStream.of(a1).boxed().sorted().mapToInt(i -> i).toArray();
         int i=0, j=0, diff = Integer.MAX_VALUE;
         int a1Idx = 0, a2Idx = 0;
         while(i < a1.length && j < a2.length) { // since arrays are sorted, loop can be broken as soon as one array ends
