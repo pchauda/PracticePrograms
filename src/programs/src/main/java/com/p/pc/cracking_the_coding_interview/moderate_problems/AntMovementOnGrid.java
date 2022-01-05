@@ -3,7 +3,7 @@ package com.p.pc.cracking_the_coding_interview.moderate_problems;
 import java.util.Arrays;
 
 /**
- * An ant is sitting on an infinite grid of white and black squares. It initially faces right.
+ * <p>An ant is sitting on an infinite grid of white and black squares. It initially faces right.
  * At each step, it does the following:
  * (1) At a white square, flip the color of the square, turn 90 degrees right (clockwise), and move forward
  * one unit.
@@ -12,9 +12,9 @@ import java.util.Arrays;
  * Write a program to simulate the first K moves that the ant makes and print the final board as a grid.
  * Note that you are not provided with the data structure to represent the grid. This is something you
  * must design yourself. The only input to your method is K. You should print the final grid and return
- * nothing. The method signature might be something like void printKMoves (int K).
+ * nothing. The method signature might be something like void printKMoves (int K).</p>
  *
- * Approach:
+ * Approach: <br/>
  *  Problem looks simple enough however the complexity lies with InfiniteGrid. Since the grid is infinite and needs to be printed,
  *  there is no point of printing the grid area that beyond the reach of the ant in K moves. Idea here is to start with
  *  a grid of single square and then grow the grid based on ant's latest position. If storing the grid as matrix, then

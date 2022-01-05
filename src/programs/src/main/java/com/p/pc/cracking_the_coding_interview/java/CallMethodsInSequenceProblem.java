@@ -3,7 +3,7 @@ package com.p.pc.cracking_the_coding_interview.java;
 import java.util.concurrent.Semaphore;
 
 /**
- * Suppose we have the following code:
+ * <p>Suppose we have the following code:
  * public class Foo {
  * public Foo() { ... }
  * public void first() { ... }
@@ -11,10 +11,10 @@ import java.util.concurrent.Semaphore;
  * public void third() { ... }
  * }
  * The same instance of Foo will be passed to three different threads. ThreadA will call first threadB
- * will call second, and thread( will call third. Design a mechanism to ensure that first is called
- * before second and second is called before third.
- *
- * Approach:
+ * will call second, and threadC will call third method. Design a mechanism to ensure that business logic in first is
+ * executed before second and second is executed before third.
+ *</p>
+ * Approach: <br/>
  *  With Locks, unlock method can only be invoked by the thread that acquired the lock, hence we can't use locks here to enforce call ordering.
  *  However, with Semaphores that is not the case hence we will use Semaphores here to achieve the call ordering.
  */

@@ -3,10 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.p.pc.cracking_the_coding_interview.java.TicTacWin.TicTacToe.*;
+
 /**
- * Design an algorithm to figure out if someone has won a game of tic-tac-toe.
+ * <p>Design an algorithm to figure out if someone has won a game of tic-tac-toe.</p>
  *
- * Approach:
+ * Approach: <br/>
  *  Idea here is to check all rows and columns including both diagonals from the start points to end and if it all matches then return the winner.
  *  To make the code flexible for N x N board, first define conditions with initial positions to check the board and then increment the conditions
  *  to check further positions.
@@ -21,7 +22,7 @@ public class TicTacWin {
                 {Empty, Cross, Circle},
                 {Cross, Circle, Circle}
         };
-        System.out.println(findWinner(board));
+        System.out.println(findWinner(board)); // Output: Cross
     }
 
     private static TicTacToe findWinner(TicTacToe[][] board) {
@@ -49,6 +50,9 @@ public class TicTacWin {
 
     private static TicTacToe findWinner(TicTacToe[][] board, CheckCondition condition) {
         TicTacToe initialValue = board[condition.row][condition.col];
+        if(initialValue == Empty) return Empty;
+        condition.increment();
+
         while(condition.inbound(board.length, board[0].length)) {
             if(board[condition.row][condition.col] != initialValue) return Empty;
             condition.increment();

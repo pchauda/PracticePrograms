@@ -3,7 +3,7 @@ package com.p.pc.cracking_the_coding_interview.moderate_problems;
 import java.util.*;
 
 /**
- * An ant is sitting on an infinite grid of white and black squares. It initially faces right.
+ * <p>An ant is sitting on an infinite grid of white and black squares. It initially faces right.
  * At each step, it does the following:
  * (1) At a white square, flip the color of the square, turn 90 degrees right (clockwise), and move forward
  * one unit.
@@ -12,27 +12,28 @@ import java.util.*;
  * Write a program to simulate the first K moves that the ant makes and print the final board as a grid.
  * Note that you are not provided with the data structure to represent the grid. This is something you
  * must design yourself. The only input to your method is K. You should print the final grid and return
- * nothing. The method signature might be something like void printKMoves (int K).
+ * nothing. The method signature might be something like void printKMoves (int K).</p>
  *
  * Approach:
- *  Alternate approach implementation where only keep track of white squares and always maintain topLeft and bottomRight corner
- *  of the grid. This approach is better than the previous approach using matrix as it keeps the grid size minimum and no need to shift the elements.
+ *  Alternate approach implementation where only keep track of white squares and always maintain topLeft and bottomRight
+ *  corner of the grid. This approach is better than the previous approach using matrix as it keeps the grid size
+ *  minimum and no need to shift the elements.
  */
 public class AntMovementOnGrid2 {
     static final AntMovementOnGrid2 obj = new AntMovementOnGrid2();
 
     public static void main(String[] args) {
-        Ant a1 = new Ant(1, Orientation.Right);
-
         int K = 100;
-        Board board = new Board(new Ant[]{a1});
+        Board board = new Board(new Ant[]{
+                new Ant(1, Orientation.Right),
+                new Ant(2, Orientation.Right),
+                new Ant(3, Orientation.Right)});
         obj.printKMoves(K, board);
     }
 
     private void printKMoves(int k, Board board) {
-        while(k > 0) {
+        while(k-- > 0) {
             board.moveAnts();
-            k--;
         }
         board.printGrid();
     }
@@ -151,10 +152,6 @@ public class AntMovementOnGrid2 {
             } else if(orientation == Orientation.Up) {
                 position.row--;
             } else position.row++;
-        }
-        public void adjustPosition(int shiftRow, int shiftCol) {
-            position.row += shiftRow;
-            position.col += shiftCol;
         }
         String antString() {return Integer.toString(index);};
     }

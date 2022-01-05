@@ -4,12 +4,12 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * The dining philosophers problem states that there are 5 philosophers sharing a circular table, they eat and think
+ * <p>The dining philosophers problem states that there are 5 philosophers sharing a circular table, they eat and think
  * alternatively. There is a bowl of rice for each of the philosophers and 5 chopsticks.
  * A philosopher needs both their right and a left chopstick to eat. A hungry philosopher may only eat if there are both
  * chopsticks available. Otherwise, a philosopher puts down their chopstick and begin thinking again.
- *
- * Approach:
+ *</p>
+ * Approach: <br/>
  *  Prioritized chopstick approach will be followed here i.e. the last philosopher will pick up the chopsticks in reverse order.
  */
 public class DiningPhilosophersProblem {

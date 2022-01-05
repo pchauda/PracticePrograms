@@ -52,8 +52,8 @@ public class LambdaExpression {
     }
 
     /**
-     * Implement a method to return a random subset of arbitrary size .
-     * Approach:
+     * <p>Implement a method to return a random subset of arbitrary size .</p>
+     * Approach: <br/>
      *  Iterate over a list and for each entry flip a coin.
      * @param list
      * @return
