@@ -1,23 +1,22 @@
 package com.p.pc.cracking_the_coding_interview.moderate_problems;
 
-import java.util.Arrays;
-
 /**
- * Given two strings str1 and str2, the task is to find the length of the shortest string that has both str1 and str2
- * as subsequences.
+ * <p>Given two strings str1 and str2, the task is to find the length of the shortest string that has both str1 and str2
+ * as subsequences.</p>
  *
- * Approach: Follow recursive approach with memoization.
+ * Approach: <br/>
+ *  Follow recursive approach with memoization.
  *  1. If last element matches then length of SCS will be = 1 + SCS (str1 - 1, str2 - 1)
  *  2. If last element does not match then length of SCS will be = 1 + min (SCS (str1 - 1, str2), SCS (str1, str2 - 1))
  */
 public class ShortestCommonSuperSequence {
     public static void main(String[] args) {
-        String s1 = "ABDD";
-        String s2 = "ABCDE";
+        String s1 = "AB";
+        String s2 = "DB";
 
         System.out.println("SCS: " + findSCS(s1, s2, s1.length(), s2.length()));
         int[][] lookUp = new int[s1.length() + 1][s2.length() + 1];
-        System.out.println("SCS optimzied: " + findSCSOptimized(s1, s2, s1.length(), s2.length(), lookUp));
+        System.out.println("SCS optimized: " + findSCSOptimized(s1, s2, s1.length(), s2.length(), lookUp));
         System.out.println("SCS (DP) : " + findSCSUsingDP(s1, s2));
     }
     // Simple recursive solution. Complexity = O(2 ^ min(m,n))
@@ -30,7 +29,7 @@ public class ShortestCommonSuperSequence {
         }
         return 1 + Math.min(findSCS(s1, s2, l1 - 1, l2), findSCS(s1, s2, l1, l2 - 1));
     }
-    // Using DP approach as this problem has overlapping sub-problems and optimal sub-problems
+
     // use additional data structure to hold already computed SCS for a given sub problem
     private static int findSCSOptimized(String s1, String s2, int l1, int l2, int[][] lookUp) {
         if(l1 == 0 || l2 == 0) {
@@ -48,6 +47,7 @@ public class ShortestCommonSuperSequence {
         return lookUp[l1][l2];
     }
 
+    // Using DP approach as this problem has overlapping sub-problems and optimal sub-problems
     private static int findSCSUsingDP(String s1, String s2) {
         int l1 = s1.length();
         int l2 = s2.length();

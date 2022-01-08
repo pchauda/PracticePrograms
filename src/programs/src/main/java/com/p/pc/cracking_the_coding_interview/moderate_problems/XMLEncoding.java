@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Since XML is very verbose, you are given a way of encoding it where each tag gets
+ * <p>Since XML is very verbose, you are given a way of encoding it where each tag gets
  * mapped to a pre-defined integer value. The language/grammar is as follows:
  * Element --> Tag Attributes END Children END
  * Attribute --> Tag Value
@@ -21,6 +21,7 @@ import java.util.List;
  * 1 4 McDowell 5 CA 0 2 3 Gayle 0 Some Message 0 0
  * Write code to print the encoded version of an XML element (passed in Element and Attribute
  * objects).
+ * </p>
  */
 public class XMLEncoding {
     public static void main(String[] args) {
@@ -38,27 +39,27 @@ public class XMLEncoding {
 
     private static void encodedString(Element xml, StringBuilder sb) {
         if(xml != null) {
-            encodeString(xml.nameCode, sb);
+            convert(xml.nameCode, sb);
             if(xml.attributeList != null && !xml.attributeList.isEmpty()) {
                 for(Attribute atr : xml.attributeList) {
-                    encodeString(atr.nameCode, sb);
-                    encodeString(atr.value, sb);
+                    convert(atr.nameCode, sb);
+                    convert(atr.value, sb);
                 }
             }
-            encodeString("0", sb);
+            convert("0", sb);
             if(xml.value != null) {
-                encodeString(xml.value, sb);
+                convert(xml.value, sb);
             }
             if(xml.children != null && !xml.children.isEmpty()) {
                 for(Element child : xml.children) {
                     encodedString(child, sb);
                 }
             }
-            encodeString("0", sb);
+            convert("0", sb);
         }
     }
 
-    private static void encodeString(String str, StringBuilder sb) {
+    private static void convert(String str, StringBuilder sb) {
         if(str != null) {
             sb.append(str).append(" ");
         }

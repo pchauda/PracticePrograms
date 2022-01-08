@@ -3,7 +3,8 @@ package com.p.pc.cracking_the_coding_interview.moderate_problems;
 import java.util.StringJoiner;
 
 /**
- * Given an NxN matrix of positive and negative numbers, write code to find the sub-matrix with the largest possible sum.
+ * <p>Given an MxN matrix of positive and negative numbers, write code to find the sub-matrix with the largest possible
+ * sum.</p>
  */
 public class MaxSubMatrix {
     private static MaxSubMatrix obj = new MaxSubMatrix();
@@ -25,16 +26,16 @@ public class MaxSubMatrix {
     }
 
     private SubMatrix findSubMatrixWithMaxSum(int[][] matrix) {
-        int rowCount = matrix.length, colCount = matrix[0].length;
+        int rows = matrix.length, cols = matrix[0].length;
         SubMatrix best = null;
         // Loop for Row Start
-        for(int rowStart = 0; rowStart < rowCount; rowStart++) {
+        for(int rowStart = 0; rowStart < rows; rowStart++) {
             // array to hold column wise sum of rows from rowStart to rowEnd
-            int[] columnWiseSum = new int[colCount];
+            int[] columnWiseSum = new int[cols];
             // Loop for Row End
-            for(int rowEnd = rowStart; rowEnd < rowCount; rowEnd++) {
+            for(int rowEnd = rowStart; rowEnd < rows; rowEnd++) {
                 // Iterate over all columns, compute column-wise sum and find the best range using Kadane's algorithm
-                for(int col = 0; col < colCount; col++) {
+                for(int col = 0; col < cols; col++) {
                     columnWiseSum[col] += matrix[rowEnd][col]; // collapse the column wise sum using rowEnd
                 }
                 Range bestRange = findBestSubArray(columnWiseSum); // find the best range so far using Kadane's algo

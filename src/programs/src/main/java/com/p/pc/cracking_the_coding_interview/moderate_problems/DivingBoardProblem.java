@@ -4,15 +4,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * You are building a diving board by placing a bunch of planks of wood end-to-end.
+ * <p>You are building a diving board by placing a bunch of planks of wood end-to-end.
  * There are two types of planks, one of length shorter and one of length longer. You must use
- * exactly K planks of wood. Write a method to generate all possible lengths for the diving board.
+ * exactly K planks of wood. Write a method to generate all possible lengths for the diving board.</p>
  *
- * Approach:
+ * Approach: <br/>
  *  1. Recursive approach: For each plank there are two options, either pick shorter or longer and so on. Pick any plank
  *  and recursively repeat the same step until K becomes zero and then add the total length obtained so far in a Set
  *  to avoid duplicates. Solution can be improved by memoization.
- *  Time complexity of simple recursive solution will exponential - O (2^K). With memoization Time complexity will be O(K^2) only.
+ *  Time complexity of simple recursive solution is exponential - O (2^K). With memoization Time complexity is O(K^2) only.
  *
  *  2. Iterative approach: If you take a close look to the problem, it is evident that there are only K + 1 distinct sums
  *  to picking K planks of wood. I.e. (0 smaller, K larger), (1 smaller, K-1 larger) ...... ( K smaller, 0 larger)
@@ -46,11 +46,13 @@ public class DivingBoardProblem {
     }
     // Recursive approach with memoization
     private static void allPossibleLengthsRecursiveWithMemo(int k, int totalLength, int s, int l, Set<Integer> allPossibleLengths, Set<String> visited) {
+        String key = k + " " + totalLength;
         if(k == 0 ) {
+            visited.add(key);
             allPossibleLengths.add(totalLength);
             return;
         }
-        String key = k + " " + totalLength; // Key should be using both total plank remaining and length
+         // Key should be using both total plank remaining and length
         if(visited.contains(key)) return; // already visited option
         // select shorter
         allPossibleLengthsRecursiveWithMemo(k -1, totalLength + s, s, l, allPossibleLengths, visited);

@@ -4,25 +4,28 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Given a list of words, write a program to find the longest word made of other words
+ * <p>Given a list of words, write a program to find the longest word made of other words
  * in the list.
  *
  * Example: String[] words = new String[]{"i", "not", "rest", "int", "e", "te" , "in", "interesting", "ing"};
  * Result: interesting
+ * </p>
+ * Approach: <br/>
+ *  Reverse sort the array, and then starting from  the longest word, check if it can be made using other words.
  */
 public class LongestWordMadeOfOtherWords {
     private static LongestWordMadeOfOtherWords obj = new LongestWordMadeOfOtherWords();
 
     public static void main(String[] args) {
         String[] words = new String[]{"i", "not", "rest", "int", "e", "te" , "in", "interesting", "nothing", "hing"};
-        System.out.println(Arrays.toString(words));
-        System.out.println("Longest word: " + obj.findLongestWordMadeOfOtherWords(words)); // nothing
+        System.out.println("Given words:" + Arrays.toString(words));
+        System.out.println("Longest word: " + obj.findLongestWordMadeOfOtherWords(words)); // Output: nothing
     }
 
     private String findLongestWordMadeOfOtherWords(String[] words) {
         // Use Map instead of Set for memoization purpose
         Map<String, Boolean> wordMap = Arrays.stream(words).collect(Collectors.toMap(t -> t, t -> true));
-        // sort the input array, complexity: O (n * log n)
+        // reverse sort the input array, complexity: O (n * log n)
         Arrays.sort(words, (a, b) -> b.length() - a.length());
         // For each word starting from the longest, check if it can be made using other words
         for(String word: words) {

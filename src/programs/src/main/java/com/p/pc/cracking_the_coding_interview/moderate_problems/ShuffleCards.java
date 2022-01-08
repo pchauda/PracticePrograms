@@ -4,13 +4,14 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Write a method to shuffle a deck of cards. It must be a perfect shuffle-in other words, each
+ * <p>Write a method to shuffle a deck of cards. It must be a perfect shuffle-in other words, each
  * of the 52! permutations of the deck has to be equally likely. Assume that you are given a random
- * number generator which is perfect.
+ * number generator which is perfect.</p>
  *
- * Approach:
- *  Let's start with a base case, if we have shuffled n - 1 card and nth card needs to be suffled into the deck, then swap
- *  the nth card with any random card from the deck. Follow this process iteratively or recursively to have a suffled deck.
+ * Approach: <br/>
+ *  Let's start with a base case, if we have shuffled n - 1 card and nth card needs to be shuffled into the deck,
+ *  then swap the nth card with any random card from the deck. Follow this process iteratively or recursively to have a
+ *  shuffled deck.
  */
 public class ShuffleCards {
     static Random r = new Random();
@@ -23,8 +24,9 @@ public class ShuffleCards {
         System.out.println("Initial deck: " + Arrays.toString(deck));
         // Shuffle deck 100 times
         for(int i=0; i<100; i++) {
-            shuffleDeck(deck);
-            System.out.println("Shuffled deck: " + Arrays.toString(deck));
+            int[] tmp = Arrays.copyOf(deck, deck.length);
+            shuffleDeck(tmp);
+            System.out.println("Shuffled deck: " + Arrays.toString(tmp));
         }
     }
     // Since random number is being used for getting the index to be swapped, all cards have equal probability.
@@ -33,9 +35,9 @@ public class ShuffleCards {
             // generate a random number in the range of 0 to i (inclusive) and swap ith element with this element
             int k = r.nextInt(i+1);
             // swap cards in the deck
-            int tmp = deck[k];
-            deck[k] = deck[i];
-            deck[i] = tmp;
+            int tmp = deck[i];
+            deck[i] = deck[k];
+            deck[k] = tmp;
         }
     }
 }

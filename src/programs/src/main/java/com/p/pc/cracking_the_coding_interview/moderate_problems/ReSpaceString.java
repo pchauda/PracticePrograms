@@ -5,18 +5,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Oh, no! You have accidentally removed all spaces, punctuation, and capitalization in a
+ * <p>Oh, no! You have accidentally removed all spaces, punctuation, and capitalization in a
  * lengthy document. A sentence like "I reset the computer. It still didn't boot!" became
  * "iresetthecomputeritstilldidntboot". You'll deal with the punctuation and capitalization
  * later; right now you need to re-insert the spaces. Most of the words are in a dictionary but
  * a few are not. Given a dictionary (a list of strings) and the document (a string), design an algorithm
- * to un-concatenate the document in a way that minimizes the number of unrecognized characters.
+ * to un-concatenate the document in a way that minimizes the number of unrecognized characters.</p>
+ * <p>
  * EXAMPLE
  * Input: jesslookedjustliketimherbrother
  * Output: jess looked just like tim her brother (7 unrecognized characters)
- *
- * Approach: Recursion with memoization,
- *
+ *</p>
+ * Approach: Recursion with memoization.
+ *  Iterate through the input string, pick a character, check if it has minimum valid chars and recurse.
+ *  Add the picked char to the partial string, check if partial string exists in the dictionary, if yes then 0 invalid
+ *  chars so far else length of partial becomes total invalid characters.
  */
 public class ReSpaceString {
     private static ReSpaceString obj = new ReSpaceString();
@@ -25,7 +28,8 @@ public class ReSpaceString {
         // Original: We love my computer and alex as well. There is nothing that can beat the human instinct.
         String input = "welovemycomputerandalexaaswellthereisnothingthatcanbeatthehumaninstinct";
         Set<String> dictionary = new HashSet<>(Arrays.asList(
-                new String[] {"a", "and", "love", "my", "computer", "rand", "as", "we", "well", "we", "alexa", "there", "are", "no", "nothing", "that", "can", "beat", "the", "human", "instinct"})
+                new String[] {"a", "and", "love", "my", "computer", "rand", "as", "we", "well", "we", "alexa", "there",
+                        "are", "no", "nothing", "that", "can", "beat", "the", "human", "instinct"})
         );
 
         Result result = obj.parseString(input, dictionary, 0, new Result[input.length()]);

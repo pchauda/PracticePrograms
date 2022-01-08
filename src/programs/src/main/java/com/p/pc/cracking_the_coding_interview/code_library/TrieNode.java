@@ -31,6 +31,10 @@ public class TrieNode {
         return children.get(c);
     }
 
+    public HashMap<Character, TrieNode> getChildren() {
+        return children;
+    }
+
     public void setTerminates(boolean terminates) {
         this.terminates = terminates;
     }

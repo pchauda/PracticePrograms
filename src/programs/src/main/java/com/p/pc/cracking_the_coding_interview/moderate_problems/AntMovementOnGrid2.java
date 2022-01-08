@@ -105,7 +105,7 @@ public class AntMovementOnGrid2 {
                 for(int c=cMin; c<=cMax; c++) {
                     Ant ant = checkAnt(r, c);
                     if(ant != null) {
-                        sb.append(ant.antString());
+                        sb.append(ant.toString());
                     } else if(isWhite(r, c)) {
                         sb.append("x");
                     } else sb.append("_");
@@ -153,7 +153,7 @@ public class AntMovementOnGrid2 {
                 position.row--;
             } else position.row++;
         }
-        String antString() {return Integer.toString(index);};
+        public String toString() {return Integer.toString(index);};
     }
 
     enum Orientation {

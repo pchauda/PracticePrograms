@@ -14,7 +14,7 @@ public class RandomNumberGenerator {
 
     public static void main(String[] args) {
         Map<Integer, Integer> numCount = new HashMap<>();
-        int i = 1400000;
+        int i = 14000000;
         while(i > 0) {
             int num = obj.rand7();
             numCount.compute(num, (k, v) -> v != null ? v + 1 : 1);
@@ -38,7 +38,7 @@ public class RandomNumberGenerator {
         }
     }
 
-    // given random function that generated values from 0 to 4
+    // given random function that generates values from 0 to 4
     Random r = new Random();
     int rand5() {
         return r.nextInt(5);

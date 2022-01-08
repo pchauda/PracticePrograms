@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Randomly choose K samples from a list of N items. This problem can also be seen as : Write a method to randomly
+ * <p>Randomly choose K samples from a list of N items. This problem can also be seen as : Write a method to randomly
  * generate a set of m integers from an array of size n. Each element must have equal probability of being chosen.
- *
- * Approach:
+ *</p>
+ * Approach: <br/>
  *  Copy over first K items from the list of N items directly. Then for each i th item from the list of remaining N-K items
  *  find a random index from 0 to ith item, and if random index is less than K then replace the random index value with i th item.
  *
@@ -18,7 +18,7 @@ import java.util.Random;
  *  K/(K+1) * (K+1)/(K+2)...... * (N-1)/N => K/N -- Probability of any item from the first K item to remain in the final list
  *
  *  Case 2. Probability of any item from remaining N-K items to be in the final list is =>
- *  -- Probability of N th item to be in the final list = K/N (probability to selecting any item from first K item out of total N items)
+ *  -- Probability of N th item to be in the final list = K/N (probability of selecting any item from first K item out of total N items)
  *  -- Probability of (N-1) th item to be in the final list =
  *      Probability of selecting any item from first K items out of total N-1 items * Probability that the index picked in iteration for N is not same as index picked for iteration N-1
  *    => (K/(N-1) * (N-1)/N => K/N

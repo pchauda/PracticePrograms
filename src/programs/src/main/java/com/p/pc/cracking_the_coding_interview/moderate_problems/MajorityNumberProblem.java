@@ -1,15 +1,15 @@
 package com.p.pc.cracking_the_coding_interview.moderate_problems;
 
 /**
- * A majority element is an element that makes up more than half of the items (rounded down) in an array. Given a positive integers
+ * <p>A majority element is an element that makes up more than half of the items (rounded down) in an array. Given a positive integers
  * array, find the majority element. If there is no majority element, return -1.
  *
  * Do this in O(N) time and 0(1) space.
  *
  * Input: 1 2 5 9 5 9 5 5 5
  * Output: 5
- *
- * Approach:
+ *</p>
+ * Approach: <br/>
  *  Since we need to solve this problem in O(1) space, hence, we can't use a HashMap. Idea here will be to first find
  *  a potential candidate by iterating over the array once and then try to validate if the item found is indeed a majority element.
  *

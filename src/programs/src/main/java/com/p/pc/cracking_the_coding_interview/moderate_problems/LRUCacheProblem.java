@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Design an LRU cache with below features:
+ * <p>Design an LRU cache with below features:
  * 1. Max size and evict least recently used items if required
  * 2. Keys are integer and values are string
- * 3. Insert and retrieve a value using key
+ * 3. Insert and retrieve a value using key</p>
  *
- * Approach:
+ * Approach: <br/>
  *  Since it's a cache it should have O(1) complexity for search and insertion. This means a Map is required here as
  *  a data structure. However, to maintain the LRU feature, Map is not sufficient and hence another data structure like
  *  LinkedList is also required as well.
