@@ -4,44 +4,46 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Given a list of projects and its dependencies, figure out the dependency resolution order for all projects.
- * If there is a cyclic dependency then flag it out as and error.
- *
- * Approach:
- *  This problem can be solved using the graph approach easily. A topological sort order needs to be created for given
- *  projects. If a cyclic dependency is detected then throw exception.
+ * <p>Given a list of projects and its dependencies, figure out the dependency resolution order for all projects.
+ * If there is a cyclic dependency then flag it out as error.</p>
+ * <p>
+ * Approach: <br/>
+ * This problem can be solved using the graph approach easily. A topological sort order needs to be created for given
+ * projects. If a cyclic dependency is detected then throw exception.
  */
 public class ResolveBuildDependencies {
     static ResolveBuildDependencies obj = new ResolveBuildDependencies();
 
     public static void main(String[] args) {
-        String[] projectNames = new String[] {"a", "b", "c", "d", "e", "f"};
+        String[] projectNames = new String[]{"a", "b", "c", "d", "e", "f"};
         // dependency (a, b) means b is dependent on a
-        String[][] dependencies = new String[][] {
+        String[][] dependencies = new String[][]{
                 {"a", "b"},
                 {"b", "c"},
                 {"f", "e"},
                 {"e", "a"},
                 {"d", "c"},
-                {"c", "e"} // this dependency will cause cyclic dependency
+                {"d", "e"},
+                {"c", "e"}
         };
         ArrayList<Project> projects = obj.createProjects(projectNames);
         Graph g = obj.createGraph(projects, dependencies);
         try {
             Stack<Project> buildOrder = obj.createBuildOrder(g);
             System.out.println("Projects build order is: ");
-            while(!buildOrder.empty()) {
+            while (!buildOrder.empty()) {
                 System.out.print(buildOrder.pop().name + " ");
             }
         } catch (CyclicDependencyException e) {
             System.out.println("Cyclic dependency, build can't be completed.");
         }
     }
+
     // Perform Topological sort operation by keeping track of the Project state
     private Stack<Project> createBuildOrder(Graph g) throws CyclicDependencyException {
         Stack<Project> stack = new Stack<>();
-        for(Project prj : g.projects) {
-            if(prj.state == State.NOT_STARTED) {
+        for (Project prj : g.projects) {
+            if (prj.state != State.COMPLETED) {
                 performTopologicalSort(prj, stack);
             }
         }
@@ -49,12 +51,12 @@ public class ResolveBuildDependencies {
     }
 
     private void performTopologicalSort(Project prj, Stack<Project> stack) throws CyclicDependencyException {
-        if(prj.state == State.IN_PROGRESS)
+        if (prj.state == State.IN_PROGRESS)
             throw new CyclicDependencyException();
 
         prj.state = State.IN_PROGRESS;
-        for(Project d : prj.dependents) {
-            if(d.state != State.COMPLETED)
+        for (Project d : prj.dependents) {
+            if (d.state != State.COMPLETED)
                 performTopologicalSort(d, stack);
         }
         prj.state = State.COMPLETED;
@@ -63,7 +65,7 @@ public class ResolveBuildDependencies {
 
     private Graph createGraph(ArrayList<Project> prjs, String[][] dependencies) {
         Graph g = new Graph(prjs);
-        for(String[] d : dependencies) {
+        for (String[] d : dependencies) {
             g.addDependency(d[0], d[1]);
         }
         g.printGraph();
@@ -78,11 +80,12 @@ public class ResolveBuildDependencies {
 
     static class Graph {
         ArrayList<Project> projects;
-        Map<String, Project> projectMap;
+        // map is only used to build dependencies
+        private Map<String, Project> projectMap;
 
         Graph(ArrayList<Project> projects) {
             this.projects = projects;
-            projectMap = this.projects.stream().collect(Collectors.toMap(t -> t.name, t -> t));
+            this.projectMap = this.projects.stream().collect(Collectors.toMap(t -> t.name, t -> t));
         }
 
         void addDependency(String u, String v) {
@@ -90,7 +93,7 @@ public class ResolveBuildDependencies {
         }
 
         public void printGraph() {
-            for(Project prj : projects) {
+            for (Project prj : projects) {
                 StringJoiner joiner = new StringJoiner(" -> ", "[", "}");
                 joiner.add(prj.name + ":" + prj.state);
                 prj.dependents.stream().forEach(t -> joiner.add(t.name + ":" + t.state));
@@ -99,7 +102,8 @@ public class ResolveBuildDependencies {
         }
     }
 
-    enum State { NOT_STARTED, IN_PROGRESS, COMPLETED}
+    enum State {NOT_STARTED, IN_PROGRESS, COMPLETED}
+
     static class Project {
         String name;
         State state = State.NOT_STARTED;
@@ -112,7 +116,7 @@ public class ResolveBuildDependencies {
         }
 
         void addDependentChild(Project child) {
-            if(!dependentsSet.contains(child.name)) {
+            if (!dependentsSet.contains(child.name)) {
                 dependents.add(child);
                 dependentsSet.add(child.name);
             }

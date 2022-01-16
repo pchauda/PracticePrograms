@@ -28,7 +28,7 @@ public class WeightedGraph {
     WeightedGraph(int vertices) {
         this.vertices = vertices;
         adjacencyList = new ArrayList<>(vertices);
-        for(int i=0; i<vertices; i++) {
+        for (int i = 0; i < vertices; i++) {
             adjacencyList.add(new ArrayList<>());
         }
     }
@@ -49,9 +49,8 @@ public class WeightedGraph {
         for (int i = 0; i < adjacencyList.size(); i++) {
             StringJoiner joiner = new StringJoiner(" -> ", "[", "]");
             joiner.add(Integer.toString(i));
-            for (int j = 0; j < adjacencyList.get(i).size(); j++) {
-                joiner.add(adjacencyList.get(i).get(j).toString());
-            }
+            List<Edge> edges = adjacencyList.get(i);
+            edges.stream().forEach(t -> joiner.add(t.toString()));
             System.out.println(joiner);
         }
     }

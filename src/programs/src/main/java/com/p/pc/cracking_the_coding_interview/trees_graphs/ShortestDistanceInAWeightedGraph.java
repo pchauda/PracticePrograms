@@ -3,23 +3,22 @@ package com.p.pc.cracking_the_coding_interview.trees_graphs;
 import java.util.*;
 
 /**
- * Given a weighted graph where each edge has a weight associated, find the shortest distance from any given source
+ * <p>Given a weighted graph where each edge has a weight associated, find the shortest distance from any given source
  * vertex to all vertices.
- * Also print the paths from the source vertex to all vertices.
- *
+ * Also print the paths from the source vertex to all vertices.</p>
+ * <p>
  * Approach: Use Dijkstra's algorithm to compute shortest distance from a source vertex to all vertices. Use a Min-Heap
  * to maintain the set of all unvisited nodes along with their distances.
- *
+ * <p>
  * Algo:
- *  Assign the initial distance from source vertex to all vertices as Infinity.
- *  Push the source vertex to the min heap.
- *  Pick the minimum vertex from the min heap.
- *  Visit all unvisited adjacent vertices from the source vertex and update the distance based on the weight of the edges
- *      If the new distance is less than the previously captured distance then update the distance as well the path array.
- *  Mark the current vertex as visited and add the adjacent vertices to the min heap along with their distances.
- *  Repeat the above till min heap is empty.
+ * Assign the initial distance from source vertex to all vertices as Infinity.
+ * Push the source vertex to the min heap.
+ * Pick the minimum vertex from the min heap.
+ * Visit all unvisited adjacent vertices from the source vertex and update the distance based on the weight of the edges
+ * If the new distance is less than the previously captured distance then update the distance as well the path array.
+ * Mark the current vertex as visited and add the adjacent vertices to the min heap along with their distances.
+ * Repeat the above till min heap is empty.
  */
-@SuppressWarnings("unchecked")
 public class ShortestDistanceInAWeightedGraph {
     public static void main(String[] args) {
         ShortestDistanceInAWeightedGraph obj = new ShortestDistanceInAWeightedGraph();
@@ -31,13 +30,13 @@ public class ShortestDistanceInAWeightedGraph {
         System.out.println("Shortest distance from source vertex " + sourceVertex + " for all nodes:");
         Pair<int[], int[]> distances = findShortestDistance(graph, sourceVertex, vertices);
         // distances
-        for(int i=0; i < distances.first.length; i++) {
+        for (int i = 0; i < distances.first.length; i++) {
             System.out.println("Destination: " + i + " , Distance: " + distances.first[i]);
         }
         // paths
         int[] paths = distances.second;
-        System.out.println("Path to all vertices from source vertex " + sourceVertex +":");
-        for(int i=0; i < vertices; i++) {
+        System.out.println("Path to all vertices from source vertex " + sourceVertex + ":");
+        for (int i = 0; i < vertices; i++) {
             printPath(i, paths);
         }
     }
@@ -45,17 +44,16 @@ public class ShortestDistanceInAWeightedGraph {
     private static void printPath(int vertex, int[] paths) {
         int prev = paths[vertex];
         ArrayList<Integer> path = new ArrayList<>();
-        if(prev != -1)
+        if (prev != -1)
             path.add(vertex);
 
-        while(prev != -1) {
+        while (prev != -1) {
             path.add(prev);
             prev = paths[prev];
         }
         StringJoiner joiner = new StringJoiner(" -> ", "[", "]");
-        for(int i=path.size() - 1; i >= 0 ;i--) {
-            joiner.add(Integer.toString(path.get(i)));
-        }
+        Collections.reverse(path);
+        path.stream().forEach(t -> joiner.add(Integer.toString(t)));
         System.out.println(joiner);
     }
 
@@ -74,19 +72,19 @@ public class ShortestDistanceInAWeightedGraph {
         PriorityQueue<Pair<Integer, Integer>> pq = new PriorityQueue<>(7, Comparator.comparingInt(a -> (int) a.second));
         pq.add(new Pair(source, distances[source]));
 
-        while(!pq.isEmpty()) {
+        while (!pq.isEmpty()) {
             Pair poll = pq.poll(); // always pick up vertex with minimum distance
             int currVertex = (int) poll.first;
-            if(!visited.contains(currVertex)) { // Check if the vertex has already been visited
+            if (!visited.contains(currVertex)) { // Check if the vertex has already been visited
                 visited.add(currVertex);
 
                 List<WeightedGraph.Edge> edges = graph.adjacencyList.get(currVertex);
-                for(WeightedGraph.Edge edge : edges) {
+                for (WeightedGraph.Edge edge : edges) {
                     int destination = edge.destination;
-                    if(!visited.contains(destination)) { // check again if the destination vertex has already been visited
+                    if (!visited.contains(destination)) { // check again if the destination vertex has already been visited
                         int currentDistance = distances[destination];
                         int newDistance = distances[currVertex] + edge.weight;
-                        if(newDistance < currentDistance) { // if new distance is better than update it
+                        if (newDistance < currentDistance) { // if new distance is better than update it
                             distances[destination] = newDistance;
                             paths[destination] = currVertex;
                             Pair p = new Pair(destination, newDistance);
@@ -124,7 +122,7 @@ public class ShortestDistanceInAWeightedGraph {
 
     private WeightedGraph createGraph(int vertices) {
         WeightedGraph graph = new WeightedGraph(vertices); // Graph with 7 vertices
-        graph.addDirectedEdge(0, 1, 4);
+        graph.addUnDirectedEdge(0, 1, 4);
         graph.addDirectedEdge(0, 2, 3);
         graph.addDirectedEdge(0, 4, 5);
         graph.addDirectedEdge(1, 5, 3);

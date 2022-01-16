@@ -3,16 +3,16 @@ package com.p.pc.cracking_the_coding_interview.recursion_dp;
 import java.util.Stack;
 
 /**
- * In the classic problem of the Towers of Hanoi, you have 3 towers and N disks of
+ * <p>In the classic problem of the Towers of Hanoi, you have 3 towers and N disks of
  * different sizes which can slide onto any tower. The puzzle starts with disks sorted in ascending order
  * of size from top to bottom (i.e., each disk sits on top of an even larger one). You have the following
  * constraints:
  * (1) Only one disk can be moved at a time.
  * (2) A disk is slid off the top of one tower onto another tower.
  * (3) A disk cannot be placed on top of a smaller disk.
- * Write a program to move the disks from the first tower to the last using Stacks.
+ * Write a program to move the disks from the first tower to the last using Stacks.</p>
  * <p>
- * Approach:
+ * Approach: <br/>
  * Use an extra tower as buffer. Algo: Move n-1 disks from source to buffer using destination tower as buffer.
  * Then move nth disk from source to destination.
  * Then move n-1 disks from buffer to destination using source as buffer.
@@ -46,7 +46,7 @@ public class TowerOfHanoi {
     }
 
     private void moveTop(Tower original, Tower destination) {
-        destination.addDisk(original.stack.pop());
+        destination.addDisk(original.removeDisk());
     }
 
     static class Tower {

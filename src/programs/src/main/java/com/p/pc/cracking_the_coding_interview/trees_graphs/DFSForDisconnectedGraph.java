@@ -1,10 +1,9 @@
 package com.p.pc.cracking_the_coding_interview.trees_graphs;
 
 /**
- * Program to perform a DFS on a disconnected graph. Idea is to follow the DFS algo and then perform DFS again on remaining
- * unvisited nodes.
+ * <p>Program to perform a DFS on a disconnected graph. Idea is to follow the DFS algo and then perform DFS again on
+ * remaining unvisited nodes.</p>
  */
-@SuppressWarnings("unchecked")
 public class DFSForDisconnectedGraph {
 
     public static void main(String[] args) {
@@ -13,22 +12,24 @@ public class DFSForDisconnectedGraph {
         System.out.println("Following is Depth First Traversal of the disconnected graph");
         obj.performDFS(g, 6); // Output: 0 1 4 2 3 5
     }
+
     // For each unvisited node, perform DFS
     private void performDFS(Graph2 g, int vertices) {
         boolean[] visited = new boolean[vertices];
-        for(int i=0; i<vertices; i++) {
-            if(!visited[i]) {
+        for (int i = 0; i < vertices; i++) {
+            if (!visited[i]) {
                 performDFSUtil(g, i, visited);
             }
         }
     }
+
     // Perform a regular DFS on a graph in a recursive manner
-    private void performDFSUtil(Graph2 g, Integer adjV, boolean[] visited) {
-        System.out.print(adjV + " ");
-        visited[adjV] = true;
-        for (Integer v : g.adjLists[adjV]) {
-            if(!visited[v]) {
-                performDFSUtil(g, v, visited);
+    private void performDFSUtil(Graph2 g, Integer v, boolean[] visited) {
+        System.out.print(v + " ");
+        visited[v] = true;
+        for (Integer adj : g.adjLists[v]) {
+            if (!visited[adj]) {
+                performDFSUtil(g, adj, visited);
             }
         }
     }

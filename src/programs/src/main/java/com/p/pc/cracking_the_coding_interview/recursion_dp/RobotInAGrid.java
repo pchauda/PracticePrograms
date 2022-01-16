@@ -2,12 +2,13 @@ package com.p.pc.cracking_the_coding_interview.recursion_dp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
- * Imagine a robot sitting on the upper-left-corner of grid with r rows and c columns.
+ * <p>Imagine a robot sitting on the upper-left-corner of grid with r rows and c columns.
  * The robot can only move in two directions, right and down, but certain cells are "off limits" such that
  * the robot cannot step on them. Design an algorithm to find a path for the robot from the top left to
- * the bottom right.
+ * the bottom right.</p>
  */
 public class RobotInAGrid {
 
@@ -16,7 +17,7 @@ public class RobotInAGrid {
         int[][] grid = {
                 {0, 0, 1, 0, 0, 0},
                 {1, 0, 1, 1, 0, 1},
-                {1, 0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 1, 0},
                 {1, 1, 1, 0, 1, 0}
         };
         List<Point> path = findPathOptimized(grid);
@@ -32,7 +33,7 @@ public class RobotInAGrid {
         int rows = grid.length;
         int cols = grid[0].length;
         List<Point> failedPoints = new ArrayList<>();
-        if(findPath(grid, rows - 1, cols - 1, path, failedPoints)) {
+        if (findPath(grid, rows - 1, cols - 1, path, failedPoints)) {
             return path;
         }
         return null;
@@ -40,14 +41,14 @@ public class RobotInAGrid {
 
     private static boolean findPath(int[][] grid, int rowIdx, int colIdx, List<Point> path, List<Point> failedPoints) {
         // base cases
-        if(rowIdx < 0 || colIdx < 0 || grid[rowIdx][colIdx] == 1) return false;
+        if (rowIdx < 0 || colIdx < 0 || grid[rowIdx][colIdx] == 1) return false;
         boolean isOrigin = (rowIdx == 0 && colIdx == 0);
         Point p = new Point(rowIdx, colIdx);
 
         // If point is already visited then return
-        if(failedPoints.contains(p)) return false;
+        if (failedPoints.contains(p)) return false;
 
-        if(isOrigin || findPath(grid, rowIdx - 1, colIdx, path, failedPoints)
+        if (isOrigin || findPath(grid, rowIdx - 1, colIdx, path, failedPoints)
                 || findPath(grid, rowIdx, colIdx - 1, path, failedPoints)) {
             path.add(p);
             return true;
@@ -58,14 +59,28 @@ public class RobotInAGrid {
 
     static class Point {
         int r, c;
+
         Point(int r, int c) {
             this.r = r;
             this.c = c;
         }
 
         @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Point point = (Point) o;
+            return r == point.r && c == point.c;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(r, c);
+        }
+
+        @Override
         public String toString() {
-            return "{r=" + r + ", c=" + c + '}';
+            return "(" + r + "," + c + ")";
         }
     }
 }

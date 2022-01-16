@@ -3,13 +3,13 @@ package com.p.pc.cracking_the_coding_interview.trees_graphs;
 import java.util.Random;
 
 /**
- * You are implementing a binary search tree class from scratch, which, in addition to insert, find, and delete, has a
+ * <p>You are implementing a binary search tree class from scratch, which, in addition to insert, find, and delete, has a
  * method getRandomNode() which returns a random node from the tree. All nodes should be equally likely to be chosen.
- * Design and implement an algorithm for getRandomNode, and explain how you would implement the rest of the methods.
- *
- * Approach:
- *  Maintain a size variable for each node representing the size of the sub-tree starting from that node. Increment the
- *  size any time a new node is added to the tree. Decrement the size any time a node is deleted from the tree.
+ * Design and implement an algorithm for getRandomNode, and explain how you would implement the rest of the methods.</p>
+ * <p>
+ * Approach: <br/>
+ * Maintain a size variable for each node representing the size of the sub-tree starting from that node. Increment the
+ * size any time a new node is added to the tree. Decrement the size any time a node is deleted from the tree.
  */
 public class RandomNodeInABST {
     public static void main(String[] args) {
@@ -44,25 +44,25 @@ public class RandomNodeInABST {
         }
 
         void insert(int n) {
-            if(root == null) root = new TreeNode(n);
+            if (root == null) root = new TreeNode(n);
             else root.insert(n);
         }
 
         TreeNode randomNode() {
-            if(root == null) return null;
+            if (root == null) return null;
             int i = r.nextInt(getSize());
             return root.getIthNode(i);
         }
 
         void printTree() {
-            if(root != null) {
+            if (root != null) {
                 printInOrder(root);
                 System.out.println();
             }
         }
 
         TreeNode findNode(int n) {
-            if(root == null) return null;
+            if (root == null) return null;
             else return root.find(n);
         }
 
@@ -73,18 +73,18 @@ public class RandomNodeInABST {
 
         // Recursively delete the node and adjust the size as well. Size only need to be adjusted for all parent nodes.
         private TreeNode deleteRec(TreeNode node, int n) {
-            if(node == null) return null;
-            if(node.val == n) {
+            if (node == null) return null;
+            if (node.val == n) {
                 // If left is null then set the root to right and vice versa
-                if(node.left == null) return node.right; // Effectively root = root.right
-                if(node.right == null) return node.left; // Effectively root = root.left
+                if (node.left == null) return node.right; // Effectively root = root.right
+                if (node.right == null) return node.left; // Effectively root = root.left
                 // If both left and right are not null then find InOrder successor and replace the node with it
                 TreeNode child = findInOrderSuccessor(node.right);
                 // copy the successor's value in the node being deleted and delete successor
                 node.val = child.val;
                 // adjust the right pointer
                 node.right = deleteRec(node.right, child.val);
-            } else if(n < node.val) {
+            } else if (n < node.val) {
                 // delete the node from left sub-tree and update left pointer accordingly
                 node.left = deleteRec(node.left, n);
             } else {
@@ -97,14 +97,14 @@ public class RandomNodeInABST {
         }
 
         private TreeNode findInOrderSuccessor(TreeNode node) {
-            while(node.left != null) {
+            while (node.left != null) {
                 node = node.left;
             }
             return node;
         }
 
         private void printInOrder(TreeNode root) {
-            if(root != null) {
+            if (root != null) {
                 printInOrder(root.left);
                 System.out.print(root.val + " ");
                 printInOrder(root.right);
@@ -123,8 +123,8 @@ public class RandomNodeInABST {
 
             void insert(int n) {
                 TreeNode node = n < val ? left : right;
-                if(node == null) {
-                    if(n < val) left = new TreeNode(n);
+                if (node == null) {
+                    if (n < val) left = new TreeNode(n);
                     else right = new TreeNode(n);
                 } else {
                     node.insert(n); // recursive call will ensure that size has been increased for all intermediate nodes
@@ -133,8 +133,8 @@ public class RandomNodeInABST {
             }
 
             TreeNode find(int n) {
-                if(n == val) return this;
-                else if(n < val) {
+                if (n == val) return this;
+                else if (n < val) {
                     return left != null ? left.find(n) : null;
                 } else if (n > val) {
                     return right != null ? right.find(n) : null;
@@ -152,12 +152,12 @@ public class RandomNodeInABST {
              */
             TreeNode getIthNode(int i) {
                 int leftSize = left == null ? 0 : left.size;
-                if(i < leftSize) {
+                if (i < leftSize) {
                     return left.getIthNode(i);
-                } else if(i == leftSize) {
+                } else if (i == leftSize) {
                     return this;
                 } else {
-                    return right.getIthNode( i - (leftSize + 1));
+                    return right.getIthNode(i - leftSize - 1);
                 }
             }
 

@@ -1,8 +1,8 @@
 package com.p.pc.cracking_the_coding_interview.trees_graphs;
 
 /**
- * Check if a given binary tree is a binary search tree.
- * Consider equal elements to be on the right subtree.
+ * <p>Check if a given binary tree is a binary search tree.
+ * Consider equal elements to be on the right subtree.</p>
  *
  * Time Complexity = O(n), Space complexity = O(log n) due to recursive call stack
  */

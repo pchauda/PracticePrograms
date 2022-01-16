@@ -5,9 +5,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Find all subsets of a given set of characters. For simplicity to access the given chars in order use a list.
+ * <p>Find all subsets of a given set of characters. For simplicity to access the given chars in order use a list.</p>
  *
- * Approach:
+ * Approach: <br/>
  *  Find sub sets before a given element, clone all subsets and add the current element to it and perform this operation
  *  in a recursive manner.
  *  Since each element has two options, either it will be present in a set or not, for n elements, total number of subsets will be 2^n.

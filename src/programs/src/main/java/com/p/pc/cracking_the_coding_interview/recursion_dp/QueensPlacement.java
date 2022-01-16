@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Write an algorithm to print all ways of arranging eight queens on a 8x8 chess board so that none of them share
- * the same row, column, or diagonal. "diagonal" here means all diagonals, not just the two that bisect the board.
+ * <p>Write an algorithm to print all ways of arranging eight queens on a 8x8 chess board so that none of them share
+ * the same row, column, or diagonal. "diagonal" here means all diagonals, not just the two that bisect the board.</p>
  *
- * Approach:
+ * Approach: <br/>
  *   Use recursion with backtracking to place queens on the board. Start with the first row and first column and try
  *   to place a queen at this position and then move to the second row and try to place to a valid column recursively.
  *   If no solution found then backtrack and try to place in a different column.
@@ -25,7 +25,7 @@ public class QueensPlacement {
         });
     }
     /**
-     * Recursively identified and places queen in its respective position using Back tracking algorithm.
+     * Recursively identify and places queen in its respective position using Back tracking algorithm.
      *
      * Time Complexity:
      *  1. for loop runs in O(n) time
@@ -57,7 +57,8 @@ public class QueensPlacement {
             if(col == occupiedCol) return false; // already a queen in the same column
             // Check for diagonal intersection. If distance between row and column is the same then same diagonal
             int colDistance = Math.abs(col - occupiedCol);
-            if(colDistance == (row - r)) return false; // Row distance and col distance is the same, no need to do absolute for rows as row will always be greater than r
+            // Row distance and col distance is the same, no need to do absolute for rows as row will always be greater than r
+            if(colDistance == (row - r)) return false;
         }
         return true;
     }

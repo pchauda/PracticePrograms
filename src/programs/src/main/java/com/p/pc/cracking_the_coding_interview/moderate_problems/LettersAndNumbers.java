@@ -5,18 +5,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Given an array filled with letters and numbers, find the longest sub-array with
+ * <p>Given an array filled with letters and numbers, find the longest sub-array with
  * an equal number of letters and numbers.
  * Example:
  * char[] arr = new char[] {'1', 'A', 'b', '1', '2', 'c', 'D', '4'};
  *
  * Output:
  *  Sub-array length having equal number of letters and numbers: 8 - {'1', 'A', 'b', '1', '2', 'c', 'D', '4'}
- *
- * Approach:
+ *</p>
+ * Approach: <br/>
  * Calculate the delta between letter and number count for each element in the array. As shown below wherever the delta
  * matches then there is equal number of letters and numbers (i.e. same number of letters and numbers appeared in between)
- * between starting match index + 1 to last matching index.
+ * starting from match index + 1 to last matching index.
  * Now to find the longest sub-array, we just need to find the largest range of matching delta, which can be done in O(n) using HashMap.
  *
  *                  1   A   b   1   2   c   D   4
@@ -51,15 +51,15 @@ public class LettersAndNumbers {
 
         // find indexes for largest sub-array
         int startIdx = -1, endIdx = -1;
-        Map<Integer, Integer> deltaMap = new HashMap<>(); // Map<DeltaCount, Index>
-        deltaMap.put(0, -1); // Put deltaCount of 0 at -1 position as initial conditon
+        Map<Integer, Integer> deltaIndexMap = new HashMap<>(); // Map<DeltaCount, Index>
+        deltaIndexMap.put(0, -1); // Put deltaCount of 0 at -1 position as initial conditon
 
         for(int i=0; i<deltaArr.length; i++) {
             int curr = deltaArr[i];
-            if(!deltaMap.containsKey(curr)) {
-                deltaMap.put(curr, i);
+            if(!deltaIndexMap.containsKey(curr)) {
+                deltaIndexMap.put(curr, i);
             } else {
-                Integer match = deltaMap.get(curr);
+                Integer match = deltaIndexMap.get(curr);
                 int prevMax = endIdx - startIdx;
                 int currMax = i - match;
                 if(currMax > prevMax) {
