@@ -1,7 +1,6 @@
 package com.p.pc.facebook;
 
 import java.util.Arrays;
-import java.util.StringJoiner;
 
 /**
  * Given a 2D matrix where 1 represents land and 0 represents water. Remove all the islands that are not connected

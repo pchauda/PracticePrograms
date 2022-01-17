@@ -83,7 +83,8 @@ public class ContiguousSubArrayCount {
             // after the above step either stack is empty or stack top is the max element and hence contiguous sub-arrays
             // having max element at i are only possible till the stack top
             if (stack.isEmpty()) result[i] = i + 1; // add 1 for self
-            else result[i] = i - stack.peek(); // no need to add 1 here as for base case when ith element is smaller than stack top, delta will still result into 1
+            else
+                result[i] = i - stack.peek(); // no need to add 1 here as for base case when ith element is smaller than stack top, delta will still result into 1
             stack.push(i);
         }
         stack.clear();
@@ -94,7 +95,8 @@ public class ContiguousSubArrayCount {
                 stack.pop();
             // after the above step either stack is empty or stack top is the max element and hence contiguous sub-arrays having max element at i are only possible till the stack top
             if (stack.isEmpty()) result[i] += (arr.length - i - 1);
-            else result[i] += (stack.peek() - i - 1); // subtract 1 as it was already counted earlier and for base case no need to count it again
+            else
+                result[i] += (stack.peek() - i - 1); // subtract 1 as it was already counted earlier and for base case no need to count it again
             stack.push(i);
         }
         return result;
