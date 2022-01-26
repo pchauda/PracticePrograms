@@ -26,6 +26,8 @@ import java.util.List;
  * </p>
  * Approach:<br/>
  * Follow a Trie based approach to solve this problem optimally.
+ *
+ * Time Complexity: O(n * s) where n = length of the given num string, s = length of the longest word in dictionary
  */
 public class T9Dictionary {
 
