@@ -22,8 +22,10 @@ import java.util.StringJoiner;
  *                                16
  * <p>
  * In Order: 3 -> 5 -> 6 -> 7 -> 9 -> 10 -> 11 -> 13 -> 14 -> 16 -> 17
+ *
+ * Similarly also find in order predecessor.
  */
-public class InOrderSuccessor {
+public class InOrderSuccessorOrPredecessor {
 
     public static void main(String[] args) {
         TreeNode root = new TreeNode(10, null);
@@ -46,7 +48,59 @@ public class InOrderSuccessor {
         System.out.println("In order predecessor of node 17 is : " + findInOrderPredecessor(root, 17));
         System.out.println("In order successor of node 17 is : " + findInOrderSuccessor(root, 17));
         System.out.println("In order predecessor of node 13 is : " + findInOrderPredecessor(root, 13));
+        System.out.println("In order predecessor of node 13 is : " + findInOrderPredecessorWithoutUsingParentPointer(root, 13));
         System.out.println("In order successor of node 13 is : " + findInOrderSuccessor(root, 13));
+        System.out.println("In order successor of node 13 is : " + findInOrderSuccessorWithoutUsingParentPointer(root, 13));
+    }
+
+    // In this approach, keep track of the parent pointer using the left child and once we find a matching node
+    // follow the regular approach of find in order successor
+    private static TreeNode findInOrderSuccessorWithoutUsingParentPointer(TreeNode root, int key) {
+        TreeNode parent = null;
+        TreeNode node = root;
+        while(node.val != key) {
+            if(node.val > key) {
+                parent = node;
+                node = node.left;
+            } else {
+                node = node.right;
+            }
+        }
+        if(node == null) return null;
+        // if right child is present then return the left most child of the right child, else return the parent
+        if(node.right != null) {
+            node = node.right;
+            while(node != null && node.left != null)
+                node = node.left;
+            return node;
+        } else {
+            return parent;
+        }
+    }
+
+    // In this approach, keep track of the parent pointer using the right child and once we find a matching node
+    // follow the regular approach of find in order successor
+    private static TreeNode findInOrderPredecessorWithoutUsingParentPointer(TreeNode root, int key) {
+        TreeNode parent = null;
+        TreeNode node = root;
+        while(node.val != key) {
+            if(node.val > key) {
+                node = node.left;
+            } else {
+                parent = node;
+                node = node.right;
+            }
+        }
+        if(node == null) return null;
+        // if left child is present then return the right most child of the left child, else return the parent
+        if(node.left != null) {
+            node = node.left;
+            while(node != null && node.right != null)
+                node = node.right;
+            return node;
+        } else {
+            return parent;
+        }
     }
 
     private static TreeNode findInOrderPredecessor(TreeNode root, int key) {
@@ -57,11 +111,11 @@ public class InOrderSuccessor {
     }
 
     private static TreeNode inOrderPredecessor(TreeNode node) {
-        // If node's right child is not null then return the left most child of the right child
+        // If node's left child is not null then return the right most child of the left child
         if (node.left != null) {
             return rightMostChild(node.left);
         } else {
-            // If node's right child is null then move up the tree till the node becomes the left child and then return the parent
+            // If node's left child is null then move up the tree till the node becomes the right child and then return the parent
             while (node.parent != null && node.parent.right != node) {
                 node = node.parent;
             }
