@@ -123,7 +123,7 @@ public class T9Dictionary {
         return result;
     }
 
-    static void findAllWordsContainedInNumStringRecursive(String numString, TrieNode node, int index, String prefix, Set<String> result) {
+    private static void findAllWordsContainedInNumStringRecursive(String numString, TrieNode node, int index, String prefix, Set<String> result) {
         if (node.terminates()) result.add(prefix);
 
         if (index < numString.length()) {
