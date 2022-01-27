@@ -4,7 +4,9 @@ import com.p.pc.cracking_the_coding_interview.code_library.Trie;
 import com.p.pc.cracking_the_coding_interview.code_library.TrieNode;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>On old cell phones, users typed on a numeric keypad and the phone would provide a list of words
@@ -25,30 +27,33 @@ import java.util.List;
  * </p>
  * Approach:<br/>
  * Follow a Trie based approach to solve this problem optimally.
- *
+ * <p>
  * Time Complexity: First a Trie needs to be created from the given dictionary and then search is happening and hence
  * total time complexity will be O(w * l + n * l)
  * where
- *  w = total words in dictionary
- *  n = length of the given num string
- *  l = avg length of the word in dictionary
- *
- *  There are different flavors of this problem such that:
- *  1. Find all words represented by the given num string
- *  2. Find all words starting from the given num string
- *  3. Find all words contained within the given num string
+ * w = total words in dictionary
+ * n = length of the given num string
+ * l = avg length of the word in dictionary
+ * <p>
+ * There are different flavors of this problem such that:
+ * 1. Find all words represented by the given num string
+ * 2. Find all words starting from the given num string
+ * 3. Find all words contained within the given num string
  */
 public class T9Dictionary {
 
     public static void main(String[] args) {
-        String[] validWords = new String[]{"use", "used", "tree", "true", "bat", "cat", "mat", "trees"};
+        String[] validWords = new String[]{"use", "user", "used", "tree", "true", "bat", "cat", "mat", "trees"};
         Trie trie = new Trie(validWords);
         // Find all words represented by the given num string
         System.out.println(findAllWordsRepresentingNumString("873", trie)); // Output: [use]
+        System.out.println(findAllWordsRepresentingNumString("8733", trie)); // Output: [tree, used]
         // Find all words starting from the given num string
-        System.out.println(findAllWordsStartingFromNumString("873", trie)); // Output: [tree, trees, use, used]
+        System.out.println(findAllWordsStartingFromNumString("873", trie)); // Output: [tree, trees, use, user, used]
+        System.out.println(findAllWordsStartingFromNumString("22", trie)); // Output: [bat, cat]
         // Find all words contained within the given num string
-        // TODO
+        System.out.println(findAllWordsContainedInNumString("180087332289", trie)); // Output: [bat, use, cat, tree, used]
+        System.out.println(findAllWordsContainedInNumString("873387372289", trie)); // Output: [bat, use, cat, tree, used, user]
     }
 
     // 1. This method returns all words represented by the given num string
@@ -60,7 +65,7 @@ public class T9Dictionary {
 
     private static void findAllWordsRepresentingNumStringRecursive(String numString, int index, String prefix, TrieNode node, List<String> result) {
         if (index == numString.length()) {
-            if(node.terminates())
+            if (node.terminates())
                 result.add(prefix);
             return;
         }
@@ -100,12 +105,46 @@ public class T9Dictionary {
         }
     }
 
+    // 3. This method returns all words contained within the given num string. Time complexity: O(n^2)
+    static Set<String> findAllWordsContainedInNumString(String numString, Trie trie) {
+        TrieNode root = trie.getRoot();
+        Set<String> result = new HashSet<>();
+        for (int i = 0; i < numString.length(); i++) {
+            char[] letters = getT9Chars(numString.charAt(i));
+            if (letters != null) {
+                for (char c : letters) {
+                    TrieNode child = root.getChild(c);
+                    if (child != null) {
+                        findAllWordsContainedInNumStringRecursive(numString, child, i + 1, Character.toString(c), result);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    static void findAllWordsContainedInNumStringRecursive(String numString, TrieNode node, int index, String prefix, Set<String> result) {
+        if (node.terminates()) result.add(prefix);
+
+        if (index < numString.length()) {
+            char[] letters = getT9Chars(numString.charAt(index));
+            if (letters != null) {
+                for (char c : letters) {
+                    TrieNode child = node.getChild(c);
+                    if (child != null) {
+                        findAllWordsContainedInNumStringRecursive(numString, child, index + 1, prefix + c, result);
+                    }
+                }
+            }
+        }
+    }
+
     private static void findAllWordsStartingFromTheNode(String prefix, TrieNode node, List<String> result) {
-        if(node.terminates()) result.add(prefix);
-        if(node.getChildren().isEmpty()) {
+        if (node.terminates()) result.add(prefix);
+        if (node.getChildren().isEmpty()) {
             return;
         }
-        for(Character c: node.getChildren().keySet()) {
+        for (Character c : node.getChildren().keySet()) {
             findAllWordsStartingFromTheNode(prefix + c, node.getChildren().get(c), result);
         }
     }
