@@ -3,7 +3,7 @@ package com.p.pc.facebook.arrays;
 import java.util.HashMap;
 
 /**
- * Given a binary array nums, return the maximum length of a contiguous subarray with an equal number of 0 and 1
+ * Given an array containing binary (0 or 1) numbers, return the maximum length of a contiguous subarray with an equal number of 0 and 1
  *
  * Input: nums = [0,1,0]
  * Output: 2
@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class MaxContiguousLengthInBinaryArray {
     public static void main(String[] args) {
         int[] arr = new int[]{1,0,0,1,1,0,1,1,1,0,0,0,1};
-        System.out.println("Max length of the contiguous array having eq 0 & 1 is: " + maxLength(arr));
+        System.out.println("Max length of the contiguous array having eq 0 & 1 is: " + maxLength(arr)); // Output: 12
     }
 
     private static int maxLength(int[] arr) {

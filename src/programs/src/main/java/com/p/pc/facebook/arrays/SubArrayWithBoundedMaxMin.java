@@ -30,15 +30,19 @@ public class SubArrayWithBoundedMaxMin {
         int[] arr = new int[]{3,0,5,2,6,1};
         // bounded range: 2 <= array's max/min <= 4
 
-        System.out.println("Count of subarray having MAX array element within 2 and 4 is: " + countOfSubArrayWithBoundedMax(arr, 2, 4));
+        System.out.println("Count of sub-array having MAX array element within 2 and 4 is: "
+                + countOfSubArrayWithBoundedMax(arr, 2, 4));
         //Output = 3; [3], [3,0], [2]
-        System.out.println("Count of subarray having MIN array element within 2 and 4 is: " + countOfSubArrayWithBoundedMin(arr, 2, 4));
+        System.out.println("Count of sub-array having MIN array element within 2 and 4 is: "
+                + countOfSubArrayWithBoundedMin(arr, 2, 4));
         //Output = 5; [3], [5,2], [2], [5,2,6], [2,6]
 
         arr = new int[]{0,3,1,2,0,5,1,2};
-        System.out.println("Count of subarray having MAX array element within 2 and 4 is: " + countOfSubArrayWithBoundedMax(arr, 2, 4));
+        System.out.println("Count of sub-array having MAX array element within 2 and 4 is: "
+                + countOfSubArrayWithBoundedMax(arr, 2, 4));
         //Output = 14; [3], [3, 0], [1, 3], [1, 3, 0], [2], [2, 1], [2, 1, 3], [2, 1, 3, 0], [0, 2], [0, 2, 1], [0, 2, 1, 3], [0, 2, 1, 3, 0], [2], [2, 1]
-        System.out.println("Count of subarray having MIN array element within 2 and 4 is: " + countOfSubArrayWithBoundedMin(arr, 2, 4));
+        System.out.println("Count of sub-array having MIN array element within 2 and 4 is: "
+                + countOfSubArrayWithBoundedMin(arr, 2, 4));
         //Output = 3; [3], [2], [2]
         List<List<Integer>> subArrays = new ArrayList<>();
         countAndCollectSubArraysWithBoundedMax(arr, 2, 4, subArrays);

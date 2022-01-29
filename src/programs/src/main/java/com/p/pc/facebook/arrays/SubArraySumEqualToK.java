@@ -11,6 +11,8 @@ import java.util.HashMap;
  *  HashMap then that means there are these many prefix sums which can be removed from the running sum to get the target sum.
  *  That means there are exactly these many sub arrays whose sum will be equal to the target sum. Follow this approach for
  *  all elements of the array.
+ *
+ *  Time Complexity: O(n)
  */
 public class SubArraySumEqualToK {
 

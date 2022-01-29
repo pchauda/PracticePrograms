@@ -8,12 +8,12 @@ import java.util.Arrays;
 public class LeftRotation {
 
     public static void main(String[] args) {
-        int[] arr = new int[] {1,2,3,4};
-        int rotation = 3;
+        int[] arr = new int[] {1,2,3,4,5,6};
+        int rotation = 10;
         System.out.println("Original array: " + Arrays.toString(arr));
         performRotationInPlace(arr, rotation);
         System.out.println("Rotated array (in place) : " + Arrays.toString(arr));
-        performRotationInPlace(arr, 1); // restore original array
+        performRotationInPlace(arr, 2); // restore original array
         System.out.println("Original array: " + Arrays.toString(arr));
         arr = performRotation(arr, rotation);
         System.out.println("Rotated array: " + Arrays.toString(arr));
@@ -25,7 +25,7 @@ public class LeftRotation {
         if (actualRotation == 0) return arr;
         int[] retVal = new int[length];
         for(int i=0; i<length; i++) {
-            int newIndex = ((length - rotation) + i) % length;
+            int newIndex = ((length - actualRotation) + i) % length;
             retVal[newIndex] = arr[i];
         }
         return retVal;
