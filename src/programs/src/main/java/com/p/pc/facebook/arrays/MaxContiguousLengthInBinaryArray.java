@@ -3,7 +3,8 @@ package com.p.pc.facebook.arrays;
 import java.util.HashMap;
 
 /**
- * Given an array containing binary (0 or 1) numbers, return the maximum length of a contiguous subarray with an equal number of 0 and 1
+ * Given an array containing binary (0 or 1) numbers, return the maximum length of a contiguous sub-array with an equal
+ * number of 0 and 1.
  *
  * Input: nums = [0,1,0]
  * Output: 2

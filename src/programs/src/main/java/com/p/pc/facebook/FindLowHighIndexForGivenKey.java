@@ -4,12 +4,15 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Perform Binary search twice, once for low index and then for high index
+ * Given a sorted array but having duplicates, find the low and high index for a given key.
+ *
+ * Approach:
+ * Perform modified binary search twice, once for low index and then for high index.
  */
 public class FindLowHighIndexForGivenKey {
 
     public static void main(String[] args) {
-        List<Integer> array = Arrays.asList(0, 1, 2, 3, 4, 5, 6);
+        List<Integer> array = Arrays.asList(-2, -2, 2, 3, 3, 5, 6);
         int key = 3;
         int low = findLowIndex(array, key);
         int high = findHighIndex(array, key);
@@ -22,6 +25,7 @@ public class FindLowHighIndexForGivenKey {
         System.out.println("Low Index of " + key + ": " + low);
         System.out.println("High Index of " + key + ": " + high);
     }
+
     static int findLowIndex (List<Integer> arr, int key) {
         int low = 0;
         int high = arr.size() - 1;
@@ -46,10 +50,7 @@ public class FindLowHighIndexForGivenKey {
             if (arr.get(mid) <= key) low = mid + 1;
             else high = mid - 1;
         }
-        if(high == -1){
-            return -1;
-        }
-        if (high < arr.size() && arr.get(high) == key) {
+        if (high >= 0 && high < arr.size() && arr.get(high) == key) {
             return high;
         }
         return -1;

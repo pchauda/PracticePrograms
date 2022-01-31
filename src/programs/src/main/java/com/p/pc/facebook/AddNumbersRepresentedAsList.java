@@ -54,12 +54,12 @@ public class AddNumbersRepresentedAsList {
             int n2 = num2 != null ? num2.value : 0;
             int sum = n1 + n2 + carry;
             carry = sum/10;
-            Node tmp = new Node(sum % 10);
+            Node node = new Node(sum % 10);
             if(head == null) {
-                head = next = tmp;
+                head = next = node;
             } else {
-                next.next = tmp;
-                next = tmp;
+                next.next = node;
+                next = node;
             }
             if(num1 != null)
                 num1 = num1.next;
@@ -84,9 +84,9 @@ public class AddNumbersRepresentedAsList {
             if(!stack2.isEmpty()) b = stack2.pop().value;
             int sum = a + b + carry;
             carry = sum/10;
-            Node tmp = new Node(sum % 10);
-            tmp.next = prev;
-            prev = tmp;
+            Node node = new Node(sum % 10);
+            node.next = prev;
+            prev = node;
         }
         return prev;
     }

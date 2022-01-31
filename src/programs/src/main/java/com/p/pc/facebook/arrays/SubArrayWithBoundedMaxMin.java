@@ -78,12 +78,7 @@ public class SubArrayWithBoundedMaxMin {
     }
 
     /**
-     * This method counts the number of sub-arrays as well also collects those sub-arrays
-     * @param arr
-     * @param low
-     * @param high
-     * @param subArrays
-     * @return
+     * This method counts the number of sub-arrays as well also collects those sub-arrays.
      */
     static int countAndCollectSubArraysWithBoundedMax(int[] arr, int low, int high, List<List<Integer>> subArrays) {
         int start = -1, end = -1;
@@ -94,8 +89,7 @@ public class SubArrayWithBoundedMaxMin {
             if(arr[i] > high) start = end = i; // Reset value as soon as a value greater than the bound appears
             // ignore the cases where arr[i] < low as this value be included in the array as long as max is within range
             result += (end - start);
-            // only collect the sub arrays when start != end i.e. there is at least one max element present from 0 to ith index
-            if(start != end) collectSubArrays(start, i, low, arr, subArrays);
+            collectSubArrays(start, i, low, arr, subArrays);
         }
         return result;
     }
@@ -103,10 +97,11 @@ public class SubArrayWithBoundedMaxMin {
     private static void collectSubArrays(int start, int end, int low, int[] arr, List<List<Integer>> subArrays) {
         LinkedList<Integer> tmp = new LinkedList<>();
         boolean shouldCollect = false;
-        while(end > start) {
+        while(start < end) {
             int value = arr[end--];
             tmp.addFirst(value); // add values to a temporary list, add first to keep the elements order intact
-            // only start collecting as soon we hit a first element within the range, don't have to check for high as this method will not be called for high
+            // only start collecting as soon we hit a first element within the range, don't have to check for high
+            // as this method will not be called for high
             if(value >= low) shouldCollect = true;
             if(shouldCollect)
                 subArrays.add(new ArrayList<>(tmp)); // add a clone
