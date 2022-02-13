@@ -3,8 +3,10 @@ package com.p.pc.java;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Java8Features {
 
@@ -12,7 +14,9 @@ public class Java8Features {
         Java8Features obj = new Java8Features();
 
         List<String> list = new ArrayList<>();
-        list.add(""); list.add("Prince"); list.add("");
+        list.add("");
+        list.add("Prince");
+        list.add("");
 
         list.removeIf(String::isEmpty);
         System.out.println(list.size());
@@ -38,12 +42,14 @@ public class Java8Features {
 
         // Compute methods in Map
         HashMap<String, String> map = new HashMap<>();
-        map.compute("Riya", (k, v) -> v == null ? k.toUpperCase() : v.concat(k.toLowerCase()));
-        map.computeIfAbsent("Prince", (k) -> k.toUpperCase());
+        map.compute("Foo", (k, v) -> v == null ? k.toUpperCase() : v.concat(k.toLowerCase()));
+        map.computeIfAbsent("Bar", (k) -> k.toUpperCase());
         System.out.println(map);
+        TreeMap amap = null;
     }
 
-    public static void myStaticMethod() {}
+    public static void myStaticMethod() {
+    }
 
     List<String> removeEmptyStringsUsingStream(List<String> list) {
         return list.stream().filter(String::isEmpty).collect(Collectors.toList());
@@ -53,6 +59,7 @@ public class Java8Features {
         static void getName() {
             System.out.println("Java8Interface");
         }
+
         default void getYear() {
             System.out.println("2021");
         }

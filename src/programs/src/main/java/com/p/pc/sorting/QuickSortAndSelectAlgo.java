@@ -52,23 +52,22 @@ public class QuickSortAndSelectAlgo {
         swap(arr, j, end);
         return j;
     }
+    // Find Kth smallest element in the array
+    static int kthSmallest(int[] arr, int k) {
+        int start = 0;
+        int end = arr.length - 1;
+        while (start <= end) {
+            int pIdx = partition(arr, start, end);
+            if (pIdx == k - 1) return arr[pIdx];
+            else if (pIdx > k - 1) end = pIdx - 1;
+            else start = pIdx + 1;
+        }
+        return Integer.MIN_VALUE;
+    }
 
     static void swap(int[] arr, int i, int j) {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
-    }
-
-    // Find Kth smallest element in the array
-    static int kthSmallest(int[] arr, int k) {
-        int left = 0;
-        int right = arr.length - 1;
-        while (left <= right) {
-            int pIdx = partition(arr, left, right);
-            if (pIdx == k - 1) return arr[pIdx];
-            else if (pIdx > k - 1) right = pIdx - 1;
-            else left = pIdx + 1;
-        }
-        return Integer.MIN_VALUE;
     }
 }

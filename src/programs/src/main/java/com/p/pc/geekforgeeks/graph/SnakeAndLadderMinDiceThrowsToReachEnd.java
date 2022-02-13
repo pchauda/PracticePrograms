@@ -1,7 +1,5 @@
 package com.p.pc.geekforgeeks.graph;
 
-import com.sun.jmx.remote.internal.ArrayQueue;
-
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Queue;
@@ -28,7 +26,7 @@ public class SnakeAndLadderMinDiceThrowsToReachEnd {
         int[] board = new int[100]; // 100 cells in the board, board[0] is first cell and board[99] is the last cell.
         Arrays.fill(board, -1);
         // ladders
-        board[2] = 51; // cell 3 has a ladder that will bring the player to cell 21 and so on
+        board[2] = 51; // cell 3 has a ladder that will move the player up to cell 21 and so on
         board[10] = 41;
         board[23] = 76;
         board[39] = 64;
@@ -36,14 +34,14 @@ public class SnakeAndLadderMinDiceThrowsToReachEnd {
         board[64] = 78;
 
         // snakes
-        board[98] = 75; // cell 98 has a snake that will being the player down to cell 75 and so on
+        board[98] = 75; // cell 98 has a snake that will move the player down to cell 75 and so on
         board[91] = 54;
         board[66] = 52;
         board[51] = 22;
         board[35] = 10;
 
         int minDiceThrows = calculateMinDiceThrows(board);
-        System.out.println("Minimum dice thrown: " + minDiceThrows);
+        System.out.println("Minimum dice thrown: " + minDiceThrows); // Output: 5
 
     }
 
@@ -63,7 +61,7 @@ public class SnakeAndLadderMinDiceThrowsToReachEnd {
                     visited[i] = 1;
                     Entry next = new Entry();
                     next.diceThrowCount = entry.diceThrowCount + 1;
-                    next.cell = (board[i] != -1) ? board[i] : i;
+                    next.cell = (board[i] == -1) ? i : board[i]; // if ladder or snake is found then move to that cell
                     queue.add(next);
                 }
             }

@@ -29,13 +29,8 @@ public class NecklaceProblem {
 
     public static void main(String[] args) {
         int[] array = new int[] {5, 4, 0, 3, 7, 6, 2, 8, 9, 10, 1};
-        int max = 1;
-        for(int i=0; i < array.length; i++) {
-            int length = findNecklaceLengthBruteForce(array, i, array[i]);
-            if(length > max) max = length;
-        }
-        System.out.println("Length: " + max);
-        System.out.println("Length (Optimal solution): " + findMaxLengthOptimal(array));
+        System.out.println("Length: " + findMaxLength(array)); // Output: 6
+        System.out.println("Length (Optimal solution): " + findMaxLengthOptimal(array)); // Output: 6
     }
 
     static int findMaxLengthOptimal(int[] array) {
@@ -57,8 +52,23 @@ public class NecklaceProblem {
         return max;
     }
 
-    static int findNecklaceLengthBruteForce(int[] array, int startIndex, int value) {
+    static int findMaxLength(int[] array) {
+        int max = 1;
+        boolean[] visited = new boolean[array.length];
+        for(int i=0; i<array.length; i++) {
+            if(!visited[i]) {
+                int tmp = findMaxLengthRecursive(array, i, array[i], visited);
+                if(tmp > max) {
+                    max = tmp;
+                }
+            }
+        }
+        return max;
+    }
+
+    static int findMaxLengthRecursive(int[] array, int startIndex, int value, boolean[] visited) {
+        visited[startIndex] = true;
         if(startIndex == value) return 1;
-        return 1 + findNecklaceLengthBruteForce(array, startIndex, array[value]);
+        return 1 + findMaxLengthRecursive(array, startIndex, array[value], visited);
     }
 }

@@ -16,8 +16,8 @@ public class RobotInAGrid {
         // 0 means free, 1 means blocked, 4 x 6 grid
         int[][] grid = {
                 {0, 0, 1, 0, 0, 0},
-                {1, 0, 1, 1, 0, 1},
-                {1, 0, 0, 0, 1, 0},
+                {1, 0, 0, 0, 0, 1},
+                {1, 0, 0, 0, 0, 0},
                 {1, 1, 1, 0, 1, 0}
         };
         List<Point> path = findPathOptimized(grid);
@@ -42,13 +42,16 @@ public class RobotInAGrid {
     private static boolean findPath(int[][] grid, int rowIdx, int colIdx, List<Point> path, List<Point> failedPoints) {
         // base cases
         if (rowIdx < 0 || colIdx < 0 || grid[rowIdx][colIdx] == 1) return false;
-        boolean isOrigin = (rowIdx == 0 && colIdx == 0);
+        // reached origin
+        if(rowIdx == 0 && colIdx == 0) {
+            path.add(new Point(0, 0));
+            return true;
+        };
         Point p = new Point(rowIdx, colIdx);
-
         // If point is already visited then return
         if (failedPoints.contains(p)) return false;
 
-        if (isOrigin || findPath(grid, rowIdx - 1, colIdx, path, failedPoints)
+        if (findPath(grid, rowIdx - 1, colIdx, path, failedPoints)
                 || findPath(grid, rowIdx, colIdx - 1, path, failedPoints)) {
             path.add(p);
             return true;

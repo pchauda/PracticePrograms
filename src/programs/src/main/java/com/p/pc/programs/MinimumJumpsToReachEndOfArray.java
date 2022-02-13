@@ -7,8 +7,8 @@ import java.util.StringJoiner;
 public class MinimumJumpsToReachEndOfArray {
 
     public static void main(String[] args) {
-        // int[] arr = new int[] {2, 2, 0, 8, 0, 0, 0, 1, 2, 2, 1, 0, 1}; // Output should be -1 due to zero at 11th position starting from 0th position
-        int[] arr = new int[] {2, 4, 0, 8, 9, 1, 2, 7, 1, 0, 8, 0, 0, 0, 0, 1}; // Output should be 3
+         int[] arr = new int[] {2, 2, 0, 8, 0, 0, 0, 1, 2, 2, 1, 0, 1}; // Output should be -1 due to zero at 11th position starting from 0th position
+        //int[] arr = new int[] {2, 4, 0, 8, 9, 1, 2, 7, 1, 0, 8, 0, 0, 0, 0, 1}; // Output should be 3
         // int[] arr = new int[] {3, 2, 0, 8, 0, 0, 0, 1, 2, 2, 1, 1, 1}; // Output should be 3 starting from 0th position
         System.out.println("Minimum jumps O(n): " + minJumps(arr));
         System.out.println("Minimum jumps (dynamic programming): " + minJumpsDP(arr, arr.length));
@@ -26,7 +26,7 @@ public class MinimumJumpsToReachEndOfArray {
         int[] jumpIndex = new int[arr.length];
         Arrays.fill(minJumps, Integer.MAX_VALUE);
         Arrays.fill(jumpIndex, -1);
-        minJumps[0] = 0; // initialize the minJumps and jumIndex array for 0 position
+        minJumps[0] = 0; // initialize the minJumps array for 0 position
         // For each index in the array, try to find out the minimum jump for each position starting from 0 index
         // if index i is reachable from the given j index
         for(int i = 1; i < arr.length; i++) {
@@ -49,10 +49,8 @@ public class MinimumJumpsToReachEndOfArray {
             jumpIndexes.addFirst(temp);
             index = temp;
         }
-        StringJoiner joiner = new StringJoiner(",", "[", "]");
-        jumpIndexes.forEach(t -> joiner.add(Integer.toString(t)));
-        System.out.println("Minimum jump indexes: " + joiner);
 
+        System.out.println("Minimum jump indexes: " + jumpIndexes);
         return minJumps[arr.length - 1];
     }
 
@@ -65,8 +63,8 @@ public class MinimumJumpsToReachEndOfArray {
         minJumps[0] = 0;
         // For each i index, calculate the minimum number of jumps required to reach any reachable j index
         for(int i = 0; i < n; i++) {
-            int maxReach = Math.min(i + arr[i] + 1, n);
-            for(int j = i+1; j < maxReach; j++) {
+            int maxReach = Math.min(i + arr[i], n-1);
+            for(int j = i+1; j <= maxReach; j++) {
                 int jumpTillJ = 1 + minJumps[i];
                 if(jumpTillJ < minJumps[j])
                     minJumps[j] = jumpTillJ;

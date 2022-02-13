@@ -23,7 +23,7 @@ package com.p.pc.cracking_the_coding_interview.recursion_dp;
 public class CoinChangeProblem {
 
     public static void main(String[] args) {
-        int[] coinTypes = new int[]{25, 10, 5, 1};
+        int[] coinTypes = new int[]{1, 5, 10, 25};
         int amount = 100;
 
         int ways = waysToMakeChange(coinTypes, amount);

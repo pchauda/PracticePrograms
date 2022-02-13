@@ -3,6 +3,8 @@ package com.p.pc.facebook;
 /**
  * <p>Find all unique paths in a grid (M x N) from start (top left) to end (bottom right). Movement can only happen to
  * right or down from a given block.</p>
+ * Example: <br/>
+ * For 4 x 4 grid, total paths from top left to bottom right = 20
  *
  * Approach: <br/>
  *  Using DP, the complexity can be reduced to O(m * n). For base cases, if there is only 1 row or 1 column then only

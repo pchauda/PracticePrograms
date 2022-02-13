@@ -1,4 +1,4 @@
-package com.p.pc.programs;
+package com.p.pc.graphs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,10 +7,10 @@ import java.util.List;
  * Given an undirected graph, print all connected components line by line and calculate the total number of connected
  * components.
  * A graph can be represented as vertices and adjacencyList for each vertex.
- *
- * Approach:
- *  For every node, perform DFS if the node has not been visited. Mark the node as visited as part of DFS and perform DFS
- *  recursively on all adjacent vertices. Increment the count any time you encounter an unvisited vertex outside of DFS.
+ * <p>
+ * Approach: <br/>
+ * For every node, perform DFS if the node has not been visited. Mark the node as visited as part of DFS and perform DFS
+ * recursively on all adjacent vertices. Increment the count any time you encounter an unvisited vertex outside of DFS.
  */
 public class ConnectedComponentsInUndirectedGraph {
     public static void main(String[] args) {
@@ -24,6 +24,7 @@ public class ConnectedComponentsInUndirectedGraph {
 
         System.out.println("Connected components count: " + g.connectedComponents()); // Output: 3
     }
+
     // class representing a graph using vertices and adjacency list
     static class Graph {
         // total
@@ -34,10 +35,11 @@ public class ConnectedComponentsInUndirectedGraph {
             this.vertices = n;
             adjacencyList = new ArrayList<>();
             // initialize the adjacencyList for each vertex
-            for(int i =0; i < n; i++) {
+            for (int i = 0; i < n; i++) {
                 adjacencyList.add(new ArrayList<>());
             }
         }
+
         // Add edge from vertex src to dest
         void addEdge(int src, int dest) {
             adjacencyList.get(src).add(dest);
@@ -47,14 +49,13 @@ public class ConnectedComponentsInUndirectedGraph {
 
 
         int connectedComponents() {
-            // Mark all the vertices as not visited
             boolean[] visited = new boolean[vertices];
             int count = 0;
             // For each vertex, perform a DFS using the adjacencyList. this way, all vertices linked to a given first
             // vertex will be marked as visited and anytime a new un-visited vertex is encountered, it will represent
             // a disconnected graph and will be treated as a new connected component.
-            for(int i=0; i < vertices; i++) {
-                if(!visited[i]) {
+            for (int i = 0; i < vertices; i++) {
+                if (!visited[i]) {
                     performDFS(i, visited);
                     count++;
                     System.out.println();

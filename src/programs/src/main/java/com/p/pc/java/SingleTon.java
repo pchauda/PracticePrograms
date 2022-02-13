@@ -9,8 +9,8 @@ public class SingleTon {
         MySingleTon singleTon = MySingleTon.getInstance();
     }
 
-    // Enums are Thread Safe by design and also serializable, hence defining singleton using Enum is better than creating singleton using double check.
-    // It is also safe from reflection as JVM makes sure only one instance of the enum exists
+    // Enums are Thread Safe by design and also serializable, hence defining singleton using Enum is better than creating
+    // singleton using double check. It is also safe from reflection as JVM makes sure only one instance of the enum exists
     // However, singleton using Enum is not lazy loaded.
     enum MySingleTon {
         INSTANCE;
@@ -37,7 +37,7 @@ public class SingleTon {
 
     class MySingleTonClass {
 
-        private MySingleTonClass instance; // Volatile guarantees the happens before relationship starting Java 6.
+        private volatile MySingleTonClass instance; // Volatile guarantees the happens before relationship starting Java 6.
 
         MySingleTonClass getInstance() {
             if(instance == null) {

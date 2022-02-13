@@ -1,5 +1,7 @@
 package com.p.pc.graphs;
 
+import sun.reflect.generics.tree.Tree;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -67,6 +69,8 @@ public class TreeTraversal<K> {
 
         System.out.println("\nPrinting Reverse LevelOrder Traversal using Pre-Order:");
         tree.levelOrderTraversalViaPreOrderAlgo(root);
+
+        System.out.println(tree.findLeftLeavesSum(root, false));
     }
 
     // Recursive
@@ -253,6 +257,17 @@ public class TreeTraversal<K> {
     private void addToMap(Map<Integer, List<TreeNode<K>>> map, Integer level, TreeNode<K> treeNode) {
         map.putIfAbsent(level, new ArrayList<>());
         map.get(level).add(treeNode);
+    }
+
+    int findLeftLeavesSum(TreeNode<Integer> root, boolean isLeftChild) {
+        if(root == null) return 0;
+        int result = 0;
+        if(root.left == null && root.right == null && isLeftChild) {
+            result += root.value;
+        }
+        result += findLeftLeavesSum(root.left, true);
+        result += findLeftLeavesSum(root.right, false);
+        return result;
     }
 
     static class TreeNode<K> {

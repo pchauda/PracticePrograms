@@ -1,21 +1,21 @@
 package com.p.pc.facebook;
 
 /**
- * Implement a function that prints first n elements of the look and say sequence.
- *
- * Example: Input = 6
- * Output =
- * 1
- * 11
- * 21
- * 1211
- * 111221
- * 312211
- *
- * Approach:
- *  Use String instead of integer to handle large numbers. Read the string char by char and then count the number of times
- *  its occurring and collect it in a string builder as soon as different char appears or string ends. Print the final
- *  value and use it again to print the next number and so on.
+ * Implement a function that prints first n elements of the look and say sequence. <br/>
+ * <p>
+ * Example: Input = 6 <br/>
+ * Output = <br/>
+ * 1 <br/>
+ * 11 <br/>
+ * 21 <br/>
+ * 1211 <br/>
+ * 111221 <br/>
+ * 312211 <br/>
+ * <p>
+ * Approach: <br/>
+ * Use String instead of integer to handle large numbers. Read the string char by char and then count the number of times
+ * its occurring and collect it in a string builder as soon as different char appears or string ends. Print the final
+ * value and use it again to print the next number and so on.
  */
 public class LookAndSaySequence {
     public static void main(String[] args) {
@@ -26,21 +26,20 @@ public class LookAndSaySequence {
     private static void printLookAndSaySequence(int n) {
         String num = "1";
         System.out.println(num);
-        int i=1;
+        int i = 1;
 
-        while(i++ < n) {
-            num = printAndReturnNext(num);
+        while (i++ < n) {
+            num = calculateNext(num);
             System.out.println(num);
         }
     }
 
-    private static String printAndReturnNext(String num) {
-        int count = 1;
-
+    private static String calculateNext(String num) {
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < num.length(); i++) {
+        int count = 1;
+        for (int i = 0; i < num.length(); i++) {
             char c = num.charAt(i);
-            if(i < num.length() - 1 && c == num.charAt(i+1)) {
+            if (i < num.length() - 1 && c == num.charAt(i + 1)) {
                 count++; // increase the count
             } else {
                 sb.append(count).append(c); // add the count and number to the string

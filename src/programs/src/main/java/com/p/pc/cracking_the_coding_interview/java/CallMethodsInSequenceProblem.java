@@ -1,6 +1,7 @@
 package com.p.pc.cracking_the_coding_interview.java;
 
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Lock;
 
 /**
  * <p>Suppose we have the following code:
@@ -10,8 +11,8 @@ import java.util.concurrent.Semaphore;
  * public void second() { ... }
  * public void third() { ... }
  * }
- * The same instance of Foo will be passed to three different threads. ThreadA will call first threadB
- * will call second, and threadC will call third method. Design a mechanism to ensure that business logic in first is
+ * The same instance of Foo will be passed to three different threads. ThreadA will call first, ThreadB
+ * will call second, and ThreadC will call third method. Design a mechanism to ensure that business logic in first is
  * executed before second and second is executed before third.
  *</p>
  * Approach: <br/>
@@ -23,6 +24,7 @@ public class CallMethodsInSequenceProblem {
         // Two semaphores are created for first and second method
         final Semaphore s1, s2;
         public Foo() {
+            Lock l = null;
             s1 = new Semaphore(1);
             s2 = new Semaphore(1);
             System.out.println("In constructor of Foo");

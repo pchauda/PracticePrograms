@@ -5,22 +5,22 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * <p>Goal for this program is to find a path in a tree having sum equal to a number. This problem has multiple flavors:
- * 1. Find paths starting from root node having sum equal to K
- * 2. Find paths starting from root node to leaf node only and having sum equal to K
- * 3. Find paths starting from any node going downwards only and having sum equal to K
- * 4. Count all subtrees having sum equal to K
+ * <p>Goal for this program is to find a path in a tree having sum equal to a number. This problem has multiple flavors: <br/>
+ * 1. Find paths starting from root node having sum equal to K <br/>
+ * 2. Find paths starting from root node to leaf node only and having sum equal to K <br/>
+ * 3. Find paths starting from any node going downwards only and having sum equal to K <br/>
+ * 4. Count all subtrees having sum equal to K <br/>
  * </p>
- * Tree:
- *                  4
- *                /  \
- *               5    3
- *              / \   / \
- *            1   2   2   3
- *           /   /   /     \
- *         -1   1  -2       2
- *          \
- *          1
+ * Tree: <br/>
+ *                  4   <br/>
+ *                /  \   <br/>
+ *               5    3   <br/>
+ *              / \   / \  <br/>
+ *            1   2   2   3 <br/>
+ *           /   /   /     \ <br/>
+ *         -1   1  -2       2 <br/>
+ *          \                  <br/>
+ *          1                   <br/>
  */
 public class TreePathSumEqualToANumber {
     static int count;
@@ -28,10 +28,10 @@ public class TreePathSumEqualToANumber {
     public static void main(String[] args) {
         TreeNode root = createTree();
         List<List<Integer>> paths = new ArrayList<>();
-        findPathsStartingFromRoot(root, 10, new ArrayList<>(), paths);
+        findPathsStartingFromRoot(root, 10, new LinkedList<>(), paths);
         System.out.println("All paths starting from root having sum = 10 are: " + paths); // Output: [[4, 5, 1], [4, 5, 1, -1, 1], [4, 3, 3]]
         paths = new ArrayList<>();
-        findPathsStartingFromRootToLeaf(root, 10, new ArrayList<>(), paths);
+        findPathsStartingFromRootToLeaf(root, 10, new LinkedList<>(), paths);
         System.out.println("All paths starting from root till leaf having sum = 10 are: " + paths); // Output: [[4, 5, 1, -1, 1]]
         paths = new ArrayList<>();
         findAnyPathEqualToK(root, 6, new ArrayList<>(), paths);
@@ -47,10 +47,10 @@ public class TreePathSumEqualToANumber {
     }
 
     // Find paths starting from root have sum equal to K. Use Pre-order traversal
-    static void findPathsStartingFromRoot(TreeNode root, int K, List<Integer> path, List<List<Integer>> paths) {
+    static void findPathsStartingFromRoot(TreeNode root, int K, LinkedList<Integer> path, List<List<Integer>> paths) {
         if (root == null) return;
         // add the current element to the path and explore child nodes
-        path.add(root.value);
+        path.addLast(root.value);
 
         int rem = K - root.value;
         // If remainder is zero then collect path so far as a valid path
@@ -63,14 +63,14 @@ public class TreePathSumEqualToANumber {
         findPathsStartingFromRoot(root.left, rem, path, paths);
         findPathsStartingFromRoot(root.right, rem, path, paths);
         // remove the last element added from the path
-        path.remove(path.size() - 1);
+        path.removeLast();
     }
 
     // Find paths starting from root to leaf having sum equal to K. Use Pre-order traversal
-    static void findPathsStartingFromRootToLeaf(TreeNode root, int K, List<Integer> path, List<List<Integer>> paths) {
+    static void findPathsStartingFromRootToLeaf(TreeNode root, int K, LinkedList<Integer> path, List<List<Integer>> paths) {
         if (root == null) return;
         // add the current element to the path and explore child nodes
-        path.add(root.value);
+        path.addLast(root.value);
 
         int rem = K - root.value;
         // If remainder is zero then collect path so far as a valid path
@@ -83,7 +83,7 @@ public class TreePathSumEqualToANumber {
         findPathsStartingFromRootToLeaf(root.left, rem, path, paths);
         findPathsStartingFromRootToLeaf(root.right, rem, path, paths);
         // remove the last element added from the path
-        path.remove(path.size() - 1);
+        path.removeLast();
     }
 
     // this is a slightly different problem than the above two, for every node, perform sum in the reverse order
@@ -172,6 +172,7 @@ public class TreePathSumEqualToANumber {
     static int[] mostFrequentSubTreeSum(TreeNode root) {
         HashMap<Integer, Integer> sumFreq = new HashMap<>();
         subTreeSumFrequency(root, sumFreq);
+
         int maxFreq = sumFreq.values().stream().mapToInt(t -> t).max().getAsInt();
         List<Integer> maxFreqInts = sumFreq.entrySet().stream()
                 .filter(t -> t.getValue().equals(maxFreq))
@@ -182,9 +183,9 @@ public class TreePathSumEqualToANumber {
 
     static int subTreeSumFrequency(TreeNode root, HashMap<Integer, Integer> sumFreq) {
         if (root == null) return 0;
-        int letTreeSum = subTreeSumFrequency(root.left, sumFreq);
+        int leftTreeSum = subTreeSumFrequency(root.left, sumFreq);
         int rightTreeSum = subTreeSumFrequency(root.right, sumFreq);
-        int sum = root.value + letTreeSum + rightTreeSum;
+        int sum = root.value + leftTreeSum + rightTreeSum;
         sumFreq.put(sum, sumFreq.getOrDefault(sum, 0) + 1);
         return sum;
     }

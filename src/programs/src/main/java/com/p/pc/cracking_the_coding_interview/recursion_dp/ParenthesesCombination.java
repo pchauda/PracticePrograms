@@ -11,11 +11,11 @@ import java.util.List;
  * Output: (( () ) ) , ( () () ) , ( () ) () , () ( () ) , () () ()
  * </p>
  * Approach: <br/>
- * Break condition: If no more left brackets left, or remaining right brackets are less than left brackets
- * Collect: If remaining left and right brackets are zero then collect the string
- * Recursive:
- * i. Pick left bracket, collect in the temp char array, recursively collect other brackets.
- * ii. Pick right bracket, collect in the temp char array, recursively collect other brackets.
+ * Break condition: If no more left brackets left, or remaining right brackets are less than left brackets <br/>
+ * Collect: If remaining left and right brackets are zero then collect the string <br/>
+ * Recursive: <br/>
+ * i. Pick left bracket, collect in the temp char array, recursively collect other brackets. <br/>
+ * ii. Pick right bracket, collect in the temp char array, recursively collect other brackets. <br/>
  */
 public class ParenthesesCombination {
     static ParenthesesCombination obj = new ParenthesesCombination();

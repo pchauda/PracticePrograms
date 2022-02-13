@@ -40,6 +40,7 @@ public class CompareBinaryTrees {
     // Space Complexity = O(log(n) + log(m))
     static boolean isSubtree(Node root, Node subRoot) {
         if(root == null && subRoot != null) return false;
+        if(subRoot == null) return true; // empty sub-tree is always a sub-tree for any tree
         // Check if the trees are identical starting the root node, if no then check if either left or right subtree of the
         // larger tree is identical to other tree
         return isIdentical(root, subRoot) ||

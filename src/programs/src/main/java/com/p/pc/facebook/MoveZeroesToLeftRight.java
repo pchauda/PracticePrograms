@@ -32,15 +32,19 @@ public class MoveZeroesToLeftRight {
         for(int r = arr.length - 1; r >= 0; r--) {
             if(arr[r] !=0) {
                 if(r != w)
-                    arr[w] = arr[r];
+                    swap(arr, r, w);
                 w--;
             }
         }
-        while(w >= 0) {
-            arr[w--] = 0;
-        }
         long end = System.nanoTime();
         System.out.println("Time taken in moving left: " + (end - start) / (1000) + " us");
+    }
+
+    private static void swap(int[] arr, int r, int w) {
+        int temp = arr[r];
+        arr[r] = arr[w];
+        arr[w] = temp;
+        return;
     }
 
     // O(n) solution using reader and writer index

@@ -10,7 +10,7 @@ public class PhantomReferenceTest {
         ReferenceQueue<Person> queue = new ReferenceQueue<>();
 
         Person p = new Person(10);
-        PersonReference pf = new PersonReference(p, null);
+        PersonReference pf = new PersonReference(p, queue);
         if(pf.get() == null) System.out.println("Null");
         if(pf.isEnqueued()) {
             System.out.println("Enqueued before GC");

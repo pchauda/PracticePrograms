@@ -1,9 +1,9 @@
 package com.p.pc.hackerrank;
 
-import java.io.IOException;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Sock merchant problem:
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  */
 public class SockMerchantProblem {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         int[] socks = new int[] {1, 1, 2, 2, 2, 2, 3, 4, 4, 5, 6, 7, 8}; // 4 complete pairs
         // count of socks for each sock number
         Map<Integer, Long> sockIdentityToCountMap = Arrays.stream(socks).boxed().collect(Collectors.groupingBy(i -> i, Collectors.counting()));

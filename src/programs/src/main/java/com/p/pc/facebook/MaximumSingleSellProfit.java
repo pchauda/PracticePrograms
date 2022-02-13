@@ -36,8 +36,7 @@ public class MaximumSingleSellProfit {
             // if pnl is negative, that means sell price is lower than buy price hence move the buy index to sell index
             if(tmpPnl < 0)
                 buyIndex = sellIndex;
-            sellIndex++;
-        } while(sellIndex < array.length);
+        } while(++sellIndex < array.length);
 
         Tuple<Integer, Integer> result = new Tuple<Integer, Integer>(array[minBuyIndex], array[maxSellIndex]);
         return result;
@@ -54,7 +53,7 @@ public class MaximumSingleSellProfit {
 
         @Override
         public String toString() {
-            return "Tuple{" +
+            return "Profit {" +
                     "buyPrice=" + x +
                     ", sellPrice=" + y +
                     '}';

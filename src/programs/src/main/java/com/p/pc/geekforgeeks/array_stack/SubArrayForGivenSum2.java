@@ -24,10 +24,6 @@ public class SubArrayForGivenSum2 {
         printSubArray(arr, subArrayIndexes); // Output: [2, -3, -20]
     }
 
-    /**
-     * Since array contains positive numbers, as soon as the continuous sum exceeds the given sum, we can start dropping
-     * initial elements.
-     */
     private static Pair findSubArrayForGivenSum(int[] arr, int sum) {
         HashMap<Integer, Integer> sumMap = new HashMap<>();
         int runningSum = 0;

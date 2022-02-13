@@ -25,7 +25,7 @@ public class PaintFillProblem {
         };
         System.out.println("Original screen:");
         printScreen(screen);
-        Color newColor = Y;
+        Color newColor = G;
         int x = 1, y = 2; // Given point
         paintFill(screen, x, y, newColor);
         System.out.println("New screen:");
@@ -64,7 +64,7 @@ public class PaintFillProblem {
     }
 
     enum Color {
-        R("Red"), B("Black"), G("Green"), Y("Green");
+        R("Red"), B("Black"), G("Green"), Y("Yellow");
         String name;
 
         Color(String name) {

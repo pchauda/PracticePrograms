@@ -42,13 +42,13 @@ public class DepthLevelLinkedListForATree {
             List<Integer> list = new ArrayList<>(size);
             while (size > 0) {
                 TreeNode node = queue.poll();
+                list.add(node.val);
                 if (node.left != null) {
                     queue.add(node.left);
                 }
                 if (node.right != null) {
                     queue.add(node.right);
                 }
-                list.add(node.val);
                 size--;
             }
             lists.add(list);

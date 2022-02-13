@@ -13,8 +13,8 @@ public class PointInsidePolygon {
     public static void main(String[] args) {
         Point[] polygon = new Point[] {new Point(0, 0), new Point(4, 1),
                 new Point(3, 5), new Point(2, 4), new Point(1, 3)};
-        System.out.println(isPointInsidePolygon(polygon, new Point(2, 2)));
-        System.out.println(isPointInsidePolygon(polygon, new Point(5, 5)));
+        System.out.println(isPointInsidePolygon(polygon, new Point(2, 2))); // Output: true
+        System.out.println(isPointInsidePolygon(polygon, new Point(5, 5))); // Output: false
     }
 
     private static boolean isPointInsidePolygon(Point[] polygon, Point point) {
@@ -37,7 +37,7 @@ public class PointInsidePolygon {
         return count % 2 == 1;
     }
 
-    // Check orientation, if orientation is different then line segment intersect, else check for collinear and on-line-segment
+    // Check orientation, if orientation is different, then line segment intersect, else check for collinear and on-line-segment
     private static boolean checkIntersection(Point p1, Point q1, Point p2, Point q2) {
         Orientation o1 = findOrientation(p1, q1, p2);
         Orientation o2 = findOrientation(p1, q1, q2);

@@ -1,11 +1,12 @@
 package com.p.pc.facebook;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
  * <p>Find the length of longest strictly increasing subsequence in a given array. </p>
  *
- * Approach:
+ * Approach: <br/>
  *  This problem can be solved using dynamic programming as it contains overlapping sub-problems and optimal sub-structure properties.
  *  Idea here is to calculate the max length of strictly increasing sub-seq for each index starting from the first index.
  *
@@ -23,9 +24,7 @@ public class LongestIncreasingSubSequence {
         // array to store the results of sub-problems
         int[] lis = new int[arr.length];
         // initialize the array with 1 as every number will make a sub-sequence
-        for(int i=0; i < lis.length; i++) {
-            lis[i] = 1;
-        }
+        Arrays.fill(lis, 1);
         int maxLength = 1;
         // for each index calculate the max length from starting index
         for(int j=1; j<arr.length; j++) {

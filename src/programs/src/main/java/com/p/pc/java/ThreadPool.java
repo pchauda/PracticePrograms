@@ -2,8 +2,10 @@ package com.p.pc.java;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * Design a custom thread pool executor.
+ */
 public class ThreadPool {
-
     public static void main(String[] args) {
         int threadCount = 5;
         ThreadPoolExecutor executor = new ThreadPoolExecutor(threadCount);
@@ -15,7 +17,7 @@ public class ThreadPool {
 
     static class ThreadPoolExecutor {
         int threadCount;
-        LinkedBlockingQueue<Task> queue;
+        LinkedBlockingQueue<Runnable> queue;
         Worker[] threads;
 
         ThreadPoolExecutor(int threadCount) {
@@ -71,7 +73,7 @@ public class ThreadPool {
                             }
                         }
                     }
-                    Task t = queue.poll();
+                    Runnable t = queue.poll();
                     try {
                         if(t != null) {
                             t.run();
@@ -86,15 +88,11 @@ public class ThreadPool {
 
     static class Task implements Runnable {
         int taskId;
-
         Task(int taskId) {
             this.taskId = taskId;
         }
-
         public void run() {
             System.out.println("Executing task : " + taskId);
         }
     }
-
-
 }

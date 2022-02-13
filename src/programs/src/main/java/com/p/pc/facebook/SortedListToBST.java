@@ -37,9 +37,8 @@ public class SortedListToBST {
         if(size <= 0) return null;
         // start from the middle element
         TreeNode left = createBSTRecursiveOptimized(size/2);
-        TreeNode root = new TreeNode(headNode.value);
+        TreeNode root = new TreeNode(headNode.value); headNode = headNode.next;
         root.left = left;
-        headNode = headNode.next;
         root.right = createBSTRecursiveOptimized(size - size/2 - 1); // Total - Left Nodes - Root
         return root; // it will be the middle node
     }

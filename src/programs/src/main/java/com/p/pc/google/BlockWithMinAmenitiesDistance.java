@@ -7,20 +7,20 @@ import java.util.stream.Stream;
 /**
  * Given a list of blocks having various amenities, find out the block having minimum distance considering all required
  * amenities. <br/>
- *
+ * <p>
  * Example:
  * Required Amenities = {"School", "Gym", "Market"}
  * Blocks = {
-             {"School": true, "Gym": false, "Market": false },
-             {"School": false, "Gym": true, "Market": false },
-             {"School": false, "Gym": false, "Market": false },
-             {"School": true, "Gym": false, "Market": true }
-            }
-    Output: Block = 2 (School and Market on the next block, Gym one block before)
- <p/>
+ * {"School": true, "Gym": false, "Market": false },
+ * {"School": false, "Gym": true, "Market": false },
+ * {"School": false, "Gym": false, "Market": false },
+ * {"School": true, "Gym": false, "Market": true }
+ * }
+ * Output: Block = 2 (School and Market on the next block, Gym one block before)
+ * <p/>
  * Approach: <br/>
- *  Use sliding window approach and compute the optimal block using start and end pointers.
- *
+ * Use sliding window approach and compute the optimal block using start and end pointers.
+ * <p>
  * Time complexity: O(b * n), where b is the number of blocks and n is the average number of amenities across all blocks
  * Space complexity: O(a), where a is the number of amenities
  */
@@ -46,17 +46,18 @@ public class BlockWithMinAmenitiesDistance {
         int block = -1, minWindowSize = Integer.MAX_VALUE;
 
         Map<String, Integer> amenitiesFound = new HashMap<>();
-        for(int low=0, high=0; high < blocks.size(); high++) {
+        for (int low = 0, high = 0; high < blocks.size(); high++) {
             visitBlock(blocks.get(high), requiredAmenities, amenitiesFound);
-            while(requiredAmenities.size() == amenitiesFound.size() && low <= high) {
+            while (requiredAmenities.size() == amenitiesFound.size() && low <= high) {
                 int windowSize = high - low;
-                if(windowSize < minWindowSize) {
+                if (windowSize < minWindowSize) {
                     minWindowSize = windowSize;
                     block = (high + low) / 2;
-                    if(minWindowSize == 0) return block; // break early if minWindowSize == 0 i.e. all amenities are available on the same block
+                    // break early if minWindowSize == 0 i.e. all amenities are available on the same block
+                    if (minWindowSize == 0) return block;
                 }
                 // remove the block at low pointer and move the low pointer
-                unvisitBlock(blocks.get(low++), requiredAmenities, amenitiesFound);
+                unVisitBlock(blocks.get(low++), requiredAmenities, amenitiesFound);
             }
         }
         return block;
@@ -68,7 +69,7 @@ public class BlockWithMinAmenitiesDistance {
         });
     }
 
-    private static void unvisitBlock(Map<String, Boolean> block, Set<String> requiredAmenities, Map<String, Integer> amenitiesFound) {
+    private static void unVisitBlock(Map<String, Boolean> block, Set<String> requiredAmenities, Map<String, Integer> amenitiesFound) {
         block.entrySet().stream().filter(t -> t.getValue() && requiredAmenities.contains(t.getKey())).forEach(t -> {
             amenitiesFound.compute(t.getKey(), (k, v) -> v == null ? 0 : v - 1);
             amenitiesFound.remove(t.getKey(), 0); // remove the amenity if count is zero
@@ -79,19 +80,27 @@ public class BlockWithMinAmenitiesDistance {
         List<Map<String, Boolean>> blocks = new ArrayList<>();
 
         Map<String, Boolean> b1 = new HashMap<>();
-        b1.put("School", true); b1.put("Gym", false); b1.put("Market", false);
+        b1.put("School", true);
+        b1.put("Gym", false);
+        b1.put("Market", false);
         blocks.add(b1);
 
         Map<String, Boolean> b2 = new HashMap<>();
-        b2.put("School", false); b2.put("Gym", true); b2.put("Market", false);
+        b2.put("School", false);
+        b2.put("Gym", true);
+        b2.put("Market", false);
         blocks.add(b2);
 
         Map<String, Boolean> b3 = new HashMap<>();
-        b3.put("School", false); b3.put("Gym", false); b3.put("Market", false);
+        b3.put("School", false);
+        b3.put("Gym", false);
+        b3.put("Market", false);
         blocks.add(b3);
 
         Map<String, Boolean> b4 = new HashMap<>();
-        b4.put("School", true); b4.put("Gym", false); b4.put("Market", true);
+        b4.put("School", true);
+        b4.put("Gym", false);
+        b4.put("Market", true);
         blocks.add(b4);
 
         return blocks;
