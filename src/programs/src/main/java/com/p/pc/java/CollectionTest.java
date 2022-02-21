@@ -1,7 +1,10 @@
 package com.p.pc.java;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CollectionTest {
@@ -24,6 +27,24 @@ public class CollectionTest {
                 .filter(s -> s.startsWith("a"));
         System.out.println(streamSupplier.get().anyMatch(t -> t.contains("a")));
         System.out.println(streamSupplier.get().noneMatch(t -> t.contains("p")));
+
+        List<Employee> employees = Stream.of(new Employee(1, "IT", 50), new Employee(1, "IT", 51), new Employee(1, "HR", 55), new Employee(1, "IT", 50),
+                new Employee(1, "HR", 35), new Employee(1, "IT", 57), new Employee(1, "IT", 25)).collect(Collectors.toList());
+
+        Map<String, Integer> collect = employees.stream().collect(Collectors.groupingBy(t -> t.department, Collectors.summingInt(t -> t.age)));
+        System.out.println(collect);
+    }
+
+    static class Employee {
+        int id;
+        String department;
+        int age;
+
+        Employee(int id, String department, int age) {
+            this.id = id;
+            this.department = department;
+            this.age = age;
+        }
     }
 }
 

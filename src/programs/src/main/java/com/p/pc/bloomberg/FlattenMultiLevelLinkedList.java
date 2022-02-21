@@ -27,6 +27,9 @@ public class FlattenMultiLevelLinkedList {
         System.out.println(list); // 1,2,7,8,3,4,5,6
         Node flattenList = flattenList(list);
         System.out.println(flattenList); // Output: 1,3,5,6,4,2,7,8
+        list = createList();
+        flattenList = flatten(list);
+        System.out.println(flattenList); // Output: 1,3,5,6,4,2,7,8
     }
 
     private static Node flattenList(Node head) {
@@ -51,6 +54,32 @@ public class FlattenMultiLevelLinkedList {
         return head;
     }
 
+    public static Node flatten(Node head) {
+        if (head == null) return head;
+        // pseudo head to ensure the `prev` pointer is never none
+        Node pseudoHead = new Node(0, null, head, null);
+
+        flattenDFS(pseudoHead, head);
+
+        // detach the pseudo head from the real head
+        pseudoHead.next.prev = null;
+        return pseudoHead.next;
+    }
+
+    public static Node flattenDFS(Node prev, Node curr) {
+        if (curr == null) return prev;
+        curr.prev = prev;
+        if(prev != null) prev.next = curr;
+
+        // the curr.next would be tempered in the recursive function
+        Node tempNext = curr.next;
+
+        Node tail = flattenDFS(curr, curr.child);
+        curr.child = null;
+
+        return flattenDFS(tail, tempNext);
+    }
+
     private static Node createList() {
         Node head = new Node(1);
         head.next = new Node(2); head.next.prev = head;
@@ -72,6 +101,12 @@ public class FlattenMultiLevelLinkedList {
 
         Node(int i) {
             this.value = i;
+        }
+        public Node(int _val,Node _prev,Node _next,Node _child) {
+            value = _val;
+            prev = _prev;
+            next = _next;
+            child = _child;
         }
 
         public String toString() {
